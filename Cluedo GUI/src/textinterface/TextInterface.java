@@ -65,7 +65,7 @@ public class TextInterface {
 	public static void main(String args[]) {
 		// Banner
 		System.out.println("___ CLUEDO ___");
-		System.out.println("By Kirita-Rose Escott and Tayler Barnett");
+		System.out.println("By Kirita-Rose Escott and Patariki Terenciki Ryaniki");
 		System.out.println("");
 		
 		//new game object
