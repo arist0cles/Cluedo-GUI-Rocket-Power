@@ -1,12 +1,13 @@
 package squares;
 
+import java.awt.Color;
 import core.Location;
 
 public class DoorSquare extends Square {
-	String name=""; 
-	Location location = null;
+	private String name=""; 
+	private Location location = null;
+	private final Color DOORCOLOR = new Color(120, 255, 120);
 	
-
 	public DoorSquare(String name, Location location) {
 		super(name, location);
 		setName();
@@ -17,8 +18,8 @@ public class DoorSquare extends Square {
 	}
 	
 	@Override
-	public void draw(){
-		System.out.print(" =");
+	public void draw(int x1, int y1, Color c){
+		super.draw(x1, y1, DOORCOLOR);
 	}
 	
 	public String getName(){

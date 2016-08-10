@@ -51,8 +51,9 @@ public class Game {
 		this.allCards = new ArrayList<Card>();
 		this.solution = new ArrayList<Card>();	
 		this.ruledOut = new ArrayList<Card>();
-		this.squares = this.board.getBoard();
+		this.squares = this.board.getSquares();
 		this.finished = false;
+		View v = new View(board);
 	}
 
 	/**
@@ -584,6 +585,7 @@ public class Game {
 		this.players = players;
 	}
 	
-	
-	
+	public static void main(String args[]) {
+	new Game();
+	}
 }

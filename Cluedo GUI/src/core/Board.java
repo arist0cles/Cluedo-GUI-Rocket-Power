@@ -73,7 +73,7 @@ public class Board {
 		
 	}
 	
-	public Square [][] getBoard(){return this.squares;}
+	public Square [][] getSquares(){return this.squares;}
 	
 	
 	public void draw(){
@@ -86,11 +86,10 @@ public class Board {
 			for (int col=0; col<25; col++){
 				Square s = this.squares[col][row];
 				if (col==24){
-					s.draw();
 					System.out.println("");
 				}
 				else {
-					s.draw();
+					//s.draw();
 				}
 			}
 			

@@ -1,0 +1,41 @@
+package core;
+
+import java.awt.Color;
+
+/**
+ * The view the user see. Part of the Model View Controller pattern, displays the state dynamically
+ * 
+ * The view renders the contents of a model. It specifies exactly how the model data should be presented. 
+ * If the model data changes, the view must update its presentation as needed. This can be achieved by 
+ * using a push model, in which the view registers itself with the model for change notifications, 
+ * or a pull model, in which the view is responsible for calling the model when it needs 
+ * to retrieve the most current data.
+ * 
+ * @author Patrick and Kirita
+ *
+ */
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class View extends JFrame
+{
+	private static final long serialVersionUID = 1L;
+    private JPanel  panel_mainPanel = new JPanel();
+    private JPanel  panel_sidePanel = new JPanel();
+    private Board board;
+
+    public View(Board board) {
+    	this.board = board;
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setSize(700, 700);
+        this.add(panel_mainPanel);
+        this.add(panel_sidePanel);
+        Color preserveBackgroundColor = new Color(200);
+		panel_sidePanel.setBackground(preserveBackgroundColor);
+        setVisible(true);
+        this.setTitle("Cluedo");
+    }
+
+
+}

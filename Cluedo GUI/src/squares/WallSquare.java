@@ -1,11 +1,14 @@
 package squares;
 
+import java.awt.Color;
+
 import core.Location;
 
 public class WallSquare extends Square{
 	String name="";
 	Location location=null;
-
+	private final Color WALLCOLOR = new Color(255, 255, 255);
+	
 	public WallSquare(String name, Location location) {
 		super(name, location);
 		setName();
@@ -20,8 +23,8 @@ public class WallSquare extends Square{
 	}
 
 	@Override
-	public void draw(){
-		System.out.print(" #");
+	public void draw(int x1, int y1, Color c){
+		super.draw(x1, y1, WALLCOLOR);
 	}
 	
 	public boolean equals(Square square){

@@ -1,0 +1,18 @@
+package core;
+
+
+public class MousePosition implements Runnable {
+	
+	public MousePosition(){
+		(new Thread(new MousePosition())).start();
+	}
+
+    public void run() {
+        System.out.println("Hello from a thread!");
+    }
+
+    public static void main(String args[]) {
+        (new Thread(new MousePosition())).start();
+    }
+
+}

@@ -1,0 +1,28 @@
+package core;
+
+import java.awt.Dimension;
+import java.awt.Graphics;
+import javax.swing.JPanel;
+
+public class GridPanel extends JPanel {
+	
+	private final int WIDTH = 700;
+	private final int HEIGHT = 400;
+	
+	public GridPanel(){
+		setPreferredSize(new Dimension(500, 500));
+	}
+	
+	@Override
+	public void paintComponent(Graphics g){
+	    int xstart=30;
+
+	    for(int i = 0; i < 25; i++) {
+	    	int gap = 10;
+	        xstart = xstart + gap;
+	        g.drawLine(xstart, 30, xstart, HEIGHT);
+	    }
+	    
+	    System.out.println("Hello");
+	}
+}

@@ -75,7 +75,7 @@ public class CluedoTests {
 		game.setPlayers(players);
 		game.intialise();
 		game.placePlayers();
-		Square [][] squares = game.getBoard().getBoard();
+		Square [][] squares = game.getBoard().getSquares();
 		for (Player p : game.getPlayers()){
 			assert(p.getLocation() != null);
 			Square current = squares[p.getLocation().getX()][p.getLocation().getY()];
@@ -106,8 +106,8 @@ public class CluedoTests {
 		Player p = mock.setMockPlayer();
 		p.updateLocation(5, 5);
 		
-		Square pSQ = game.getBoard().getBoard()[5][5];
-		Square tSQ = game.getBoard().getBoard()[22][16];
+		Square pSQ = game.getBoard().getSquares()[5][5];
+		Square tSQ = game.getBoard().getSquares()[22][16];
 		
 		pathNode start = new pathNode(pSQ, game);
 		pathNode end = new pathNode(tSQ, game);

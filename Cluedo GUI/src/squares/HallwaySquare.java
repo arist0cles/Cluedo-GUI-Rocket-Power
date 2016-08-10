@@ -1,10 +1,13 @@
 package squares;
 
+import java.awt.Color;
+
 import core.Location;
 
 public class HallwaySquare extends Square {
 	String name="";
 	Location location=null;
+	private final Color HALLCOLOR = new Color(250, 0, 0);
 
 	public HallwaySquare(String name, Location location) {
 		super(name, location);
@@ -20,8 +23,8 @@ public class HallwaySquare extends Square {
 	}
 	
 	@Override
-	public void draw(){
-		System.out.print(" *");
+	public void draw(int x1, int y1, Color c){
+		super.draw(x1, y1, HALLCOLOR);
 	}
 
 	public boolean equals(Square square){

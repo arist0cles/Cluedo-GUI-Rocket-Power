@@ -1,0 +1,46 @@
+package core;
+
+/**
+ * The view the user see. Part of the Model View Controller pattern, displays the state dynamically
+ * 
+ * The view renders the contents of a model. It specifies exactly how the model data should be presented. 
+ * If the model data changes, the view must update its presentation as needed. This can be achieved by 
+ * using a push model, in which the view registers itself with the model for change notifications, 
+ * or a pull model, in which the view is responsible for calling the model when it needs 
+ * to retrieve the most current data.
+ * 
+ * @author Patrick and Kirita
+ *
+ */
+import java.awt.Dimension;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class View extends JFrame
+{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	JButton button_close    = new JButton();
+    JPanel  panel_mainPanel = new JPanel();
+
+    public View()
+    {
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setSize(500, 500);
+        this.add(panel_mainPanel);
+        setVisible(true);
+    }
+
+    public void initButtons(ActionListener actionListener)
+    {
+        this.button_close = new JButton("Close");
+        this.button_close.setSize(new Dimension(100, 20));
+        this.button_close.addActionListener(actionListener);
+        this.panel_mainPanel.add(button_close);
+    }
+}

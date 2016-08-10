@@ -1,9 +1,12 @@
 package squares;
 
+import java.awt.Color;
+
 import core.Location;
 
 public class RoomSquare extends Square{
 	String name="";
+	private final Color ROOMCOLOR = new Color(255, 120, 0);
 	String oppRoom="";
 	Location location = null;
 	Location oppLoc = null;
@@ -85,8 +88,8 @@ public class RoomSquare extends Square{
 	}
 	
 	@Override
-	public void draw(){
-		System.out.print(" O");
+	public void draw(int x1, int y1, Color c){
+		super.draw(x1, y1, ROOMCOLOR);
 	}
 	
 	public boolean equals(Square square){

@@ -1,5 +1,7 @@
 package squares;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.util.Iterator;
 
 import core.Location;
@@ -8,6 +10,8 @@ public abstract class Square {
 	
 	private String name;
 	private Location location;
+	private Graphics g;
+	private final int SQUARE_SIZE = 10;
 	
 	public Square(String name, Location location){
 		this.name=name; this.location=location;
@@ -21,8 +25,9 @@ public abstract class Square {
 		return location;
 	}
 	
-	public void draw(){
-		System.out.println(this.name);
+	public void draw(int x1, int y1, Color c){
+		g.setColor(c);
+		g.fillRect(x1, y1, SQUARE_SIZE, SQUARE_SIZE);
 	}
 	
 	
@@ -62,6 +67,10 @@ public abstract class Square {
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
+	}
+
+	public void setGraph(Graphics g) {
+		this.g = g;
 	}
 
 //	public boolean equals(Square square){

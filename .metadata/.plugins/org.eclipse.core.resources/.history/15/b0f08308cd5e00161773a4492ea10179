@@ -1,0 +1,69 @@
+package core;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.MouseInfo;
+import java.awt.Point;
+
+import javax.swing.JPanel;
+
+import squares.Square;
+
+public class GridPanel extends JPanel {
+	private final int WIDTH = 290;
+	private final int HEIGHT = 280;
+	private final int GAP = 10;
+	private final Color GRID_COLOR = new Color(255, 255, 255);
+	private Board board;
+	
+	public GridPanel(Board board){
+		this.board = board;
+		//trackMousePosition();
+		(new Thread(new MousePosition())).start();
+	}
+	
+	private void trackMousePosition() {
+		Thread t = new Thread();
+		Point p = MouseInfo.getPointerInfo().getLocation();
+		System.out.println("Mouse X: "+p.getX());
+		System.out.println("Mouse Y: "+p.getY());
+		
+	}
+
+	@Override
+	public void paintComponent(Graphics g){
+		super.paintComponent(g);
+	    drawGrid(g);
+	}
+	
+	public void drawGrid(Graphics g){
+		drawSquares(g);
+		g.setColor(GRID_COLOR);
+    	drawGridlines(g, 40, 30, WIDTH, HEIGHT, true);
+    	drawGridlines(g, 40, 30, WIDTH, HEIGHT, false);
+    	
+	}
+	
+	public void drawGridlines(Graphics g, int x1, int y1, int x2, int y2, boolean drawAcross){
+		for(int i = 0; i <= 25; i++) {
+	        if(drawAcross){
+	        	g.drawLine(x1, y1, x1, HEIGHT);
+	        	x1 += GAP;
+	        } else {
+	        	g.drawLine(x1, y1, WIDTH, y1);
+	        	y1 += GAP; 	
+	        }
+	    }
+	}
+	
+	public void drawSquares(Graphics g){
+		for(int i = 0; i<25; i++){
+			for(int j = 0; j<25; j++){
+				Square[][] squares = board.getSquares();
+				squares[j][i].setGraph(g);
+				squares[j][i].draw(40+j*10, 30+i*10, new Color(0, 10, 10));
+			}
+		}
+	}
+}

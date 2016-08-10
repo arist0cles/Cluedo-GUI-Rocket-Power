@@ -1,1 +1,9 @@
 1470705223391	Move file
+1470772578473	Rename field 'panel_mainPanel'
+1470772590657	Rename field 'panel_sidePanel'
+1470758574297	Rename local variable 'axis'
+1470758583082	Rename local variable 'across'
+1470760187512	Rename method 'getBoard'
+1470814961215	Encapsulate field 'p'
+1470817353598	Move file
+1470817980689	Delete element
