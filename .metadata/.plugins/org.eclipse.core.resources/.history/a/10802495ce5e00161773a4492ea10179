@@ -1,0 +1,30 @@
+package core;
+
+import java.awt.MouseInfo;
+import java.awt.Point;
+
+public class MousePosition implements Runnable {
+
+	public MousePosition() {
+
+	}
+
+	public void run() {
+		while (!Thread.currentThread().isInterrupted()) {
+			try {
+				System.out.println("Hi");
+				Point p = MouseInfo.getPointerInfo().getLocation();
+				System.out.println("Mouse X: " + p.getX());
+				System.out.println("Mouse Y: " + p.getY());
+				Thread.sleep(1000);
+			} catch (InterruptedException ex) {
+				Thread.currentThread().interrupt();
+			}
+		}
+	}
+
+	public static void main(String args[]) {
+		(new Thread(new MousePosition())).start();
+	}
+
+}

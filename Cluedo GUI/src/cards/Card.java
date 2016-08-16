@@ -1,10 +1,14 @@
 package cards;
 
-public interface Card {
+public abstract class Card {
+	protected String name;
 	
-	String name = "";
+	public Card(String name){
+		this.name = name;
+	}
 
-	public String getName();
-	//public boolean equals(Object o);
-	//public int hashCode();
+	public String getName(){
+		return name;
+	}
+
 }

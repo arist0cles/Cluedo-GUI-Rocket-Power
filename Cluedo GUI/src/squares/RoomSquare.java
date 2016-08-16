@@ -1,5 +1,7 @@
 package squares;
 
+import java.awt.Color;
+
 import core.Location;
 
 public class RoomSquare extends Square{
@@ -10,8 +12,8 @@ public class RoomSquare extends Square{
 	String weapon = null;
 	boolean stairs = false;
 	
-	public RoomSquare(String name, Location location) {
-		super(name, location);
+	public RoomSquare(String name, Location location, Color c) {
+		super(name, location, c);
 		setName(name);
 	}
 	
@@ -82,11 +84,6 @@ public class RoomSquare extends Square{
 	
 	public String getName(){
 		return this.name;
-	}
-	
-	@Override
-	public void draw(){
-		System.out.print(" O");
 	}
 	
 	public boolean equals(Square square){

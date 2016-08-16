@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import core.Board;
-import core.Game;
+import model.Game;
 import squares.Square;
 
 public class pathNode {
@@ -20,7 +20,7 @@ public class pathNode {
 	public List<pathNode> findNeighbours(){
 		List<pathNode> neighbours = new ArrayList<>();
 		Board board = this.game.getBoard();
-		Square [][] squares = board.getBoard();
+		Square [][] squares = board.getSquares();
 		
 		if (this.sqaure.getLoc().getX()-1 >= 0){
 			neighbours.add(new pathNode(squares[this.sqaure.getLoc().getX()-1][this.sqaure.getLoc().getY()],this.game));
