@@ -7,3 +7,16 @@
 1470814961215	Encapsulate field 'p'
 1470817353598	Move file
 1470817980689	Delete element
+1470831967579	Rename local variable 'numberOf'
+1470846113968	Delete element
+1470846342416	Delete element
+1470900659624	Delete element
+1470900684668	Move compilation unit
+1470900690701	Move compilation unit
+1470900729306	Move compilation unit
+1470900733576	Move compilation unit
+1470900758715	Move compilation unit
+1470908850076	Encapsulate field 'scheme'
+1470930607996	Delete element
+1470930680394	Move compilation units
+1470930856364	Rename package 'ColorSchemes'

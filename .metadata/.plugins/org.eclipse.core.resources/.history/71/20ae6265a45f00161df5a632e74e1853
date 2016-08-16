@@ -1,0 +1,11 @@
+package view;
+
+import java.awt.Color;
+
+public abstract class ColorScheme {
+	private Color DOOR;
+	private Color HALLWAY;
+	private Color ROOM;
+	private Color WALL;
+	private Color GRID;
+}

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import core.Board;
-import core.Game;
+import model.Game;
 import squares.Square;
 
 public class pathNode {

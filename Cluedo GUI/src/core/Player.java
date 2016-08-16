@@ -23,21 +23,12 @@ public class Player {
 	private Location location;
 	private String [] alpha = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O"
 	, "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y"};
-	
 	private boolean eliminated = false;
 	
-	/**
-	 * Construct a new player with a given name, hand and location.
-	 * 
-	 * @param name
-	 * @param hand
-	 * @param location
-	 */
 	public Player(int id, String name){
 		this.id = id;
 		this.name = name;
-		this.hand = new ArrayList<Card>();
-		
+		this.hand = new ArrayList<Card>();	
 	}
 	
 	/** Sets players initial location

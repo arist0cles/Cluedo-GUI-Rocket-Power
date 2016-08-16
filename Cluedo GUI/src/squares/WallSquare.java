@@ -5,30 +5,7 @@ import java.awt.Color;
 import core.Location;
 
 public class WallSquare extends Square{
-	String name="";
-	Location location=null;
-	private final Color WALLCOLOR = new Color(255, 255, 255);
-	
-	public WallSquare(String name, Location location) {
-		super(name, location);
-		setName();
+	public WallSquare(String name, Location location, Color color) {
+		super(name, location, color);
 	}
-	
-	public void setName(){
-		this.name="Wall";
-	}
-	
-	public String getName(){
-		return this.name;
-	}
-
-	@Override
-	public void draw(int x1, int y1, Color c){
-		super.draw(x1, y1, WALLCOLOR);
-	}
-	
-	public boolean equals(Square square){
-		return super.equals(square);
-	}
-	
 }

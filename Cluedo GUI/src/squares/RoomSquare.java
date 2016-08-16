@@ -6,15 +6,14 @@ import core.Location;
 
 public class RoomSquare extends Square{
 	String name="";
-	private final Color ROOMCOLOR = new Color(255, 120, 0);
 	String oppRoom="";
 	Location location = null;
 	Location oppLoc = null;
 	String weapon = null;
 	boolean stairs = false;
 	
-	public RoomSquare(String name, Location location) {
-		super(name, location);
+	public RoomSquare(String name, Location location, Color c) {
+		super(name, location, c);
 		setName(name);
 	}
 	
@@ -85,11 +84,6 @@ public class RoomSquare extends Square{
 	
 	public String getName(){
 		return this.name;
-	}
-	
-	@Override
-	public void draw(int x1, int y1, Color c){
-		super.draw(x1, y1, ROOMCOLOR);
 	}
 	
 	public boolean equals(Square square){
