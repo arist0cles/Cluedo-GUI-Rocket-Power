@@ -1,0 +1,35 @@
+package view;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.MouseInfo;
+import java.awt.Point;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import colorschemes.ColorScheme;
+import core.Board;
+import squares.Square;
+
+/**
+ * A custom implementation of a JPanel. Used to draw the Cluedo grid.
+ * 
+ * @author Patrick and Kirita
+ *
+ */
+public class GridPanel extends JPanel {
+	
+
+	
+
+	
+}

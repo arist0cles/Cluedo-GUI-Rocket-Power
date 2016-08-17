@@ -25,8 +25,8 @@ public class Board {
 	private Square[][] squares = new Square[25][25];
 	private ColorScheme scheme;
 
-	public Board(ColorScheme scheme) {
-		this.setScheme(scheme);
+	public Board(ColorScheme c) {
+		this.scheme = c;
 		File file = new File("board.txt");
 		Scanner scan;
 		try {

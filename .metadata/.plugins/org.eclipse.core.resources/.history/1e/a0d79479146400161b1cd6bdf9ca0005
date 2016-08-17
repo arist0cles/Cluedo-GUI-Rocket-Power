@@ -1,0 +1,119 @@
+package view;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.MouseInfo;
+import java.awt.Point;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import core.Board;
+import squares.Square;
+
+/**
+ * A custom implementation of a JPanel. Used to draw the Cluedo grid.
+ * 
+ * @author Patrick and Kirita
+ *
+ */
+public class GridPanel extends JPanel {
+	public final int XOFFSET = 60;
+	public final int YOFFSET = 50;
+	private final int SQUARE_SIZE = 15;
+	public final int GAP = SQUARE_SIZE;
+	public final int WIDTH = XOFFSET+GAP*25;
+	public final int HEIGHT = YOFFSET+GAP*25;
+	private Board board;
+	private boolean started;
+
+	public GridPanel(Board board) {
+		this.board = board;
+	}
+
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		if (started) {
+			drawGrid(g);
+		} else {
+			g.setColor(Color.WHITE);
+			g.setFont(new Font("TimesRoman", Font.PLAIN, 100));
+			g.drawString("?", 170, 150);
+			g.setColor(new Color(0, 0, 0));
+		}
+	}
+
+	/**
+	 * Calls draw squares and then draws the grid as an overlay over them.
+	 * 
+	 * @param g
+	 */
+	public void drawGrid(Graphics g) {
+		drawSquares(g);
+		g.setColor(board.getScheme().GRID);
+		drawGridlines(g, XOFFSET, YOFFSET, true);
+		drawGridlines(g, XOFFSET, YOFFSET, false);
+	}
+
+	/**
+	 * Takes care of the nitty gritty of drawing the grid lines
+	 * 
+	 * @param g
+	 *            the graphics object
+	 * @param x1
+	 *            starting x
+	 * @param y1
+	 *            staring y
+	 * @param x2
+	 *            finishing x
+	 * @param y2
+	 *            finishing y
+	 * @param drawAcross
+	 *            True when drawing across the X axis, false when drawing down
+	 *            the Y axis
+	 */
+	public void drawGridlines(Graphics g, int x1, int y1, boolean drawAcross) {
+		for (int i = 0; i <= 25; i++) {
+			if (drawAcross) {
+				g.drawLine(x1, y1, x1, HEIGHT);
+				x1 += GAP;
+			} else {
+				g.drawLine(x1, y1, WIDTH, y1);
+				y1 += GAP;
+			}
+		}
+	}
+
+	/**
+	 * Takes care of the nitty gritty of drawing the squares. Calls the draw on
+	 * the Square objects which take care of drawing themselves
+	 * 
+	 * @param g
+	 *            Graphics object
+	 */
+	public void drawSquares(Graphics g) {
+		Square[][] squares = board.getSquares();
+		for (int i = 0; i < 25; i++) {
+			for (int j = 0; j < 25; j++) {
+				Square current = squares[j][i];
+				int xLocation = XOFFSET + j * GAP;
+				int yLocation = YOFFSET + i * GAP;
+				g.setColor(current.getColor());
+				g.fillRect(xLocation, yLocation, SQUARE_SIZE, SQUARE_SIZE);
+			}
+		}
+	}
+
+	public void setStarted(boolean b) {
+		started = b;
+	}
+}

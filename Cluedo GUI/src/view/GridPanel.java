@@ -16,6 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import colorschemes.ColorScheme;
 import core.Board;
 import squares.Square;
 
@@ -26,25 +27,30 @@ import squares.Square;
  *
  */
 public class GridPanel extends JPanel {
-	public final int WIDTH = 290;
-	public final int HEIGHT = 280;
-	public final int GAP = 15;
-	private Board board;
+	private ColorScheme colorScheme;
+	private Square[][] squares;
+	public final int XOFFSET = 60;
+	public final int YOFFSET = 50;
+	private final int SQUARE_SIZE = 15;
+	public final int GAP = SQUARE_SIZE;
+	public final int WIDTH = XOFFSET+GAP*25;
+	public final int HEIGHT = YOFFSET+GAP*25;
 	private boolean started;
-
-	public GridPanel(Board board) {
-		this.board = board;
+	
+	public GridPanel(ColorScheme c, Square[][] squares){
+		this.colorScheme =c; 
+		this.squares = squares;
 	}
 
 	@Override
 	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
+		System.out.println("hello");
 		if (started) {
 			drawGrid(g);
 		} else {
 			g.setColor(Color.WHITE);
 			g.setFont(new Font("TimesRoman", Font.PLAIN, 100));
-			g.drawString("?", 170, 150);
+			g.drawString("?", 230, 150);
 			g.setColor(new Color(0, 0, 0));
 		}
 	}
@@ -56,9 +62,9 @@ public class GridPanel extends JPanel {
 	 */
 	public void drawGrid(Graphics g) {
 		drawSquares(g);
-		g.setColor(board.getScheme().GRID);
-		drawGridlines(g, 40, 30, true);
-		drawGridlines(g, 40, 30, false);
+		g.setColor(colorScheme.GRID);
+		drawGridlines(g, XOFFSET, YOFFSET, true);
+		drawGridlines(g, XOFFSET, YOFFSET, false);
 	}
 
 	/**
@@ -100,12 +106,11 @@ public class GridPanel extends JPanel {
 	public void drawSquares(Graphics g) {
 		for (int i = 0; i < 25; i++) {
 			for (int j = 0; j < 25; j++) {
-				Square[][] squares = board.getSquares();
 				Square current = squares[j][i];
-				int xLocation = 40 + j * GAP;
-				int yLocation = 30 + i * GAP;
-				current.setGraph(g);
-				current.draw(xLocation, yLocation);
+				int xLocation = XOFFSET + j * GAP;
+				int yLocation = YOFFSET + i * GAP;
+				g.setColor(current.getColor());
+				g.fillRect(xLocation, yLocation, SQUARE_SIZE, SQUARE_SIZE);
 			}
 		}
 	}
@@ -113,4 +118,7 @@ public class GridPanel extends JPanel {
 	public void setStarted(boolean b) {
 		started = b;
 	}
+
+
+	
 }
