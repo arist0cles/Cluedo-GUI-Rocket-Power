@@ -1,0 +1,32 @@
+package view;
+
+import java.awt.Dimension;
+
+import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
+public class SetupPopup extends JOptionPane {
+	final JFrame parent = new JFrame();
+    JTextField numOfPlayers = new JTextField();
+    private String players;
+    
+    public void run() {
+    	numOfPlayers.setPreferredSize(new Dimension(100, 20));
+        numOfPlayers.setText("How many players?");
+        parent.add(numOfPlayers);
+        parent.setPreferredSize(new Dimension(200, 200));
+        parent.pack();
+        parent.setVisible(true);
+        
+        numOfPlayers.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                players = numOfPlayers.getText();
+                System.out.println(players);
+            }
+        });
+    }
+}

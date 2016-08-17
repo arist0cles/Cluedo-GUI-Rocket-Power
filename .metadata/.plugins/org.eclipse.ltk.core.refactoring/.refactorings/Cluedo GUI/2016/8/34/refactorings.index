@@ -1,2 +1,5 @@
 1471222450997	Rename method 'setupPanelImages'
 1471305372890	Delete element
+1471401440131	Encapsulate field 'colorScheme'
+1471402579445	Encapsulate field 'startingColor'
+1471409796218	Delete element

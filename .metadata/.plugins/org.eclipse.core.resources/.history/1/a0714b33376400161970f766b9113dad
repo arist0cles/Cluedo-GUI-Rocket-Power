@@ -1,0 +1,358 @@
+package view;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Window;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.imageio.ImageIO;
+import javax.swing.ButtonGroup;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+/**
+ * The view the user see. Part of the Model View Controller pattern, displays the state dynamically
+ * 
+ * The view renders the contents of a model. It specifies exactly how the model data should be presented. 
+ * If the model data changes, the view must update its presentation as needed. This can be achieved by 
+ * using a push model, in which the view registers itself with the model for change notifications, 
+ * or a pull model, in which the view is responsible for calling the model when it needs 
+ * to retrieve the most current data.
+ * 
+ * @author Patrick and Kirita
+ *
+ */
+import javax.swing.JButton;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
+import javax.swing.KeyStroke;
+import javax.swing.SpinnerListModel;
+import javax.swing.border.EmptyBorder;
+
+import colorschemes.BW;
+import colorschemes.ColorScheme;
+import colorschemes.Emo;
+import colorschemes.Pastel;
+import controller.Controller;
+import core.Board;
+import model.Model;
+import squares.DoorSquare;
+import squares.HallwaySquare;
+import squares.RoomSquare;
+import squares.Square;
+import squares.WallSquare;
+
+/**
+ * View class from MVC architecture. Displays state dynamically. Views are
+ * responsible for UI elements and displaying things. Controllers are
+ * responsible for connecting Views with Models and providing data for the View
+ * to display.
+ * 
+ * @author Patrick and Kirita
+ *
+ */
+public class View extends JFrame {
+	private static final long serialVersionUID = 1L;
+	
+	public final Dimension SIDE_PANEL_SIZE = new Dimension(150, 200);
+	public final Dimension FRAME_SIZE = new Dimension(800, 800);
+	public final Dimension MIDDLE_BOTTOM_PANEL_SIZE = new Dimension(500, 200);
+	public final Dimension MIDDLE_TOP_PANEL_SIZE = new Dimension(500, 500);
+	private JPanel middleTopPanel;
+	private JPanel middleBottomPanel = new JPanel();
+	private JPanel middlePanel = new JPanel();
+	private JPanel leftPanel = new JPanel();
+	private JPanel rightPanel = new JPanel();
+	private BorderLayout layout = new BorderLayout(10, 10);	
+	private List<ImageIcon> icons = new ArrayList<>();
+	private JPanel image1 = new JPanel();
+	private JPanel image2 = new JPanel();
+	private JPanel image3 = new JPanel();
+	private JPanel image4 = new JPanel();
+	private JPanel image5 = new JPanel();
+	private JPanel image6 = new JPanel();
+	private Controller controller;
+	private ColorScheme colorScheme;
+	private Square[][] squares;
+
+	public View(Controller c, Square[][] squares, ColorScheme colorScheme) {
+		this.colorScheme = colorScheme;
+		this.squares = squares;
+		this.controller = c;
+		controller.setView(this);
+		setupFrame();
+		setupMenu();
+		setupLayout();
+		setupPanels();
+		setupStartButton();
+		this.pack();
+	}
+
+	/**
+	 * Sets up the JFrame, the main section of the program
+	 * 
+	 */
+	public void setupFrame() {
+		this.setPreferredSize(FRAME_SIZE);
+		this.getContentPane().setLayout(layout);
+		this.setTitle("Cluedo");
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setVisible(true);
+	}
+	
+	/**
+	 * Sets up the Menu, the top menu of the program
+	 * 
+	 */
+	public void setupMenu() {
+		// TODO This is the gross java tutorial demonstration of Menus. Update to reflect our program
+		JMenuBar menuBar;
+		JMenu menu, submenu;
+		JMenuItem menuItem;
+		JRadioButtonMenuItem rbMenuItem;
+		JCheckBoxMenuItem cbMenuItem;
+
+		//Create the menu bar.
+		menuBar = new JMenuBar();
+
+		//Build the first menu.
+		menu = new JMenu("A Menu");
+		menu.setMnemonic(KeyEvent.VK_A);
+		menu.getAccessibleContext().setAccessibleDescription(
+		        "The only menu in this program that has menu items");
+		menuBar.add(menu);
+
+		//a group of JMenuItems
+		menuItem = new JMenuItem("A text-only menu item",
+		                         KeyEvent.VK_T);
+		menuItem.setAccelerator(KeyStroke.getKeyStroke(
+		        KeyEvent.VK_1, ActionEvent.ALT_MASK));
+		menuItem.getAccessibleContext().setAccessibleDescription(
+		        "This doesn't really do anything");
+		menu.add(menuItem);
+
+		//a group of radio button menu items
+		menu.addSeparator();
+		ButtonGroup group = new ButtonGroup();
+		rbMenuItem = new JRadioButtonMenuItem("A radio button menu item");
+		rbMenuItem.setSelected(true);
+		rbMenuItem.setMnemonic(KeyEvent.VK_R);
+		group.add(rbMenuItem);
+		menu.add(rbMenuItem);
+
+		rbMenuItem = new JRadioButtonMenuItem("Another one");
+		rbMenuItem.setMnemonic(KeyEvent.VK_O);
+		group.add(rbMenuItem);
+		menu.add(rbMenuItem);
+
+		//a group of check box menu items
+		menu.addSeparator();
+		cbMenuItem = new JCheckBoxMenuItem("A check box menu item");
+		cbMenuItem.setMnemonic(KeyEvent.VK_C);
+		menu.add(cbMenuItem);
+
+		cbMenuItem = new JCheckBoxMenuItem("Another one");
+		cbMenuItem.setMnemonic(KeyEvent.VK_H);
+		menu.add(cbMenuItem);
+
+		//a submenu
+		menu.addSeparator();
+		submenu = new JMenu("A submenu");
+		submenu.setMnemonic(KeyEvent.VK_S);
+
+		menuItem = new JMenuItem("An item in the submenu");
+		menuItem.setAccelerator(KeyStroke.getKeyStroke(
+		        KeyEvent.VK_2, ActionEvent.ALT_MASK));
+		submenu.add(menuItem);
+
+		menuItem = new JMenuItem("Another item");
+		submenu.add(menuItem);
+		menu.add(submenu);
+
+		//Build second menu in the menu bar.
+		menu = new JMenu("Another Menu");
+		menu.setMnemonic(KeyEvent.VK_N);
+		menu.getAccessibleContext().setAccessibleDescription(
+		        "This menu does nothing");
+		menuBar.add(menu);
+		this.setJMenuBar(menuBar);
+	}
+
+	public void setupLayout() {
+		layout.setHgap(0);
+		layout.setVgap(0);
+		this.setLayout(layout);
+	}
+
+	/**
+	 * Calls methods to setup the panels
+	 */
+	public void setupPanels() {
+		setupMiddlePanels();
+		setupSidePanels(colorScheme.BACKGROUND, leftPanel, BorderLayout.EAST);
+		setupSidePanels(colorScheme.BACKGROUND, rightPanel, BorderLayout.WEST);
+		setupIcons();
+		setupRightSidePanelImages();
+		setupLeftSidePanelImages();
+	}
+
+	private void setupIcons() {
+		icons.add(new ImageIcon(new ImageIcon("Chars\\White\\card_colonel_mustard.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
+		icons.add(new ImageIcon(new ImageIcon("Chars\\Black\\card_miss_scarlett.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
+		icons.add(new ImageIcon(new ImageIcon("Chars\\White\\card_mrs_peacock.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
+		icons.add(new ImageIcon(new ImageIcon("Chars\\White\\card_mrs_white.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
+		icons.add(new ImageIcon(new ImageIcon("Chars\\Black\\card_professor_plum.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
+		icons.add(new ImageIcon(new ImageIcon("Chars\\White\\card_rev_green.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
+	}
+
+	private void setupLeftSidePanelImages() {
+		JLabel thumb = new JLabel();
+		thumb.setIcon(icons.get(0));
+		image1.add(thumb);
+		JLabel thumb2 = new JLabel();
+		thumb2.setIcon(icons.get(1));
+		image2.add(thumb2);
+		JLabel thumb3 = new JLabel();
+		thumb3.setIcon(icons.get(2));
+		image3.add(thumb3);
+		image1.setPreferredSize(new Dimension(50, 50));
+		image2.setPreferredSize(new Dimension(50, 50));
+		image3.setPreferredSize(new Dimension(50, 50));
+		image1.setBackground(colorScheme.BACKGROUND);
+		image2.setBackground(colorScheme.BACKGROUND);
+		image3.setBackground(colorScheme.BACKGROUND);
+		leftPanel.setLayout(new GridLayout(3, 1));
+		leftPanel.add(image1);
+		leftPanel.add(image2);
+		leftPanel.add(image3);
+	}
+
+	/**
+	 * Sets up all the middle panels
+	 */
+	public void setupMiddlePanels() {
+		middleTopPanel = new GridPanel(new Emo(), squares);
+		middleTopPanel.setPreferredSize(MIDDLE_TOP_PANEL_SIZE);
+		middleTopPanel.setBackground(colorScheme.BACKGROUND);
+
+		middleBottomPanel.setPreferredSize(MIDDLE_BOTTOM_PANEL_SIZE);
+		middleBottomPanel.setBackground(colorScheme.BACKGROUND);
+
+		this.getContentPane().add(middlePanel, BorderLayout.CENTER);
+		middlePanel.setBackground(colorScheme.BACKGROUND);
+		
+		middlePanel.add(middleTopPanel, BorderLayout.NORTH);
+		middlePanel.add(middleBottomPanel, BorderLayout.SOUTH);
+	}
+
+	/**
+	 * Sets up the side panels.
+	 * 
+	 * @param startingColor
+	 *            Basic Bitch Black
+	 * @param panel
+	 *            The panel to be setup.
+	 * 
+	 *            * @param layoutPosition Either the left or the right, which
+	 *            are called east or west
+	 */
+	public void setupSidePanels(Color startingColor, JPanel panel, String layoutPosition) {
+		panel.setPreferredSize(SIDE_PANEL_SIZE);
+		panel.setVisible(true);
+		this.getContentPane().add(panel, layoutPosition);
+		panel.setBackground(startingColor);
+	}
+	
+	public void setupRightSidePanelImages(){
+		JLabel thumb = new JLabel();
+		thumb.setIcon(icons.get(3));
+		image4.add(thumb);
+		JLabel thumb2 = new JLabel();
+		thumb2.setIcon(icons.get(4));
+		image5.add(thumb2);
+		JLabel thumb3 = new JLabel();
+		thumb3.setIcon(icons.get(5));
+		image6.add(thumb3);
+		image4.setPreferredSize(new Dimension(50, 50));
+		image5.setPreferredSize(new Dimension(50, 50));
+		image6.setPreferredSize(new Dimension(50, 50));
+		image4.setBackground(new Color(0, 0, 0));
+		image5.setBackground(new Color(0, 0, 0));
+		image6.setBackground(new Color(0, 0, 0));
+		rightPanel.setLayout(new GridLayout(3, 1));
+		rightPanel.add(image4);
+		rightPanel.add(image5);
+		rightPanel.add(image6);
+	}
+
+	public void setupTextFields() {
+		JTextField numberOfPlayers = new JTextField("hello");
+		middleBottomPanel.add(numberOfPlayers, BorderLayout.CENTER);
+		String players = numberOfPlayers.getText();
+	}
+
+	public void setupStartButton() {
+		JButton start = new JButton("START");
+		JSpinner color = setupColorSpinner();
+		addStartButtonListener(start, color);
+		
+		middleBottomPanel.add(start, BorderLayout.SOUTH);
+		middleBottomPanel.add(color, BorderLayout.NORTH);
+	}
+	
+	public JSpinner setupColorSpinner(){
+		List<String> colorScheme = new ArrayList<>();
+		colorScheme.add("Pastel");
+		colorScheme.add("Emo");
+		colorScheme.add("BW");
+		SpinnerListModel l = new SpinnerListModel(colorScheme);
+		return new JSpinner(l);
+	}
+
+	private void addStartButtonListener(JButton start, JSpinner color) {
+		start.addActionListener(e -> {	
+			controller.start((String)color.getValue());
+		});
+	}
+	
+	public String showInputDialog(){
+		String name = JOptionPane.showInputDialog(this,
+                "How many players?", null);
+		return name;
+	}
+	
+	public void redraw(Color c){
+		middleBottomPanel.setBackground(c);
+		middleTopPanel.setBackground(c);
+		leftPanel.setBackground(c);
+		rightPanel.setBackground(c);
+		image1.setBackground(c);
+		image2.setBackground(c);
+		image3.setBackground(c);
+		image4.setBackground(c);
+		image5.setBackground(c);
+		image6.setBackground(c);
+		((GridPanel) middleTopPanel).setStarted(true);
+		middleTopPanel.repaint();
+	}
+
+}

@@ -1,0 +1,69 @@
+package view;
+
+import java.awt.Button;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.util.Vector;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+
+public class SetupPopup extends JOptionPane {
+	JFrame parent = new JFrame();
+    JTextField numOfPlayers = new JTextField(10);
+    private String players;
+    
+    public void run() {
+    	numOfPlayers.setPreferredSize(new Dimension(5, 20));
+        numOfPlayers.setText("How many players?");
+        parent.add(numOfPlayers);
+        parent.setPreferredSize(new Dimension(200, 200));
+        parent.pack();
+        parent.setVisible(true);
+        
+        numOfPlayers.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                players = numOfPlayers.getText();
+                setupEachPlayer(Integer.parseInt(players));
+            }
+        });
+    }
+    
+    public void setupEachPlayer(int i){
+    	for(int j = 0; j<i; j++){
+    		parent = new JFrame();
+    		parent.setLayout(new GridLayout(7, 1));
+    		JTextField playerName = new JTextField("Enter name and pick chararacter?");
+    		parent.add(playerName);
+    		JRadioButton b1 = new JRadioButton("Miss scarlet");
+    		JRadioButton b2 = new JRadioButton("Professor Plum");
+    		JRadioButton b3 = new JRadioButton("Kirita");
+    		JRadioButton b4 = new JRadioButton("Patrick");
+    		JRadioButton b5 = new JRadioButton("Zach");
+    		JRadioButton b6 = new JRadioButton("James");
+    		ButtonGroup bg = new ButtonGroup();
+    		bg.add(b1);
+    		bg.add(b2);
+    		bg.add(b3);
+    		bg.add(b4);
+    		bg.add(b5);
+    		bg.add(b6);
+    		parent.add(b1);
+    		parent.add(b2);
+    		parent.add(b3);
+    		parent.add(b4);
+    		parent.add(b5);
+    		parent.add(b6);
+    		
+            parent.setPreferredSize(new Dimension(200, 200));
+            parent.pack();
+            parent.setVisible(true);
+    	}
+    }
+}

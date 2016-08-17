@@ -19,7 +19,7 @@ public class pathNode {
 	
 	public List<pathNode> findNeighbours(){
 		List<pathNode> neighbours = new ArrayList<>();
-		Board board = this.game.getBoard();
+		Board board = null;
 		Square [][] squares = board.getSquares();
 		
 		if (this.sqaure.getLoc().getX()-1 >= 0){

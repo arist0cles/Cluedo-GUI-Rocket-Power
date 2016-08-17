@@ -12,6 +12,7 @@ import cards.Card;
 import cards.Weapon;
 import colorschemes.ColorScheme;
 import colorschemes.Emo;
+import controller.Controller;
 import core.Board;
 import core.Die;
 import core.Player;
@@ -31,34 +32,13 @@ import cards.Room;
  *
  */
 public class Game {
-
-	private Board board;
-	private Player currentPlayer;
-	private ArrayList<Player> players;
-	private ArrayList<Card> allCards; // all cards in the game
-	private ArrayList<Card> solution; // three solution cards
-	private ArrayList<Card> ruledOut; // cards ruled out during the game
-	private boolean finished;
-
-	String[] weapons = { "CANDLESTICK", "DAGGER", "LEADPIPE", "REVOLVER", "ROPE", "SPANNER" };
-	String[] characters = { "MISS SCARLETT", "COLONEL MUSTARD", "MRS WHITE", "THE REVEREND GREEN", "MRS PEACOCK",
-			"PROFESSOR PLUM" };
-	String[] rooms = { "KITCHEN", "BALLROOM", "CONSERVATORY", "DINING", "GAMESROOM", "LIBRARY", "LOUNGE", "BEDROOM",
-			"STUDY" };
-	Square[][] squares;
-
 	/**
 	 * Game Constructor.
 	 */
 	public Game() {
-		this.board = new Board(new Emo());
-		this.players = new ArrayList<Player>();
-		this.allCards = new ArrayList<Card>();
-		this.solution = new ArrayList<Card>();
-		this.ruledOut = new ArrayList<Card>();
-		this.squares = this.board.getSquares();
-		this.finished = false;
-		View v = new View(board);
+		Model m = new Model();
+		Controller c = new Controller(m);
+		View v = new View(c, m.squares, m.getColorScheme());
 	}
 
 	/*	
@@ -419,8 +399,5 @@ public class Game {
 	public static void main(String args[]) {
 		new Game();
 	}
-
-	public Board getBoard() {
-		return board;
-	}
+	
 }
