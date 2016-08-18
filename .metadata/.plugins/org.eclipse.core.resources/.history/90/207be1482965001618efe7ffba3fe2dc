@@ -1,0 +1,80 @@
+package view;
+
+import java.awt.Button;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.util.Vector;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+
+public class SetupPopup extends JOptionPane {
+	JFrame parent = new JFrame();
+    JTextField numOfPlayers = new JTextField(10);
+    private String players;
+    
+    public void run() {
+    	//numOfPlayers.setPreferredSize(new Dimension(5, 20));
+        numOfPlayers.setText("How many players?");
+        parent.add(numOfPlayers);
+        parent.setPreferredSize(new Dimension(200, 200));
+        parent.pack();
+        parent.setVisible(true);
+    }
+    
+    public void setupEachPlayer(int i){
+    	for(int j = 0; j<i; j++){
+    		parent = new JFrame();
+    		parent.setPreferredSize(new Dimension(200, 200));
+    		parent.setLayout(new GridBagLayout());
+    		JTextField numOfPlayers = new JTextField(10);
+    		GridBagConstraints c = new GridBagConstraints();
+    		c.gridx = 0;
+    		c.gridy = 0;
+    		parent.add(new JLabel("Label 1:"), c);
+    		c.gridx = 1;
+    		c.gridy = 0;
+    		parent.add(numOfPlayers , c);
+    		JRadioButton b1 = new JRadioButton("Miss scarlet");
+    		JRadioButton b2 = new JRadioButton("Professor Plum");
+    		JRadioButton b3 = new JRadioButton("Kirita");
+    		JRadioButton b4 = new JRadioButton("Patrick");
+    		JRadioButton b5 = new JRadioButton("Zach");
+    		JRadioButton b6 = new JRadioButton("James");
+    		ButtonGroup bg = new ButtonGroup();
+    		bg.add(b1);
+    		bg.add(b2);
+    		bg.add(b3);
+    		bg.add(b4);
+    		bg.add(b5);
+    		bg.add(b6);
+    		parent.add(b1);
+    		parent.add(b2);
+    		parent.add(b3);
+    		parent.add(b4);
+    		parent.add(b5);
+    		parent.add(b6);
+    		
+            parent.setPreferredSize(new Dimension(200, 200));
+            parent.pack();
+            parent.setVisible(true);
+    	}
+    }
+
+	public void addNumberOfPlayersListener(ActionListener listenForNumPlayers) {
+		numOfPlayers.addActionListener(listenForNumPlayers);
+	}
+
+	public String getNumOfPlayers() {
+		return numOfPlayers.getText();
+	}
+}

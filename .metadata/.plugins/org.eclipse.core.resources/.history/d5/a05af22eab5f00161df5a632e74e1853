@@ -1,7 +1,0 @@
-package view;
-
-public class BW extends ColorScheme {
-	public BW() {
-
-	}
-}

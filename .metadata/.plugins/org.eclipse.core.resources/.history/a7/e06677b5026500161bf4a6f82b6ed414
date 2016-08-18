@@ -1,0 +1,69 @@
+package model;
+
+import java.awt.Color;
+import java.util.ArrayList;
+
+import cards.Card;
+import colorschemes.ColorScheme;
+import colorschemes.Emo;
+import core.Board;
+import core.Player;
+import squares.Square;
+
+/**
+ * The model represents data and the rules that govern access to and updates of
+ * this data. In enterprise software, a model often serves as a software
+ * approximation of a real-world process.
+ * 
+ * @author Patrick and Kirita
+ *
+ */
+public class Model {
+	private ColorScheme colorScheme = new Emo();
+	private Color startingColor;
+	private Board board;
+	private Player currentPlayer;
+	private ArrayList<Player> players;
+	private ArrayList<Card> allCards; // all cards in the game
+	private ArrayList<Card> solution; // three solution cards
+	private ArrayList<Card> ruledOut; // cards ruled out during the game
+	private boolean finished;
+
+	Square[][] squares;
+	
+	public Model(){
+		this.board = new Board(new Emo());
+		this.players = new ArrayList<Player>();
+		this.allCards = new ArrayList<Card>();
+		this.solution = new ArrayList<Card>();
+		this.ruledOut = new ArrayList<Card>();
+		this.squares = this.board.getSquares();
+		this.finished = false;
+		createCharacters();
+	}
+
+	private void createCharacters() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setScheme(ColorScheme c) {
+		this.setColorScheme(c);
+	}
+
+	public ColorScheme getColorScheme() {
+		return colorScheme;
+	}
+
+	public void setColorScheme(ColorScheme colorScheme) {
+		this.colorScheme = colorScheme;
+	}
+
+	public Color getStartingColor() {
+		return startingColor;
+	}
+
+	public void setStartingColor(Color startingColor) {
+		this.startingColor = startingColor;
+	}
+}

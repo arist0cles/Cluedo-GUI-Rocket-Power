@@ -1,7 +1,0 @@
-package view;
-
-public class Emo extends ColorScheme{
-	public Emo(){
-		
-	}
-}

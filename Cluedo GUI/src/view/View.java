@@ -2,6 +2,7 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -78,7 +79,7 @@ public class View extends JFrame {
 	public final Dimension FRAME_SIZE = new Dimension(800, 800);
 	public final Dimension MIDDLE_BOTTOM_PANEL_SIZE = new Dimension(500, 200);
 	public final Dimension MIDDLE_TOP_PANEL_SIZE = new Dimension(500, 500);
-	private JPanel middleTopPanel;
+	private GridPanel middleTopPanel;
 	private JPanel middleBottomPanel = new JPanel();
 	private JPanel middlePanel = new JPanel();
 	private JPanel leftPanel = new JPanel();
@@ -91,23 +92,20 @@ public class View extends JFrame {
 	private JPanel image4 = new JPanel();
 	private JPanel image5 = new JPanel();
 	private JPanel image6 = new JPanel();
-	private Controller controller;
-	private ColorScheme colorScheme;
-	private Square[][] squares;
+	private Model model;
+	private JButton start;
+	private JSpinner color;
+	private List<Component> components = new ArrayList<>();
 
-	public View(Controller c, Square[][] squares, ColorScheme colorScheme) {
-		this.colorScheme = colorScheme;
-		this.squares = squares;
-		this.controller = c;
-		controller.setView(this);
+	public View(Model m) {
+		this.model = m;
 		setupFrame();
 		setupMenu();
 		setupLayout();
 		setupPanels();
 		setupStartButton();
 		this.pack();
-		this.revalidate();
-		this.repaint();
+		addComponents();
 	}
 
 	/**
@@ -211,8 +209,8 @@ public class View extends JFrame {
 	 */
 	public void setupPanels() {
 		setupMiddlePanels();
-		setupSidePanels(colorScheme.BACKGROUND, leftPanel, BorderLayout.EAST);
-		setupSidePanels(colorScheme.BACKGROUND, rightPanel, BorderLayout.WEST);
+		setupSidePanels(model.getColorScheme().BACKGROUND, leftPanel, BorderLayout.EAST);
+		setupSidePanels(model.getColorScheme().BACKGROUND, rightPanel, BorderLayout.WEST);
 		setupIcons();
 		setupRightSidePanelImages();
 		setupLeftSidePanelImages();
@@ -240,9 +238,9 @@ public class View extends JFrame {
 		image1.setPreferredSize(new Dimension(50, 50));
 		image2.setPreferredSize(new Dimension(50, 50));
 		image3.setPreferredSize(new Dimension(50, 50));
-		image1.setBackground(colorScheme.BACKGROUND);
-		image2.setBackground(colorScheme.BACKGROUND);
-		image3.setBackground(colorScheme.BACKGROUND);
+		image1.setBackground(model.getColorScheme().BACKGROUND);
+		image2.setBackground(model.getColorScheme().BACKGROUND);
+		image3.setBackground(model.getColorScheme().BACKGROUND);
 		leftPanel.setLayout(new GridLayout(3, 1));
 		leftPanel.add(image1);
 		leftPanel.add(image2);
@@ -253,15 +251,15 @@ public class View extends JFrame {
 	 * Sets up all the middle panels
 	 */
 	public void setupMiddlePanels() {
-		middleTopPanel = new GridPanel(colorScheme, squares);
+		middleTopPanel = new GridPanel(model);
 		middleTopPanel.setPreferredSize(MIDDLE_TOP_PANEL_SIZE);
-		middleTopPanel.setBackground(colorScheme.BACKGROUND);
+		middleTopPanel.setBackground(model.getColorScheme().BACKGROUND);
 
 		middleBottomPanel.setPreferredSize(MIDDLE_BOTTOM_PANEL_SIZE);
-		middleBottomPanel.setBackground(colorScheme.BACKGROUND);
+		middleBottomPanel.setBackground(model.getColorScheme().BACKGROUND);
 
 		this.getContentPane().add(middlePanel, BorderLayout.CENTER);
-		middlePanel.setBackground(colorScheme.BACKGROUND);
+		middlePanel.setBackground(model.getColorScheme().BACKGROUND);
 		
 		middlePanel.add(middleTopPanel, BorderLayout.NORTH);
 		middlePanel.add(middleBottomPanel, BorderLayout.SOUTH);
@@ -314,9 +312,8 @@ public class View extends JFrame {
 	}
 
 	public void setupStartButton() {
-		JButton start = new JButton("START");
-		JSpinner color = setupColorSpinner();
-		addStartButtonListener(start, color);
+		start = new JButton("START");
+		color = setupColorSpinner();
 		
 		middleBottomPanel.add(start, BorderLayout.SOUTH);
 		middleBottomPanel.add(color, BorderLayout.NORTH);
@@ -332,25 +329,41 @@ public class View extends JFrame {
 		return new JSpinner(l);
 	}
 
-	private void addStartButtonListener(JButton start, JSpinner color) {
-		start.addActionListener(e -> {	
-			controller.start((String)color.getValue());
-			((GridPanel) middleTopPanel).setStarted(true);
-		});
+	public void addStartButtonListener(ActionListener listenForStart) {
+		start.addActionListener(listenForStart);
 	}
 	
-	public void redraw(Color c){
-		middleBottomPanel.setBackground(c);
-		middleTopPanel.setBackground(c);
-		leftPanel.setBackground(c);
-		rightPanel.setBackground(c);
-		image1.setBackground(c);
-		image2.setBackground(c);
-		image3.setBackground(c);
-		image4.setBackground(c);
-		image5.setBackground(c);
-		image6.setBackground(c);
-		middleTopPanel.repaint();
+	public void redraw(){
+		for(Component comp: components){
+			comp.setBackground(model.getColorScheme().BACKGROUND);
+		}
+		
+		this.getContentPane().validate();
+		this.getContentPane().repaint();
+		
+	}
+
+	public String getScheme() {
+		return (String)color.getValue();
 	}
 	
+	public void setGridPaneStarted(){
+		middleTopPanel.setStarted(true);
+	}
+	
+	/**
+	 * Helper method to help batch process actions to all components
+	 */
+	public void addComponents(){
+		components.add(leftPanel);
+		components.add(rightPanel);
+		components.add(middleBottomPanel);
+		components.add(middleTopPanel);
+		components.add(image1);
+		components.add(image2);
+		components.add(image3);
+		components.add(image4);
+		components.add(image5);
+		components.add(image6);
+	}
 }

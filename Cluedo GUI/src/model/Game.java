@@ -37,8 +37,8 @@ public class Game {
 	 */
 	public Game() {
 		Model m = new Model();
-		Controller c = new Controller(m);
-		View v = new View(c, m.squares, m.getColorScheme());
+		View v = new View(m);
+		Controller c = new Controller(m, v);
 	}
 
 	/*	

@@ -1,0 +1,64 @@
+package controller;
+
+import java.awt.Color;
+import java.awt.event.ActionListener;
+
+import colorschemes.BW;
+import colorschemes.Emo;
+import colorschemes.Kirita;
+import colorschemes.Pastel;
+import model.Model;
+import view.SetupPopup;
+import view.View;
+
+/**
+ * The controller translates the user's interactions with the view into actions
+ * that the model will perform. In a stand-alone GUI client, user interactions
+ * could be button clicks or menu selections. Depending on the context, a
+ * controller may also select a new view -- for example, a web page of results
+ * -- to present back to the user.
+ * 
+ * @author Patrick and Kirita
+ *
+ */
+public class Controller {
+	private Model model;
+	private View view;
+
+	public Controller(Model m, View v) {
+		this.model = m;
+		this.view = v;
+		addStartListener();
+	}
+	
+	public void addStartListener(){
+		this.view.addStartButtonListener(e -> {
+		    start();
+		});
+	}
+	
+	public void start() {
+		SetupPopup pop = new SetupPopup();
+		pop.run();
+		
+		String scheme = view.getScheme();
+		switch (scheme) {
+		case "Kirita":
+			model.setScheme(new Kirita());
+			break;
+		case "Emo":
+			model.setScheme(new Emo());
+			view.redraw();
+			break;
+		case "Pastel":
+			model.setScheme(new Pastel());
+			break;
+		case "BW":
+			model.setScheme(new BW());
+			break;
+		}
+		model.makeBoard();
+		view.setGridPaneStarted();
+		view.redraw();
+	}
+}

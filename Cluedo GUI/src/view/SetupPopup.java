@@ -2,46 +2,49 @@ package view;
 
 import java.awt.Button;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 public class SetupPopup extends JOptionPane {
-	JFrame parent = new JFrame();
-    JTextField numOfPlayers = new JTextField(10);
-    private String players;
+	private JFrame parent = new JFrame();
+    private JTextField numOfPlayers = new JTextField(10);
+    private List<JRadioButton> buttons = new ArrayList<>();
     
     public void run() {
-    	numOfPlayers.setPreferredSize(new Dimension(5, 20));
-        numOfPlayers.setText("How many players?");
-        parent.add(numOfPlayers);
-        parent.setPreferredSize(new Dimension(200, 200));
+    	parent.setLayout(new GridBagLayout());
+		numOfPlayers = new JTextField(10);
+		numOfPlayers.grabFocus();
+		GridBagConstraints c = new GridBagConstraints();
+		c.gridx = 0;
+		c.gridy = 0;
+		parent.add(new JLabel("How many players?"), c);
+		c.gridx = 1;
+		c.gridy = 0;
+		parent.add(numOfPlayers , c);
+        parent.setPreferredSize(new Dimension(300, 300));
         parent.pack();
         parent.setVisible(true);
-        
-        numOfPlayers.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                players = numOfPlayers.getText();
-                setupEachPlayer(Integer.parseInt(players));
-            }
-        });
     }
     
     public void setupEachPlayer(int i){
     	for(int j = 0; j<i; j++){
     		parent = new JFrame();
     		parent.setPreferredSize(new Dimension(200, 200));
-    		parent.setLayout(new GridLayout(7, 1));
-    		JTextField playerName = new JTextField("Enter name and pick chararacter?");
-    		parent.add(playerName);
     		JRadioButton b1 = new JRadioButton("Miss scarlet");
     		JRadioButton b2 = new JRadioButton("Professor Plum");
     		JRadioButton b3 = new JRadioButton("Kirita");
@@ -67,4 +70,16 @@ public class SetupPopup extends JOptionPane {
             parent.setVisible(true);
     	}
     }
+    
+    public void setupRadioButtons(){
+    	
+    }
+
+	public void addNumberOfPlayersListener(ActionListener a) {
+		numOfPlayers.addActionListener(a);
+	}
+
+	public String getNumOfPlayers() {
+		return numOfPlayers.getText();
+	}
 }

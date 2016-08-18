@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 
 import colorschemes.ColorScheme;
 import core.Board;
+import model.Model;
 import squares.Square;
 
 /**
@@ -27,8 +28,7 @@ import squares.Square;
  *
  */
 public class GridPanel extends JPanel {
-	private ColorScheme colorScheme;
-	private Square[][] squares;
+	private static final long serialVersionUID = 1L;
 	public final int XOFFSET = 60;
 	public final int YOFFSET = 50;
 	private final int SQUARE_SIZE = 15;
@@ -36,15 +36,14 @@ public class GridPanel extends JPanel {
 	public final int WIDTH = XOFFSET+GAP*25;
 	public final int HEIGHT = YOFFSET+GAP*25;
 	private boolean started;
+	private Model model;
 	
-	public GridPanel(ColorScheme c, Square[][] squares){
-		this.colorScheme =c; 
-		this.squares = squares;
+	public GridPanel(Model m){
+		this.model = m;
 	}
 
 	@Override
 	public void paintComponent(Graphics g) {
-		System.out.println("hello");
 		if (started) {
 			drawGrid(g);
 		} else {
@@ -62,7 +61,7 @@ public class GridPanel extends JPanel {
 	 */
 	public void drawGrid(Graphics g) {
 		drawSquares(g);
-		g.setColor(colorScheme.GRID);
+		g.setColor(model.getColorScheme().GRID);
 		drawGridlines(g, XOFFSET, YOFFSET, true);
 		drawGridlines(g, XOFFSET, YOFFSET, false);
 	}
@@ -106,7 +105,7 @@ public class GridPanel extends JPanel {
 	public void drawSquares(Graphics g) {
 		for (int i = 0; i < 25; i++) {
 			for (int j = 0; j < 25; j++) {
-				Square current = squares[j][i];
+				Square current = model.getSquares()[j][i];
 				int xLocation = XOFFSET + j * GAP;
 				int yLocation = YOFFSET + i * GAP;
 				g.setColor(current.getColor());
@@ -118,7 +117,4 @@ public class GridPanel extends JPanel {
 	public void setStarted(boolean b) {
 		started = b;
 	}
-
-
-	
 }

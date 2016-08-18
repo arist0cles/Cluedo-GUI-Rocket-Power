@@ -28,23 +28,22 @@ public class Model {
 	private ArrayList<Card> solution; // three solution cards
 	private ArrayList<Card> ruledOut; // cards ruled out during the game
 	private boolean finished;
-
-	Square[][] squares;
 	
 	public Model(){
-		this.board = new Board(new Emo());
 		this.players = new ArrayList<Player>();
 		this.allCards = new ArrayList<Card>();
 		this.solution = new ArrayList<Card>();
 		this.ruledOut = new ArrayList<Card>();
-		this.squares = this.board.getSquares();
 		this.finished = false;
 		createCharacters();
 	}
 
 	private void createCharacters() {
-		// TODO Auto-generated method stub
 		
+	}
+	
+	public void makeBoard(){
+		this.board = new Board(colorScheme);
 	}
 
 	public void setScheme(ColorScheme c) {
@@ -65,5 +64,9 @@ public class Model {
 
 	public void setStartingColor(Color startingColor) {
 		this.startingColor = startingColor;
+	}
+
+	public Square[][] getSquares() {
+		return this.board.getSquares();
 	}
 }
