@@ -24,8 +24,10 @@ public class Player {
 	private String [] alpha = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O"
 	, "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y"};
 	private boolean eliminated = false;
+	private Character c;
 	
-	public Player(int id, String name){
+	public Player(int id, String name, Character c){
+		this.c = c;
 		this.id = id;
 		this.name = name;
 		this.hand = new ArrayList<Card>();	

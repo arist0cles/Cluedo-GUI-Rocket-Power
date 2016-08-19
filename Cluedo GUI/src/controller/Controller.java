@@ -27,31 +27,58 @@ public class Controller {
 	private Model model;
 	private View view;
 	private SetupPopup pop = new SetupPopup();
+	private int numOfPlayers;
+	private int count;
 
 	public Controller(Model m, View v) {
 		this.model = m;
 		this.view = v;
-		addStartListener();
 		addNumberOfPlayersListener();
+		addStartListener();
 	}
-	
-	public void addStartListener(){
+
+	public void addStartListener() {
 		view.addStartButtonListener(e -> {
-		    start();
+			setup();
 		});
 	}
-	
-	public void addNumberOfPlayersListener(){
+
+	public void addNumberOfPlayersListener() {
 		pop.addNumberOfPlayersListener(e -> {
 			String players = pop.getNumOfPlayers();
-			System.out.println(players);
-	        pop.setupEachPlayer(Integer.parseInt(players));
+			numOfPlayers = Integer.parseInt(players);
+			pop.setupEachPlayer();
+			count++;
+			addPlayerInfoListener();
+		});
+	}
+
+	public void addPlayerInfoListener() {
+		pop.addPlayerInfoListener(e -> {
+			if (count >= numOfPlayers){
+				String playerName = pop.getPlayerName();
+				String char1 = pop.getSelectedButtonText();
+				System.out.println(playerName);
+				System.out.println(char1);
+				pop.closeWindow();
+				return;
+			}
+			String playerName = pop.getPlayerName();
+			String char1 = pop.getSelectedButtonText();
+			System.out.println(playerName);
+			System.out.println(char1);
+			count++;
+			pop.setupEachPlayer();
+			addPlayerInfoListener();
 		});
 	}
 	
-	public void start() {
+	public void setup(){
 		pop.run();
-		
+	}
+
+	//CALL THIS TO START GAME ONCE SETUP IS WORKING!!!!
+	public void start() {
 		String scheme = view.getScheme();
 		switch (scheme) {
 		case "Kirita":
