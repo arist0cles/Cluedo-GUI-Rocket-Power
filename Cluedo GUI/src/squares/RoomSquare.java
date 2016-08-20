@@ -20,42 +20,42 @@ public class RoomSquare extends Square{
 	public void setName(String s){
 		switch(s){
 		case "K":
-			this.name = "KITCHEN";
+			this.name = "Kitchen";
 			this.stairs = true;
-			this.oppRoom = "STUDY";
+			this.oppRoom = "Study";
 			this.oppLoc = new Location(22, 22); 
 			break;
 		case "B":
-			this.name = "BALLROOM";
+			this.name = "Ballroom";
 			break;
 		case "C":
-			this.name = "CONSERVATORY";
+			this.name = "Conservatory";
 			this.stairs = true;
-			this.oppRoom = "LOUNGE";
+			this.oppRoom = "Lounge";
 			this.oppLoc = new Location(3, 22); 
 			break;
 		case "d":
-			this.name = "DINING";
+			this.name = "Dining";
 			break;
 		case "G":
-			this.name = "GAMESROOM";
+			this.name = "Garage";
 			break;
 		case "L":
-			this.name = "LIBRARY";
+			this.name = "Library";
 			break;
 		case "l":
-			this.name = "LOUNGE";
+			this.name = "Lounge";
 			this.stairs = true;
-			this.oppRoom = "CONSERVATORY";
+			this.oppRoom = "Conservatory";
 			this.oppLoc = new Location(22, 3); 
 			break;
 		case "b":
-			this.name = "BEDROOM";
+			this.name = "Billiard";
 			break;
 		case "S":
-			this.name = "STUDY";
+			this.name = "Study";
 			this.stairs = true;
-			this.oppRoom = "KITCHEN";
+			this.oppRoom = "Kitchen";
 			this.oppLoc = new Location(3, 3); 
 			break;
 		}

@@ -32,14 +32,20 @@ import cards.RoomCard;
  *
  */
 public class Game {
+	private Model m;
+	private View v;
+	private Controller c;
+	
 	/**
 	 * Game Constructor.
 	 */
 	public Game() {
-		Model m = new Model();
-		View v = new View(m);
-		Controller c = new Controller(m, v);
+		this.m = new Model();
+		this.v = new View(m);
+		this.c = new Controller(m, v);
 	}
+	
+	
 
 	/*	
 		*//**
