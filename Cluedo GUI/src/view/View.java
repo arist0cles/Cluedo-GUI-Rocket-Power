@@ -82,16 +82,10 @@ public class View extends JFrame {
 	private GridPanel middleTopPanel;
 	private JPanel middleBottomPanel = new JPanel();
 	private JPanel middlePanel = new JPanel();
-	private JPanel leftPanel = new JPanel();
 	private JPanel rightPanel = new JPanel();
+	private JPanel leftPanel = new JPanel();
 	private BorderLayout layout = new BorderLayout(10, 10);	
 	private List<ImageIcon> icons = new ArrayList<>();
-	private JPanel image1 = new JPanel();
-	private JPanel image2 = new JPanel();
-	private JPanel image3 = new JPanel();
-	private JPanel image4 = new JPanel();
-	private JPanel image5 = new JPanel();
-	private JPanel image6 = new JPanel();
 	private Model model;
 	private JButton start;
 	private JSpinner color;
@@ -100,7 +94,7 @@ public class View extends JFrame {
 	public View(Model m) {
 		this.model = m;
 		setupFrame();
-		setupMenu();
+		//setupMenu();
 		setupLayout();
 		setupPanels();
 		setupStartButton();
@@ -209,43 +203,22 @@ public class View extends JFrame {
 	 */
 	public void setupPanels() {
 		setupMiddlePanels();
-		setupSidePanels(model.getColorScheme().BACKGROUND, leftPanel, BorderLayout.EAST);
-		setupSidePanels(model.getColorScheme().BACKGROUND, rightPanel, BorderLayout.WEST);
+		setupSidePanels(leftPanel, BorderLayout.EAST);
+		setupSidePanels(rightPanel, BorderLayout.WEST);
 		setupIcons();
-		setupRightSidePanelImages();
-		setupLeftSidePanelImages();
+		setupImagePanels();
 	}
 
 	private void setupIcons() {
-		icons.add(new ImageIcon(new ImageIcon("Chars\\White\\card_colonel_mustard.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
-		icons.add(new ImageIcon(new ImageIcon("Chars\\Black\\card_miss_scarlett.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
-		icons.add(new ImageIcon(new ImageIcon("Chars\\White\\card_mrs_peacock.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
-		icons.add(new ImageIcon(new ImageIcon("Chars\\White\\card_mrs_white.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
-		icons.add(new ImageIcon(new ImageIcon("Chars\\Black\\card_professor_plum.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
-		icons.add(new ImageIcon(new ImageIcon("Chars\\White\\card_rev_green.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
+		icons.add(new ImageIcon(new ImageIcon("card_colonel_mustard.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
+		icons.add(new ImageIcon(new ImageIcon("card_miss_scarlett.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
+		icons.add(new ImageIcon(new ImageIcon("card_mrs_peacock.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
+		icons.add(new ImageIcon(new ImageIcon("card_mrs_white.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
+		icons.add(new ImageIcon(new ImageIcon("card_professor_plum.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
+		icons.add(new ImageIcon(new ImageIcon("card_rev_green.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
+		
 	}
 
-	private void setupLeftSidePanelImages() {
-		JLabel thumb = new JLabel();
-		thumb.setIcon(icons.get(0));
-		image1.add(thumb);
-		JLabel thumb2 = new JLabel();
-		thumb2.setIcon(icons.get(1));
-		image2.add(thumb2);
-		JLabel thumb3 = new JLabel();
-		thumb3.setIcon(icons.get(2));
-		image3.add(thumb3);
-		image1.setPreferredSize(new Dimension(50, 50));
-		image2.setPreferredSize(new Dimension(50, 50));
-		image3.setPreferredSize(new Dimension(50, 50));
-		image1.setBackground(model.getColorScheme().BACKGROUND);
-		image2.setBackground(model.getColorScheme().BACKGROUND);
-		image3.setBackground(model.getColorScheme().BACKGROUND);
-		leftPanel.setLayout(new GridLayout(3, 1));
-		leftPanel.add(image1);
-		leftPanel.add(image2);
-		leftPanel.add(image3);
-	}
 
 	/**
 	 * Sets up all the middle panels
@@ -258,7 +231,7 @@ public class View extends JFrame {
 		middleBottomPanel.setPreferredSize(MIDDLE_BOTTOM_PANEL_SIZE);
 		middleBottomPanel.setBackground(model.getColorScheme().BACKGROUND);
 
-		this.getContentPane().add(middlePanel, BorderLayout.CENTER);
+		this.add(middlePanel, BorderLayout.CENTER);
 		middlePanel.setBackground(model.getColorScheme().BACKGROUND);
 		
 		middlePanel.add(middleTopPanel, BorderLayout.NORTH);
@@ -276,37 +249,41 @@ public class View extends JFrame {
 	 *            * @param layoutPosition Either the left or the right, which
 	 *            are called east or west
 	 */
-	public void setupSidePanels(Color startingColor, JPanel panel, String layoutPosition) {
+	public void setupSidePanels(JPanel panel, String layoutPosition) {
 		panel.setPreferredSize(SIDE_PANEL_SIZE);
 		panel.setVisible(true);
-		this.getContentPane().add(panel, layoutPosition);
-		panel.setBackground(startingColor);
+		this.add(panel, layoutPosition);
+		panel.setBackground(model.getColorScheme().BACKGROUND);
 	}
 	
-	public void setupRightSidePanelImages(){
-		JLabel thumb = new JLabel();
-		thumb.setIcon(icons.get(3));
-		image4.add(thumb);
-		JLabel thumb2 = new JLabel();
-		thumb2.setIcon(icons.get(4));
-		image5.add(thumb2);
-		JLabel thumb3 = new JLabel();
-		thumb3.setIcon(icons.get(5));
-		image6.add(thumb3);
-		image4.setPreferredSize(new Dimension(50, 50));
-		image5.setPreferredSize(new Dimension(50, 50));
-		image6.setPreferredSize(new Dimension(50, 50));
-		image4.setBackground(new Color(0, 0, 0));
-		image5.setBackground(new Color(0, 0, 0));
-		image6.setBackground(new Color(0, 0, 0));
-		rightPanel.setLayout(new GridLayout(3, 1));
-		rightPanel.add(image4);
-		rightPanel.add(image5);
-		rightPanel.add(image6);
+	public void setupImagePanels(){
+		JLabel thumb;
+		JPanel image;
+		leftPanel.setLayout(new GridLayout(3, 1));
+		rightPanel.setLayout(new GridLayout(3,1));
+		for (int i=0; i < icons.size(); i++){
+			thumb = new JLabel();
+			image = new JPanel();
+			thumb.setIcon(icons.get(i));
+			image.add(thumb);
+			image.setPreferredSize(new Dimension(50,50));
+			if (i < 3){
+				//leftside
+				image.setBackground(model.getColorScheme().BACKGROUND);
+				components.add(image);
+				leftPanel.add(image);
+			}
+			else {
+				//rightside
+				image.setBackground(model.getColorScheme().BACKGROUND);
+				components.add(image);
+				rightPanel.add(image);
+			}
+		}
 	}
 
 	public void setupTextFields() {
-		JTextField numberOfPlayers = new JTextField("hello");
+		JTextField numberOfPlayers = new JTextField("ENTER no of players");
 		middleBottomPanel.add(numberOfPlayers, BorderLayout.CENTER);
 		String players = numberOfPlayers.getText();
 	}
@@ -359,11 +336,6 @@ public class View extends JFrame {
 		components.add(rightPanel);
 		components.add(middleBottomPanel);
 		components.add(middleTopPanel);
-		components.add(image1);
-		components.add(image2);
-		components.add(image3);
-		components.add(image4);
-		components.add(image5);
-		components.add(image6);
+
 	}
 }

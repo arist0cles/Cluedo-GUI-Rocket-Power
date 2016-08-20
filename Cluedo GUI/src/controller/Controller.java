@@ -75,8 +75,8 @@ public class Controller {
 	
 	public void setup(){
 		pop.run();
+		start();
 	}
-
 	//CALL THIS TO START GAME ONCE SETUP IS WORKING!!!!
 	public void start() {
 		String scheme = view.getScheme();

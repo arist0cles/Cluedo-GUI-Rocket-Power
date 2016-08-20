@@ -57,7 +57,6 @@ public class SetupPopup extends JOptionPane {
 
 	public void setupEachPlayer() {
 		closeWindow();
-
 		playerName = new JTextField(10);
 		parent = new JFrame();
 		parent.add(new JLabel("Enter your name:"));
@@ -110,11 +109,11 @@ public class SetupPopup extends JOptionPane {
 	}
 
 	public void setupRadioButtons() {
-		buttons.add(new JRadioButton("Miss scarlet"));
+		buttons.add(new JRadioButton("Miss Scarlett"));
 		buttons.add(new JRadioButton("Professor Plum"));
-		buttons.add(new JRadioButton("Kirita"));
-		buttons.add(new JRadioButton("Patrick"));
-		buttons.add(new JRadioButton("Zach"));
-		buttons.add(new JRadioButton("James"));
+		buttons.add(new JRadioButton("Colonel Mustard"));
+		buttons.add(new JRadioButton("Mrs Peacock"));
+		buttons.add(new JRadioButton("Mrs White"));
+		buttons.add(new JRadioButton("Reverend Green"));
 	}
 }

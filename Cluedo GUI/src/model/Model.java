@@ -39,7 +39,7 @@ public class Model {
 	}
 
 	private void createCharacters() {
-		
+		// create character objects? - do this when players choose their character?
 	}
 	
 	public void makeBoard(){
@@ -47,15 +47,11 @@ public class Model {
 	}
 
 	public void setScheme(ColorScheme c) {
-		this.setColorScheme(c);
+		this.colorScheme = c;
 	}
 
 	public ColorScheme getColorScheme() {
 		return colorScheme;
-	}
-
-	public void setColorScheme(ColorScheme colorScheme) {
-		this.colorScheme = colorScheme;
 	}
 
 	public Color getStartingColor() {
