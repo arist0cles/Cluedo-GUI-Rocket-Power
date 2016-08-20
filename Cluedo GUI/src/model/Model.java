@@ -4,6 +4,13 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import cards.Card;
+import characters.CluedoCharacter;
+import characters.ColonelMustard;
+import characters.MissScarlett;
+import characters.MrsPeacock;
+import characters.MrsWhite;
+import characters.ProfessorPlum;
+import characters.ReverendGreen;
 import colorschemes.ColorScheme;
 import colorschemes.Emo;
 import core.Board;
@@ -35,11 +42,32 @@ public class Model {
 		this.solution = new ArrayList<Card>();
 		this.ruledOut = new ArrayList<Card>();
 		this.finished = false;
-		createCharacters();
 	}
 
-	private void createCharacters() {
-		// create character objects? - do this when players choose their character?
+	public void createPlayer(String name, String character, int ID) {
+		//create player + character 
+		//add to list of players
+		CluedoCharacter charac = characterSelection(character);
+		players.add(new Player(ID, name, charac));
+		
+	}
+	
+	private CluedoCharacter characterSelection(String character){
+		switch (character){
+		case "Colonel Mustard":
+			return new ColonelMustard(character);
+		case "Miss Scarlett":
+			return new MissScarlett(character);
+		case "Mrs Peacock":
+			return new MrsPeacock(character);
+		case "Mrs White":
+			return new MrsWhite(character);
+		case "Professor Plum":
+			return new ProfessorPlum(character);
+		case "Reverend Green":
+			return new ReverendGreen(character);
+		}
+		throw new IllegalArgumentException("Invalid Character");
 	}
 	
 	public void makeBoard(){

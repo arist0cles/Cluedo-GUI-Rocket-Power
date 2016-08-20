@@ -72,16 +72,18 @@ public class Controller {
 		pop.addPlayerInfoListener(e -> {
 			if (count >= numOfPlayers){
 				String playerName = pop.getPlayerName();
-				String char1 = pop.getSelectedButtonText();
+				String charName = pop.getSelectedButtonText();
 				System.out.println(playerName);
-				System.out.println(char1);
+				System.out.println(charName);
+				this.model.createPlayer(playerName, charName, count);
 				pop.closeWindow();
 				return;
 			}
 			String playerName = pop.getPlayerName();
-			String char1 = pop.getSelectedButtonText();
+			String charName = pop.getSelectedButtonText();
 			System.out.println(playerName);
-			System.out.println(char1);
+			System.out.println(charName);
+			this.model.createPlayer(playerName, charName, count);
 			count++;
 			pop.setupEachPlayer();
 			addPlayerInfoListener();

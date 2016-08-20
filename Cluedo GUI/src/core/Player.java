@@ -30,6 +30,7 @@ public class Player {
 		this.location = c.getLocation();
 		this.name = name;
 		this.hand = new ArrayList<Card>();
+		System.out.println("Created player: "+this.name+" with character: "+this.c.getName());
 	}
 	
 
@@ -66,6 +67,14 @@ public class Player {
 	 */
 	public void updateLocation(int x, int y){
 		this.location = new Location(x,y);
+	}
+	
+	/** Gets the players character
+	 * 
+	 * @return c
+	 */
+	public CluedoCharacter getCharacter(){
+		return this.c;
 	}
 	
 	/**
