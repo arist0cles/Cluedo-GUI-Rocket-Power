@@ -42,6 +42,11 @@ public class Game {
 		play();
 	}
 
+	private void play() {
+		System.out.println("Kirita");
+		
+	}
+
 	/*	
 		*//**
 			 * Lets the current player suggest a solution when entering a room

@@ -28,10 +28,6 @@ public abstract class CluedoCharacter {
 	public String getName(){
 		return this.name;
 	}
-	
-	public Color getColor(){
-		return this.c;
-	}
 
 	private void setImage() {
 		//set to pic to be a buffered image based on file f

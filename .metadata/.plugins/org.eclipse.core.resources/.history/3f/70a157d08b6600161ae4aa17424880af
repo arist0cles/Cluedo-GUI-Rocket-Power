@@ -6,7 +6,7 @@ import core.Location;
 
 public class ProfessorPlum extends CluedoCharacter{
 	//initial start position character always starts on
-		private static Location start = new Location(0,17);
+		private static Location start = new Location(0,16);
 		private static Color color = Color.magenta;
 
 	public ProfessorPlum(String name) {

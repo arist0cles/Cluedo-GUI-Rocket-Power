@@ -130,7 +130,7 @@ public class GridPanel extends JPanel {
 			//get char color
 			g.setColor(charColor);
 			//set graphics to be char color
-			g.fillRect(XOFFSET+SQUARE_SIZE*l.getX(), YOFFSET+SQUARE_SIZE*l.getY(), SQUARE_SIZE, SQUARE_SIZE);
+			g.fillRect(XOFFSET, YOFFSET, SQUARE_SIZE, SQUARE_SIZE);
 			//draw rect
 		}
 	}

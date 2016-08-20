@@ -77,7 +77,6 @@ public class Controller {
 				System.out.println(charName);
 				this.model.createPlayer(playerName, charName, count);
 				pop.closeWindow();
-				start();
 				return;
 			}
 			String playerName = pop.getPlayerName();
@@ -96,6 +95,7 @@ public class Controller {
 	 */
 	public void setup(){
 		pop.run();
+		start();
 	}
 	
 	//CALL THIS TO START GAME ONCE SETUP IS WORKING!!!!
@@ -122,11 +122,5 @@ public class Controller {
 		model.makeBoard();
 		view.setGridPaneStarted();
 		view.redraw();
-		play();
-	}
-
-	private void play() {
-		// TODO Auto-generated method stub
-		
 	}
 }

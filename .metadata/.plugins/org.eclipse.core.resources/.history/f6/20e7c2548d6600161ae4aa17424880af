@@ -122,11 +122,5 @@ public class Controller {
 		model.makeBoard();
 		view.setGridPaneStarted();
 		view.redraw();
-		play();
-	}
-
-	private void play() {
-		// TODO Auto-generated method stub
-		
 	}
 }

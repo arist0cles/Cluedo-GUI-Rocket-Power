@@ -7,7 +7,7 @@ import core.Location;
 
 public class ReverendGreen extends CluedoCharacter{
 	//initial start position character always starts on
-		private static Location start = new Location(7,24);
+		private static Location start = new Location(8,24);
 		private static Color color = Color.green;
 
 	public ReverendGreen(String name) {

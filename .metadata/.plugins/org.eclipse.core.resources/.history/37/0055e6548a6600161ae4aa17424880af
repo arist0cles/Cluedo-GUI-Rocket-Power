@@ -93,8 +93,4 @@ public class Model {
 	public Square[][] getSquares() {
 		return this.board.getSquares();
 	}
-
-	public ArrayList<Player> getPlayers() {
-		return players;
-	}
 }
