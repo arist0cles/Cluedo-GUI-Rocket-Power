@@ -125,8 +125,8 @@ public class View extends JFrame {
 	
 	public int moveDiagonal(){
 		return JOptionPane.showConfirmDialog(null, "You are in a corner room would you\n"
-		    + "like to move to opposite room?");
-	
+		    + "like to move to opposite room?", null, 0);
+		
 	}
 	/**
 	 * Sets up the Menu, the top menu of the program
@@ -269,7 +269,7 @@ public class View extends JFrame {
 	}
 	
 	public void addEndTurnButton() {
-		endTurnButton = new JButton("Pass");
+		endTurnButton = new JButton("End Turn");
 		middleBottomPanel.add(endTurnButton, BorderLayout.SOUTH);
 	}
 	
@@ -319,6 +319,10 @@ public class View extends JFrame {
 	 */
 	public void redraw() {
 		for (Component comp : components) {
+			//get component corresponding to player's character 
+			//set background to that character's color
+			//view doesn't know controller, pass in player as a parameter? 
+			//black out character components that are not the current player??
 			comp.setBackground(model.getColorScheme().BACKGROUND);
 		}
 		this.getContentPane().validate();
