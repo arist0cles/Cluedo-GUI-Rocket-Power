@@ -10,6 +10,7 @@ public class ColonelMustard extends CluedoCharacter{
 	private static Location start = new Location(17,0);
 	private static Color color = Color.yellow;
 	protected String symbol = "CM";
+	protected String ID = "0";
 
 	public ColonelMustard(String name) {
 		super(name, color, start);
@@ -17,6 +18,11 @@ public class ColonelMustard extends CluedoCharacter{
 
 	public String getSymbol() {
 		return symbol;
+	}
+
+	@Override
+	public String getID() {
+		return ID;
 	}
 
 }

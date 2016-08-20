@@ -7,8 +7,9 @@ import core.Location;
 public class MrsWhite extends CluedoCharacter{
 	//initial start position character always starts on
 		private static Location start = new Location(7,0);
-		private static Color color = Color.white;
+		private static Color color = Color.LIGHT_GRAY;
 		protected String symbol = "MW";
+		protected String ID = "3";
 
 	public MrsWhite(String name ){
 		super(name, color, start);
@@ -16,6 +17,12 @@ public class MrsWhite extends CluedoCharacter{
 
 	public String getSymbol() {
 		return symbol;
+	}
+
+	@Override
+	public String getID() {
+		// TODO Auto-generated method stub
+		return ID;
 	}
 
 }

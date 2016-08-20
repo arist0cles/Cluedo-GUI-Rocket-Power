@@ -1,0 +1,233 @@
+package controller;
+
+import java.awt.Color;
+import java.awt.Toolkit;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.Random;
+
+import javax.swing.JOptionPane;
+
+import astarpathfind.AStarPath;
+import astarpathfind.pathNode;
+import colorschemes.BW;
+import colorschemes.Emo;
+import colorschemes.Kirita;
+import colorschemes.Pastel;
+import core.Die;
+import core.Location;
+import core.Player;
+import model.Model;
+import view.AccusePopup;
+import view.HandPopup;
+import squares.RoomSquare;
+import squares.Square;
+import view.SetupPopup;
+import view.SuggestPopup;
+import view.View;
+
+/**
+ * The controller translates the user's interactions with the view into actions
+ * that the model will perform. In a stand-alone GUI client, user interactions
+ * could be button clicks or menu selections. Depending on the context, a
+ * controller may also select a new view -- for example, a web page of results
+ * -- to present back to the user.
+ * 
+ * @author Patrick and Kirita
+ *
+ */
+public class Controller {
+	private Model model;
+	private View view;
+	private SetupPopup pop = new SetupPopup();
+	private int numOfPlayers;
+	private int count=0;
+	private boolean finished = false; //is the game finished? 
+	private int currentRoll;
+
+
+	public Controller(Model m, View v) {
+		this.model = m;
+		this.view = v;
+		addNumberOfPlayersListener();
+		addStartListener();
+		addQuitMenuListener();
+		addShowHandMenuListener();
+		addGridMouseListener();
+	}
+
+	public void addStartListener() {
+		view.addStartButtonListener(e -> {
+			setup();
+		});
+	}
+	
+	public void addAccuseButtonListener() {
+		view.addAccuseButtonListener(e -> {
+			new AccusePopup(model);
+		});
+	}
+	
+	public void addSuggestButtonListener() {
+		view.addSuggestButtonListener(e -> {
+			new SuggestPopup(model);
+		});
+	}
+	
+	public void addEndTurnButtonListener() {
+		view.addEndTurnButtonListener(e -> {
+			endTurn();
+		});
+	}
+
+	private void endTurn() {
+		int idx = model.getPlayers().indexOf(model.getCurrentPlayer());
+		if ((idx+1)>=model.getPlayers().size()){
+			model.setCurrentPlayer(model.getPlayers().get(0));
+			currentPlayerTurn();
+		} else {
+			model.setCurrentPlayer(model.getPlayers().get(idx+1)); 
+			currentPlayerTurn();
+			}
+	}
+
+	public void addQuitMenuListener() {
+		view.addQuitMenuListener(e -> {
+			view.quit();
+		});
+	}
+
+	public void addShowHandMenuListener() {
+		view.addShowHandMenuListener(e -> {
+			HandPopup h = new HandPopup(model);
+			view.showHand();
+		});
+	}
+
+	public void addGridMouseListener() {
+		view.addGridMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent me) {
+				Toolkit.getDefaultToolkit().beep();
+				Location l = new Location((me.getX()-60)/15, (me.getY()-50)/15);
+				if (tryMove(l)){
+					//can move! so do it
+					model.getCurrentPlayer().updateLocation(l);
+					currentRoll=0;
+					view.redraw();
+				}
+			}
+		});
+	}
+	
+	public boolean tryMove(Location l){
+		Square local = model.getSquares()[model.getCurrentPlayer().getLocation().getX()][model.getCurrentPlayer().getLocation().getY()];
+		Square target = model.getSquares()[l.getX()][l.getY()];
+		pathNode start = new pathNode(local, model);
+		pathNode end = new pathNode(target, model);
+		AStarPath aStar = new AStarPath(start, end);
+		
+		if (aStar.findPath() <= this.currentRoll){ return true;}
+		
+		return false;
+	}
+
+	public void addNumberOfPlayersListener() {
+		pop.addNumberOfPlayersListener(e -> {
+			String players = pop.getNumOfPlayers();
+			numOfPlayers = Integer.parseInt(players);
+			pop.setupEachPlayer();
+			count++;
+			addPlayerInfoListener();
+		});
+	}
+
+	public void addPlayerInfoListener() {
+		pop.addPlayerInfoListener(e -> {
+			if (count >= numOfPlayers) {
+				String playerName = pop.getPlayerName();
+				String charName = pop.getSelectedButtonText();
+				this.model.createPlayer(playerName, charName, count);
+				pop.closeWindow();
+				start();
+				return;
+			}
+			String playerName = pop.getPlayerName();
+			String charName = pop.getSelectedButtonText();
+			this.model.createPlayer(playerName, charName, count);
+			count++;
+			pop.setupEachPlayer();
+			addPlayerInfoListener();
+		});
+	}
+
+	/**
+	 * Pops up the setup windows which get the info on all the players
+	 */
+	public void setup() {
+		pop.run();
+	}
+
+	// CALL THIS TO START GAME ONCE SETUP IS WORKING!!!!
+	/**
+	 * Starts the game. Gets the selected colorscheme, creates the board
+	 */
+	public void start() {
+		String scheme = view.getScheme();
+		switch (scheme) {
+		case "Kirita":
+			model.setScheme(new Kirita());
+			break;
+		case "Emo":
+			model.setScheme(new Emo());
+			break;
+		case "Pastel":
+			model.setScheme(new Pastel());
+			break;
+		case "BW":
+			model.setScheme(new BW());
+			break;
+		}
+		model.makeBoard();
+		view.addPlayButtons();
+		addEndTurnButtonListener();
+		addAccuseButtonListener();
+		addSuggestButtonListener();
+		view.setGridPaneStarted();
+		view.redraw();
+		play();
+	}
+
+	private void play() {
+		// begin play
+		// got all the players, make the solution and deal the cards
+		model.dealCards();
+		model.setCurrentPlayer(model.getPlayers().get(0));
+		currentPlayerTurn();
+	}
+	
+	public void currentPlayerTurn(){
+		//view.highlight();
+		view.redraw();
+		Square local = model.getSquares()[model.getCurrentPlayer().getLocation().getX()][model.getCurrentPlayer().getLocation().getY()];
+		currentRoll = new Die().roll();
+		System.out.println("ROLL :"+currentRoll);
+		if (local instanceof RoomSquare){
+			//check if corner square for stairways
+			if (((RoomSquare)local).getStairs()){
+				//am able to move via stairs
+				if(view.moveDiagonal()==0){
+					model.getCurrentPlayer().updateLocation(((RoomSquare)local).getOppLoc());
+					view.redraw();
+					currentRoll=0;
+				}
+			}
+			
+		} 
+		
+	}
+	
+}

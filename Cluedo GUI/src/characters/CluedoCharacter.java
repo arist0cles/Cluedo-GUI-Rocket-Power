@@ -14,6 +14,7 @@ public abstract class CluedoCharacter {
 	private BufferedImage pic;
 	private Location loc;
 	private String symbol;
+	private String ID;
 
 	public CluedoCharacter(String name, Color c, Location location) {
 		this.name = name;
@@ -40,4 +41,6 @@ public abstract class CluedoCharacter {
 	public String getSymbol(){
 		return symbol;
 	}
+	
+	public abstract String getID();
 }

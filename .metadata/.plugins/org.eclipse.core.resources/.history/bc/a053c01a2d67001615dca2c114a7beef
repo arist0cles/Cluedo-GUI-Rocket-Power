@@ -1,0 +1,27 @@
+package characters;
+
+import java.awt.Color;
+
+import core.Location;
+
+public class ProfessorPlum extends CluedoCharacter{
+	//initial start position character always starts on
+		private static Location start = new Location(0,17);
+		private static Color color = Color.magenta;
+		protected String symbol = "PP";
+		protected String ID = "1";
+
+	public ProfessorPlum(String name) {
+		super(name, color, start);
+	}
+
+	public String getSymbol() {
+		return symbol;
+	}
+
+	@Override
+	public String getID() {
+		// TODO Auto-generated method stub
+		return ID;
+	}
+}

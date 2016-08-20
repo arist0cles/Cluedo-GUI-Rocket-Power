@@ -9,6 +9,7 @@ public class ProfessorPlum extends CluedoCharacter{
 		private static Location start = new Location(0,17);
 		private static Color color = Color.magenta;
 		protected String symbol = "PP";
+		protected String ID = "4";
 
 	public ProfessorPlum(String name) {
 		super(name, color, start);
@@ -16,5 +17,11 @@ public class ProfessorPlum extends CluedoCharacter{
 
 	public String getSymbol() {
 		return symbol;
+	}
+
+	@Override
+	public String getID() {
+		// TODO Auto-generated method stub
+		return ID;
 	}
 }

@@ -53,6 +53,7 @@ public class GridPanel extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		if (started) {
+			this.setBackground(model.getColorScheme().BACKGROUND);
 			drawGrid(g);
 		} else {
 			g.setColor(Color.WHITE);

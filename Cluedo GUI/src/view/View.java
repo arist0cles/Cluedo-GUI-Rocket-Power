@@ -81,13 +81,13 @@ public class View extends JFrame {
 	public final Dimension FRAME_SIZE = new Dimension(800, 800);
 	public final Dimension MIDDLE_BOTTOM_PANEL_SIZE = new Dimension(500, 200);
 	public final Dimension MIDDLE_TOP_PANEL_SIZE = new Dimension(500, 500);
-	
-	private GridPanel middleTopPanel;
+
+	private JPanel middleTopPanel;
 	private JPanel middleBottomPanel = new JPanel();
 	private JPanel middlePanel = new JPanel();
 	private JPanel rightPanel = new JPanel();
 	private JPanel leftPanel = new JPanel();
-	
+
 	private BorderLayout layout = new BorderLayout(10, 10);
 	private List<ImageIcon> icons = new ArrayList<>();
 	private Model model;
@@ -104,6 +104,7 @@ public class View extends JFrame {
 
 	public View(Model m) {
 		this.model = m;
+		middleTopPanel = new GridPanel(m);
 		setupFrame();
 		setupMenu();
 		setupLayout();
@@ -124,12 +125,13 @@ public class View extends JFrame {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(true);
 	}
-	
-	public int moveDiagonal(){
-		return JOptionPane.showConfirmDialog(null, "You are in a corner room would you\n"
-		    + "like to move to opposite room?", null, 0);
-		
+
+	public int moveDiagonal() {
+		return JOptionPane.showConfirmDialog(null,
+				"You are in a corner room would you\n" + "like to move to opposite room?", null, 0);
+
 	}
+
 	/**
 	 * Sets up the Menu, the top menu of the program
 	 * 
@@ -147,11 +149,11 @@ public class View extends JFrame {
 		menu.add(quit);
 
 		menu.addSeparator();
-		
+
 		// a group of JMenuItems
 		showHand = new JMenuItem("Show Hand");
 		menu.add(showHand);
-		
+
 		menuBar.add(menu);
 		this.setJMenuBar(menuBar);
 	}
@@ -177,21 +179,22 @@ public class View extends JFrame {
 	}
 
 	/**
-	 * Loads the image files as ImageIcons. These may eventually end up in the character objects
+	 * Loads the image files as ImageIcons. These may eventually end up in the
+	 * character objects
 	 */
 	private void setupIcons() {
-		icons.add(new ImageIcon(
-				new ImageIcon(System.getProperty("user.dir")+"/Chars/Black/card_colonel_mustard.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
-		icons.add(new ImageIcon(
-				new ImageIcon(System.getProperty("user.dir")+"/Chars/White/card_miss_scarlett.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
-		icons.add(new ImageIcon(
-				new ImageIcon(System.getProperty("user.dir")+"/Chars/Black/card_mrs_peacock.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
-		icons.add(new ImageIcon(
-				new ImageIcon(System.getProperty("user.dir")+"/Chars/White/card_mrs_white.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
-		icons.add(new ImageIcon(
-				new ImageIcon(System.getProperty("user.dir")+"/Chars/Black/card_professor_plum.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
-		icons.add(new ImageIcon(
-				new ImageIcon(System.getProperty("user.dir")+"/Chars/White/card_rev_green.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
+		icons.add(new ImageIcon(new ImageIcon(System.getProperty("user.dir") + "/Chars/White/card_colonel_mustard.jpg")
+				.getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
+		icons.add(new ImageIcon(new ImageIcon(System.getProperty("user.dir") + "/Chars/Black/card_miss_scarlett.jpg")
+				.getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
+		icons.add(new ImageIcon(new ImageIcon(System.getProperty("user.dir") + "/Chars/White/card_mrs_peacock.jpg")
+				.getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
+		icons.add(new ImageIcon(new ImageIcon(System.getProperty("user.dir") + "/Chars/Black/card_mrs_white.jpg")
+				.getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
+		icons.add(new ImageIcon(new ImageIcon(System.getProperty("user.dir") + "/Chars/White/card_professor_plum.jpg")
+				.getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
+		icons.add(new ImageIcon(new ImageIcon(System.getProperty("user.dir") + "/Chars/Black/card_rev_green.jpg")
+				.getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
 
 	}
 
@@ -248,11 +251,13 @@ public class View extends JFrame {
 			if (i < 3) {
 				// leftside
 				image.setBackground(model.getColorScheme().BACKGROUND);
+				image.setName("" + i);
 				components.add(image);
 				leftPanel.add(image);
 			} else {
 				// rightside
 				image.setBackground(model.getColorScheme().BACKGROUND);
+				image.setName("" + i);
 				components.add(image);
 				rightPanel.add(image);
 			}
@@ -260,7 +265,8 @@ public class View extends JFrame {
 	}
 
 	/**
-	 * Sets up the start button and color spinner for picking different color schemes
+	 * Sets up the start button and color spinner for picking different color
+	 * schemes
 	 */
 	public void setupStartButton() {
 		start = new JButton("START");
@@ -269,7 +275,7 @@ public class View extends JFrame {
 		middleBottomPanel.add(start, BorderLayout.SOUTH);
 		middleBottomPanel.add(color, BorderLayout.NORTH);
 	}
-	
+
 	public void addPlayButtons() {
 		endTurnButton = new JButton("Pass");
 		suggestButton = new JButton("Suggest");
@@ -278,17 +284,17 @@ public class View extends JFrame {
 		middleBottomPanel.add(suggestButton, BorderLayout.EAST);
 		middleBottomPanel.add(accuseButton, BorderLayout.WEST);
 	}
-	
+
 	public void addEndTurnButtonListener(ActionListener l) {
 		middleBottomPanel.remove(start);
 		middleBottomPanel.remove(color);
 		endTurnButton.addActionListener(l);
 	}
-	
+
 	public void addSuggestButtonListener(ActionListener l) {
 		suggestButton.addActionListener(l);
 	}
-	
+
 	public void addAccuseButtonListener(ActionListener l) {
 		accuseButton.addActionListener(l);
 	}
@@ -311,37 +317,41 @@ public class View extends JFrame {
 	public void addStartButtonListener(ActionListener l) {
 		start.addActionListener(l);
 	}
-	
+
 	public void showHand() {
-		//TODO fill this in once hands are drawing
+		// TODO fill this in once hands are drawing
 		System.out.println("Write this method!!!");
 	}
-	
+
 	public void addQuitMenuListener(ActionListener l) {
 		quit.addActionListener(l);
 	}
-	
+
 	public void addGridMouseListener(MouseListener l) {
 		middleTopPanel.addMouseListener(l);
 	}
-	
+
 	public void addShowHandMenuListener(ActionListener l) {
 		showHand.addActionListener(l);
 	}
 
 	/**
-	 * Redraws the view with an updated background once the user has selected their colorscheme
+	 * Redraws the view with an updated background once the user has selected
+	 * their colorscheme
 	 */
 	public void redraw() {
 		for (Component comp : components) {
-			//get component corresponding to player's character 
-			//set background to that character's color
-			//view doesn't know controller, pass in player as a parameter? 
-			//black out character components that are not the current player??
+			// get component corresponding to player's character
+			// set background to that character's color
+			// view doesn't know controller, pass in player as a parameter?
+			// black out character components that are not the current player??
 			comp.setBackground(model.getColorScheme().BACKGROUND);
 		}
+		highlight();
 		this.getContentPane().validate();
+
 		this.getContentPane().repaint();
+		
 	}
 
 	public String getScheme() {
@@ -349,7 +359,7 @@ public class View extends JFrame {
 	}
 
 	public void setGridPaneStarted() {
-		middleTopPanel.setStarted(true);
+		((GridPanel)middleTopPanel).setStarted(true);
 	}
 
 	/**
@@ -364,5 +374,17 @@ public class View extends JFrame {
 
 	public void quit() {
 		this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+	}
+
+	public void highlight() {
+		for (Component c : components) {
+			System.out.println("Current player" + model.getCurrentPlayer().getCharacter().getID());
+			System.out.println(model.getCurrentPlayer().getName());
+			if (c.getName() != null && model.getCurrentPlayer().getCharacter() != null) {
+				if (c.getName().equals(model.getCurrentPlayer().getCharacter().getID())) {
+					c.setBackground(model.getCurrentPlayer().getCharacter().getColor());
+				}
+			}
+		}
 	}
 }

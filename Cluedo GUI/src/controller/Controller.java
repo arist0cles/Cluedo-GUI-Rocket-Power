@@ -197,7 +197,7 @@ public class Controller {
 		addAccuseButtonListener();
 		addSuggestButtonListener();
 		view.setGridPaneStarted();
-		view.redraw();
+		//view.redraw();
 		play();
 	}
 
@@ -210,6 +210,8 @@ public class Controller {
 	}
 	
 	public void currentPlayerTurn(){
+		//view.highlight();
+		view.redraw();
 		Square local = model.getSquares()[model.getCurrentPlayer().getLocation().getX()][model.getCurrentPlayer().getLocation().getY()];
 		currentRoll = new Die().roll();
 		System.out.println("ROLL :"+currentRoll);

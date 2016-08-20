@@ -10,6 +10,7 @@ public class ReverendGreen extends CluedoCharacter{
 		private static Location start = new Location(7,24);
 		private static Color color = Color.green;
 		protected String symbol = "RG";
+		protected String ID = "5";
 
 	public ReverendGreen(String name) {
 		super(name, color, start);
@@ -17,6 +18,12 @@ public class ReverendGreen extends CluedoCharacter{
 
 	public String getSymbol() {
 		return symbol;
+	}
+
+	@Override
+	public String getID() {
+		// TODO Auto-generated method stub
+		return ID;
 	}
 
 }

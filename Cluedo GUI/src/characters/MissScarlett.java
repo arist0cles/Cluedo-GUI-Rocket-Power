@@ -10,6 +10,7 @@ public class MissScarlett extends CluedoCharacter{
 	private static Location start = new Location(24,19);
 	private static Color color = Color.red;
 	protected String symbol = "MS";
+	protected String ID = "1";
 
 	public MissScarlett(String name) {
 		super(name, color, start);
@@ -17,6 +18,12 @@ public class MissScarlett extends CluedoCharacter{
 
 	public String getSymbol() {
 		return symbol;
+	}
+
+	@Override
+	public String getID() {
+		// TODO Auto-generated method stub
+		return ID;
 	}
 	
 }
