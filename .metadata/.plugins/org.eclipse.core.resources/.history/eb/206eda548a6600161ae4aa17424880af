@@ -16,11 +16,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import characters.CluedoCharacter;
 import colorschemes.ColorScheme;
 import core.Board;
-import core.Location;
-import core.Player;
 import model.Model;
 import squares.Square;
 
@@ -119,19 +116,6 @@ public class GridPanel extends JPanel {
 				g.setColor(current.getColor());
 				g.fillRect(xLocation, yLocation, SQUARE_SIZE, SQUARE_SIZE);
 			}
-		}
-		for(Player p: model.getPlayers()){
-			Location l = p.getLocation();
-			//get p location
-			//convert location to x, y
-			CluedoCharacter c = p.getCharacter();
-			//get players char 
-			Color charColor = c.getColor();
-			//get char color
-			g.setColor(charColor);
-			//set graphics to be char color
-			g.fillRect(XOFFSET+SQUARE_SIZE*l.getX(), YOFFSET+SQUARE_SIZE*l.getY(), SQUARE_SIZE, SQUARE_SIZE);
-			//draw rect
 		}
 	}
 

@@ -126,11 +126,9 @@ public class GridPanel extends JPanel {
 			//convert location to x, y
 			CluedoCharacter c = p.getCharacter();
 			//get players char 
-			Color charColor = c.getColor();
+			Color charColor = c
 			//get char color
-			g.setColor(charColor);
 			//set graphics to be char color
-			g.fillRect(XOFFSET+SQUARE_SIZE*l.getX(), YOFFSET+SQUARE_SIZE*l.getY(), SQUARE_SIZE, SQUARE_SIZE);
 			//draw rect
 		}
 	}

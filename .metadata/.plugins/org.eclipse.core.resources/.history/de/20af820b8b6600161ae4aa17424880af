@@ -28,11 +28,12 @@ public class Controller {
 	private View view;
 	private SetupPopup pop = new SetupPopup();
 	private int numOfPlayers;
-	private int count=0;
+	private int count;
 
 	public Controller(Model m, View v) {
 		this.model = m;
 		this.view = v;
+		
 		addNumberOfPlayersListener();
 		addStartListener();
 		addQuitMenuListener();
@@ -72,13 +73,16 @@ public class Controller {
 			if (count >= numOfPlayers){
 				String playerName = pop.getPlayerName();
 				String charName = pop.getSelectedButtonText();
+				System.out.println(playerName);
+				System.out.println(charName);
 				this.model.createPlayer(playerName, charName, count);
 				pop.closeWindow();
-				start();
 				return;
 			}
 			String playerName = pop.getPlayerName();
 			String charName = pop.getSelectedButtonText();
+			System.out.println(playerName);
+			System.out.println(charName);
 			this.model.createPlayer(playerName, charName, count);
 			count++;
 			pop.setupEachPlayer();
@@ -91,6 +95,7 @@ public class Controller {
 	 */
 	public void setup(){
 		pop.run();
+		start();
 	}
 	
 	//CALL THIS TO START GAME ONCE SETUP IS WORKING!!!!
@@ -117,11 +122,5 @@ public class Controller {
 		model.makeBoard();
 		view.setGridPaneStarted();
 		view.redraw();
-		play();
-	}
-
-	private void play() {
-		// TODO Auto-generated method stub
-		
 	}
 }

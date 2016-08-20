@@ -32,7 +32,6 @@ import cards.RoomCard;
  *
  */
 public class Game {
-	
 	/**
 	 * Game Constructor.
 	 */
@@ -41,8 +40,6 @@ public class Game {
 		View v = new View(m);
 		Controller c = new Controller(m, v);
 	}
-	
-	
 
 	/*	
 		*//**
@@ -277,7 +274,31 @@ public class Game {
 		 * @param rooms
 		 */
 	/*
-	 
+	 * public void dealCards() { // shuffle cards + get solution from arrays
+	 * passed in // adds random weapon/character/room card to solution int
+	 * wepIdx = new Random().nextInt(weapons.length); String solWeapon =
+	 * (weapons[wepIdx]); this.solution.add(new Weapon(solWeapon)); int charIdx
+	 * = new Random().nextInt(characters.length); String solCharacter =
+	 * (characters[charIdx]); this.solution.add(new Character(solCharacter));
+	 * int romIdx = new Random().nextInt(rooms.length); String solRoom =
+	 * (rooms[romIdx]); this.solution.add(new Room(solRoom));
+	 * 
+	 * // removes solution cards from allCards Iterator<Card> it =
+	 * allCards.iterator(); while (it.hasNext()) { Card c = it.next(); if
+	 * (c.getName().equals(solWeapon)) { it.remove(); } if
+	 * (c.getName().equals(solCharacter)){ it.remove(); } if
+	 * (c.getName().equals(solRoom)){ it.remove(); } }
+	 * 
+	 * // makes a copy of the cards. // deals out the cards randomly until they
+	 * are all gone. ruledOut = new ArrayList<Card>(); for(Card c : allCards){
+	 * ruledOut.add(c); } // number of players/21 int numCards =
+	 * allCards.size()%players.size(); int bound; if (numCards>0){bound =
+	 * numCards * players.size();} else {bound = ruledOut.size();}
+	 * 
+	 * for(int i = 0; i < bound-1 ; i++){ for(Player p : players){
+	 * if(ruledOut.size() > numCards){ int cardIdx = new
+	 * Random().nextInt(ruledOut.size()); Card c = ruledOut.get(cardIdx);
+	 * p.addCard(c); ruledOut.remove(cardIdx); } } } }
 	 * 
 	 *//**
 		 * loops through each player while the game is not finished.
