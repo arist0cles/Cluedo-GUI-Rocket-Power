@@ -64,8 +64,8 @@ public class Player {
 	 * 
 	 * @param new location
 	 */
-	public void updateLocation(int x, int y){
-		this.location = new Location(x,y);
+	public void updateLocation(Location l){
+		this.location = l;
 	}
 	
 	/** Gets the players character

@@ -3,36 +3,34 @@ package astarpathfind;
 import java.util.ArrayList;
 import java.util.List;
 
-import core.Board;
-import model.Game;
+import model.Model;
 import squares.Square;
 
 public class pathNode {
 	private Square sqaure;
 	private pathNode parent;
 	private double costToHere, costToGoal, totalCost;
-	private Game game;
+	private Model model;
 	
-	public pathNode(Square square, Game game){
-		this.game=game; this.sqaure=square;
+	public pathNode(Square square, Model model){
+		this.model=model; this.sqaure=square;
 	}
 	
 	public List<pathNode> findNeighbours(){
 		List<pathNode> neighbours = new ArrayList<>();
-		Board board = null;
-		Square [][] squares = board.getSquares();
+		Square [][] squares = model.getSquares();
 		
 		if (this.sqaure.getLoc().getX()-1 >= 0){
-			neighbours.add(new pathNode(squares[this.sqaure.getLoc().getX()-15][this.sqaure.getLoc().getY()],this.game));
+			neighbours.add(new pathNode(squares[this.sqaure.getLoc().getX()-1][this.sqaure.getLoc().getY()],this.model));
 		}
 		if (this.sqaure.getLoc().getX()+1 < 25){
-			neighbours.add(new pathNode(squares[this.sqaure.getLoc().getX()+15][this.sqaure.getLoc().getY()],this.game));
+			neighbours.add(new pathNode(squares[this.sqaure.getLoc().getX()+1][this.sqaure.getLoc().getY()],this.model));
 		}
 		if (this.sqaure.getLoc().getY()-1 >= 0){
-			neighbours.add(new pathNode(squares[this.sqaure.getLoc().getX()][this.sqaure.getLoc().getY()-15],this.game));
+			neighbours.add(new pathNode(squares[this.sqaure.getLoc().getX()][this.sqaure.getLoc().getY()-1],this.model));
 		}
 		if (this.sqaure.getLoc().getY()+1 < 25){
-			neighbours.add(new pathNode(squares[this.sqaure.getLoc().getX()][this.sqaure.getLoc().getY()+15],this.game));
+			neighbours.add(new pathNode(squares[this.sqaure.getLoc().getX()][this.sqaure.getLoc().getY()+1],this.model));
 		}
 		return neighbours;
 	}
@@ -108,16 +106,6 @@ public class pathNode {
 
 	public void setTotalCost(double totalCost) {
 		this.totalCost = totalCost;
-	}
-
-	public Game getGame() {
-		return game;
-	}
-
-	public void setGame(Game game) {
-		this.game = game;
-	}
-	
-	
+	}	
 
 }

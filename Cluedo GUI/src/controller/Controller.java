@@ -7,15 +7,23 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Random;
 
+import javax.swing.JOptionPane;
+
+import astarpathfind.AStarPath;
+import astarpathfind.pathNode;
 import colorschemes.BW;
 import colorschemes.Emo;
 import colorschemes.Kirita;
 import colorschemes.Pastel;
+import core.Die;
 import core.Location;
 import core.Player;
 import model.Model;
 import view.HandPopup;
+import squares.RoomSquare;
+import squares.Square;
 import view.SetupPopup;
 import view.View;
 
@@ -37,6 +45,8 @@ public class Controller {
 	private int count=0;
 	private boolean finished = false; //is the game finished? 
 	private Player currentPlayer;	//current player
+	private int currentRoll;
+
 
 	public Controller(Model m, View v) {
 		this.model = m;
@@ -61,7 +71,14 @@ public class Controller {
 	}
 
 	private void endTurn() {
-		System.out.println("Write method");
+		int idx = model.getPlayers().indexOf(currentPlayer);
+		if ((idx+1)>=model.getPlayers().size()){
+			currentPlayer = model.getPlayers().get(0);
+			currentPlayerTurn();
+		} else {
+			currentPlayer = model.getPlayers().get(idx+1); 
+			currentPlayerTurn();
+			}
 	}
 
 	public void addQuitMenuListener() {
@@ -80,12 +97,30 @@ public class Controller {
 	public void addGridMouseListener() {
 		view.addGridMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent me) {
-				System.out.println((me.getX()-60)/15);
-				System.out.println((me.getY()-50)/15);
+				//System.out.println((me.getX()-60)/15);
+				//System.out.println((me.getY()-50)/15);
 				Location l = new Location((me.getX()-60)/15, (me.getY()-50)/15);
-				//currentPlayer.tryUpdateLocation(l);
+			
+				if (tryMove(l)){
+					//can move! so do it
+					currentPlayer.updateLocation(l);
+					currentRoll=0;
+					view.redraw();
+				}
 			}
 		});
+	}
+	
+	public boolean tryMove(Location l){
+		Square local = model.getSquares()[currentPlayer.getLocation().getX()][currentPlayer.getLocation().getY()];
+		Square target = model.getSquares()[l.getX()][l.getY()];
+		pathNode start = new pathNode(local, model);
+		pathNode end = new pathNode(target, model);
+		AStarPath aStar = new AStarPath(start, end);
+		
+		if (aStar.findPath() <= this.currentRoll){ return true;}
+		
+		return false;
 	}
 
 	public void addNumberOfPlayersListener() {
@@ -157,9 +192,40 @@ public class Controller {
 		// got all the players, make the solution and deal the cards
 		model.dealCards();
 		currentPlayer = model.getPlayers().get(0); //first playaaa
+		currentPlayerTurn();
 	}
 	
 	public void currentPlayerTurn(){
 		//player whoevers turn 
+//		if (currentPlayer.getEliminated()){
+//			int idx = model.getPlayers().indexOf(currentPlayer);
+//			if ((idx+1)>=model.getPlayers().size()){
+//				currentPlayer = model.getPlayers().get(0);
+//			} else {currentPlayer = model.getPlayers().get(idx+1); currentPlayerTurn();}
+//		}
+		//this.currentRoll = new Die().roll();
+		currentRoll = 15;
+		System.out.println("ROLL "+currentRoll);
+		System.out.println("TURN: "+currentPlayer.getName());
+		Square local = model.getSquares()[currentPlayer.getLocation().getX()][currentPlayer.getLocation().getY()];
+		System.out.println(local.getName());
+		if (local instanceof RoomSquare){
+			//check if corner square for stairways
+			if (((RoomSquare)local).getStairs()){
+				String roomname = ((RoomSquare)local).getName();
+				//am able to move via stairs
+				JOptionPane optionPane = new JOptionPane(
+					    "You are in a corner room "+roomname+"\n"
+					    + "would you like to move to: \n"
+					    + ((RoomSquare)local).getOpposite(),
+					    JOptionPane.QUESTION_MESSAGE,
+					    JOptionPane.YES_NO_OPTION);
+				optionPane.createDialog(roomname);
+			}
+		}
+		
+		//end of turn 
+		//set to next player if you are last then back to start of list 
+		//always 
 	}
 }

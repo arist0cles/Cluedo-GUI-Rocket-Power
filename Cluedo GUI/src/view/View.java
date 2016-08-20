@@ -264,7 +264,7 @@ public class View extends JFrame {
 	}
 	
 	public void addEndTurnButton() {
-		endTurnButton = new JButton("End turn");
+		endTurnButton = new JButton("Pass");
 		middleBottomPanel.add(endTurnButton, BorderLayout.SOUTH);
 	}
 	
