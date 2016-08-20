@@ -9,6 +9,7 @@ import colorschemes.BW;
 import colorschemes.Emo;
 import colorschemes.Kirita;
 import colorschemes.Pastel;
+import core.Player;
 import model.Model;
 import view.SetupPopup;
 import view.View;
@@ -121,7 +122,12 @@ public class Controller {
 	}
 
 	private void play() {
-		// TODO Auto-generated method stub
-		
+		// begin play
+		//got all the players, make the solution and deal the cards
+		model.dealCards();
+			for (Player p : model.getPlayers()){
+				p.showHand();
+			}
+				
 	}
 }

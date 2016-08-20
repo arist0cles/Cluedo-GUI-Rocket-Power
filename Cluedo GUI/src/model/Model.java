@@ -2,8 +2,13 @@ package model;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Random;
 
 import cards.Card;
+import cards.CharacterCard;
+import cards.RoomCard;
+import cards.WeaponCard;
 import characters.CluedoCharacter;
 import characters.ColonelMustard;
 import characters.MissScarlett;
@@ -16,6 +21,7 @@ import colorschemes.Emo;
 import core.Board;
 import core.Player;
 import squares.Square;
+import weapons.Weapon;
 
 /**
  * The model represents data and the rules that govern access to and updates of
@@ -44,10 +50,10 @@ public class Model {
 	
 	public Model(){
 		this.players = new ArrayList<Player>();
-		this.allCards = new ArrayList<Card>();
+		this.allCards = intialiseCards();
 		this.solution = new ArrayList<Card>();
 		this.ruledOut = new ArrayList<Card>();
-		this.finished = false;
+		
 	}
 
 	public void createPlayer(String name, String character, int ID) {
@@ -75,6 +81,64 @@ public class Model {
 		}
 		throw new IllegalArgumentException("Invalid Character");
 	}
+	
+	 public ArrayList<Card> intialiseCards() { 
+		 // make the character + room + weapon cards 
+		//add them in to collection of Card objects 
+		 ArrayList<Card>all = new ArrayList();
+		 for (int i = 0; i < 6; i++) {
+			 all.add(new WeaponCard(weapons[i])); 
+			 all.add(new CharacterCard(characters[i])); } 
+		 for (int j = 0; j < 9; j++) {
+			 all.add(new RoomCard(rooms[j])); 
+		 } 
+		 return all;
+	}
+	
+	
+	public void dealCards() {
+		int wepIdx = new Random().nextInt(weapons.length); 
+		String solWeapon = (weapons[wepIdx]); 
+		this.solution.add(new WeaponCard(solWeapon)); 
+		int charIdx = new Random().nextInt(characters.length); 
+		String solCharacter =  (characters[charIdx]);
+		this.solution.add(new CharacterCard(solCharacter));
+		int romIdx = new Random().nextInt(rooms.length); 
+		String solRoom =(rooms[romIdx]); 
+		this.solution.add(new RoomCard(solRoom));
+		  
+		  // removes solution cards from allCards
+		 Iterator<Card> it = allCards.iterator(); 
+		  while (it.hasNext()) { 
+			  Card c = it.next();
+			  if (c.getName().equals(solWeapon)) { it.remove(); } 
+			  if (c.getName().equals(solCharacter)){ it.remove(); } 
+			  if (c.getName().equals(solRoom)){ it.remove(); } }
+		  
+		  // makes a copy of the cards. 
+		  // deals out the cards randomly until they are all gone. 
+		  ruledOut = new ArrayList<Card>(); 
+		  for(Card c : allCards){
+			  ruledOut.add(c); 
+		  } 
+		  
+		  // number of players/21 
+		  int numCards = allCards.size()%players.size(); 
+		  int bound; 
+		  if (numCards>0){ bound = numCards * players.size();}
+		   else {bound = ruledOut.size();}
+		  
+		  for(int i = 0; i < bound-1 ; i++){ 
+			 for(Player p : this.players){
+				 if(ruledOut.size() > numCards){ 
+					 int cardIdx = new Random().nextInt(ruledOut.size()); 
+					 Card c = ruledOut.get(cardIdx);
+					 p.addCard(c);
+					 ruledOut.remove(cardIdx); 
+				 } 
+			} 
+		} 
+}
 	
 	public void makeBoard(){
 		this.board = new Board(colorScheme);

@@ -261,27 +261,9 @@ public class Game {
 		 * creates the weapons, characters and rooms. adds all the cards to a
 		 * list. calls methods needed for game to be initialised.
 		 */
-	/*
-	 * public void intialise() { // make the character + room + weapon cards //
-	 * add them in to collection of Card objects for (int i = 0; i < 6; i++) {
-	 * this.allCards.add(new Weapon(weapons[i])); this.allCards.add(new
-	 * Character(characters[i])); } for (int j = 0; j < 9; j++) {
-	 * this.allCards.add(new Room(rooms[j])); } }
-	 * 
-	 * 
-	 *//**
-		 * makes the solution. randomly deals the cards out to the players.
-		 * 
-		 * @param weapons
-		 * @param characters
-		 * @param rooms
-		 */
-	/*
-	 
-	 * 
-	 *//**
-		 * loops through each player while the game is not finished.
-		 */
+	//**
+		 //* loops through each player while the game is not finished.
+		 /*/
 	/*
 	 * public void playGame(){ while(!finished){ if (players.size()<2){break;}
 	 * for(int i = 0; i != players.size(); i++){ if (players.size()<2){break;}
