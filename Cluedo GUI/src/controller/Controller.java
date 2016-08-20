@@ -47,7 +47,6 @@ public class Controller {
 	private int numOfPlayers;
 	private int count=0;
 	private boolean finished = false; //is the game finished? 
-	private Player currentPlayer;	//current player
 	private int currentRoll;
 
 
@@ -86,12 +85,12 @@ public class Controller {
 	}
 
 	private void endTurn() {
-		int idx = model.getPlayers().indexOf(currentPlayer);
+		int idx = model.getPlayers().indexOf(model.getCurrentPlayer());
 		if ((idx+1)>=model.getPlayers().size()){
-			currentPlayer = model.getPlayers().get(0);
+			model.setCurrentPlayer(model.getPlayers().get(0));
 			currentPlayerTurn();
 		} else {
-			currentPlayer = model.getPlayers().get(idx+1); 
+			model.setCurrentPlayer(model.getPlayers().get(idx+1)); 
 			currentPlayerTurn();
 			}
 	}
@@ -116,7 +115,7 @@ public class Controller {
 				Location l = new Location((me.getX()-60)/15, (me.getY()-50)/15);
 				if (tryMove(l)){
 					//can move! so do it
-					currentPlayer.updateLocation(l);
+					model.getCurrentPlayer().updateLocation(l);
 					currentRoll=0;
 					view.redraw();
 				}
@@ -125,7 +124,7 @@ public class Controller {
 	}
 	
 	public boolean tryMove(Location l){
-		Square local = model.getSquares()[currentPlayer.getLocation().getX()][currentPlayer.getLocation().getY()];
+		Square local = model.getSquares()[model.getCurrentPlayer().getLocation().getX()][model.getCurrentPlayer().getLocation().getY()];
 		Square target = model.getSquares()[l.getX()][l.getY()];
 		pathNode start = new pathNode(local, model);
 		pathNode end = new pathNode(target, model);
@@ -206,12 +205,12 @@ public class Controller {
 		// begin play
 		// got all the players, make the solution and deal the cards
 		model.dealCards();
-		currentPlayer = model.getPlayers().get(0);
+		model.setCurrentPlayer(model.getPlayers().get(0));
 		currentPlayerTurn();
 	}
 	
 	public void currentPlayerTurn(){
-		Square local = model.getSquares()[currentPlayer.getLocation().getX()][currentPlayer.getLocation().getY()];
+		Square local = model.getSquares()[model.getCurrentPlayer().getLocation().getX()][model.getCurrentPlayer().getLocation().getY()];
 		currentRoll = new Die().roll();
 		System.out.println("ROLL :"+currentRoll);
 		if (local instanceof RoomSquare){
@@ -219,7 +218,7 @@ public class Controller {
 			if (((RoomSquare)local).getStairs()){
 				//am able to move via stairs
 				if(view.moveDiagonal()==0){
-					currentPlayer.updateLocation(((RoomSquare)local).getOppLoc());
+					model.getCurrentPlayer().updateLocation(((RoomSquare)local).getOppLoc());
 					view.redraw();
 					currentRoll=0;
 				}

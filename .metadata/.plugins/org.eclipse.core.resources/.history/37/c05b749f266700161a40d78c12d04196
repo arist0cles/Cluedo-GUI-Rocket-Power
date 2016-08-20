@@ -270,10 +270,15 @@ public class View extends JFrame {
 		middleBottomPanel.add(color, BorderLayout.NORTH);
 	}
 	
+<<<<<<< HEAD
 	public void addPlayButtons() {
 		endTurnButton = new JButton("Pass");
 		suggestButton = new JButton("Suggest");
 		accuseButton = new JButton("Accuse");
+=======
+	public void addEndTurnButton() {
+		endTurnButton = new JButton("End Turn");
+>>>>>>> f896b641ad8498425332c5e6120c7da3e7f4046e
 		middleBottomPanel.add(endTurnButton, BorderLayout.SOUTH);
 		middleBottomPanel.add(suggestButton, BorderLayout.EAST);
 		middleBottomPanel.add(accuseButton, BorderLayout.WEST);
