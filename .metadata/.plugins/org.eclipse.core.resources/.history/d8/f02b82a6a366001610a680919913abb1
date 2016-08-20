@@ -92,7 +92,6 @@ public class View extends JFrame {
 	private List<ImageIcon> icons = new ArrayList<>();
 	private Model model;
 	private JButton start;
-	private JButton endTurnButton;
 	private JSpinner color;
 	private List<Component> components = new ArrayList<>();
 	private JMenuBar menuBar;
@@ -261,16 +260,6 @@ public class View extends JFrame {
 
 		middleBottomPanel.add(start, BorderLayout.SOUTH);
 		middleBottomPanel.add(color, BorderLayout.NORTH);
-	}
-	
-	public void addEndTurnButton() {
-		endTurnButton = new JButton("End turn");
-		middleBottomPanel.add(endTurnButton, BorderLayout.SOUTH);
-	}
-	
-	public void addEndTurnButtonListener(ActionListener l) {
-		middleBottomPanel.remove(start);
-		endTurnButton.addActionListener(l);
 	}
 
 	/**

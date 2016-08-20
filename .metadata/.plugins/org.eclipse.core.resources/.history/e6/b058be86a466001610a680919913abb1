@@ -269,7 +269,6 @@ public class View extends JFrame {
 	}
 	
 	public void addEndTurnButtonListener(ActionListener l) {
-		middleBottomPanel.remove(start);
 		endTurnButton.addActionListener(l);
 	}
 

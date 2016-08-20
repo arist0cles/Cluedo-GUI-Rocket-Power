@@ -45,6 +45,7 @@ public class Controller {
 		addQuitMenuListener();
 		addShowHandMenuListener();
 		addGridMouseListener();
+		addEndTurnButtonListener();
 	}
 
 	public void addStartListener() {
@@ -144,7 +145,6 @@ public class Controller {
 		}
 		model.makeBoard();
 		view.addEndTurnButton();
-		addEndTurnButtonListener();
 		view.setGridPaneStarted();
 		view.redraw();
 	}

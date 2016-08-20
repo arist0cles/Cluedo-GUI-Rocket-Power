@@ -52,16 +52,6 @@ public class Controller {
 			setup();
 		});
 	}
-	
-	public void addEndTurnButtonListener() {
-		view.addEndTurnButtonListener(e -> {
-			endTurn();
-		});
-	}
-
-	private void endTurn() {
-		System.out.println("Write method");
-	}
 
 	public void addQuitMenuListener() {
 		view.addQuitMenuListener(e -> {
@@ -143,8 +133,6 @@ public class Controller {
 			break;
 		}
 		model.makeBoard();
-		view.addEndTurnButton();
-		addEndTurnButtonListener();
 		view.setGridPaneStarted();
 		view.redraw();
 	}

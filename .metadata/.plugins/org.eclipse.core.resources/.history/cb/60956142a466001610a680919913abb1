@@ -144,7 +144,6 @@ public class Controller {
 		}
 		model.makeBoard();
 		view.addEndTurnButton();
-		addEndTurnButtonListener();
 		view.setGridPaneStarted();
 		view.redraw();
 	}

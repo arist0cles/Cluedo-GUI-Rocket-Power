@@ -143,8 +143,8 @@ public class Controller {
 			break;
 		}
 		model.makeBoard();
-		view.addEndTurnButton();
 		addEndTurnButtonListener();
+		view.addEndTurnButton();
 		view.setGridPaneStarted();
 		view.redraw();
 	}
