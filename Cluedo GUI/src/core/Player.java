@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cards.Card;
+import characters.CluedoCharacter;
 import core.Location;
-import squares.RoomSquare;
-import squares.Square;
+
 
 /**
  * This class represents a player in the game. It holds the players name,
@@ -21,38 +21,18 @@ public class Player {
 	private String name;
 	private ArrayList<Card> hand;
 	private Location location;
-	private String [] alpha = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O"
-	, "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y"};
 	private boolean eliminated = false;
-	private Character c;
+	private CluedoCharacter c;
 	
-	public Player(int id, String name, Character c){
+	public Player(int id, String name, CluedoCharacter c){
 		this.c = c;
-		this.id = id;
+		//initial location on the board depends upon character choice
+		this.location = c.getLocation();
 		this.name = name;
-		this.hand = new ArrayList<Card>();	
+		this.hand = new ArrayList<Card>();
 	}
 	
-	/** Sets players initial location
-	 * 
-	 * @param x
-	 * @param y
-	 * @return
-	 */
-	public Location setStartLoc(int x, int y){
-		Location loc = new Location(x, y);
-		this.location = loc;
-		return loc;
-	}
-	/** 
-	 * returns the player's location on the board. e.g "A5"
-	 * @return
-	 */
-	public String getPlayersPosition(){
-		String s = "";
-		s = (alpha[location.getX()]) + (location.getY());
-		return s;
-	}
+
 	/**
 	 * 
 	 * @param suggestion
@@ -85,8 +65,7 @@ public class Player {
 	 * @param new location
 	 */
 	public void updateLocation(int x, int y){
-		Location loc = new Location(x, y);
-		this.location = loc;
+		this.location = new Location(x,y);
 	}
 	
 	/**
@@ -127,6 +106,7 @@ public class Player {
 	
 	/**
 	 * shows players hand.
+	 * change to show the images 
 	 * 
 	 */
 	public void showHand(){
@@ -163,11 +143,4 @@ public class Player {
 		return this.hand;
 	}
 	
-	/**
-	 * getter for the string array "alpha"
-	 * @return
-	 */
-	public String [] getAlpha(){
-		return alpha;
-	}
 }

@@ -23,16 +23,16 @@ public class pathNode {
 		Square [][] squares = board.getSquares();
 		
 		if (this.sqaure.getLoc().getX()-1 >= 0){
-			neighbours.add(new pathNode(squares[this.sqaure.getLoc().getX()-1][this.sqaure.getLoc().getY()],this.game));
+			neighbours.add(new pathNode(squares[this.sqaure.getLoc().getX()-15][this.sqaure.getLoc().getY()],this.game));
 		}
 		if (this.sqaure.getLoc().getX()+1 < 25){
-			neighbours.add(new pathNode(squares[this.sqaure.getLoc().getX()+1][this.sqaure.getLoc().getY()],this.game));
+			neighbours.add(new pathNode(squares[this.sqaure.getLoc().getX()+15][this.sqaure.getLoc().getY()],this.game));
 		}
 		if (this.sqaure.getLoc().getY()-1 >= 0){
-			neighbours.add(new pathNode(squares[this.sqaure.getLoc().getX()][this.sqaure.getLoc().getY()-1],this.game));
+			neighbours.add(new pathNode(squares[this.sqaure.getLoc().getX()][this.sqaure.getLoc().getY()-15],this.game));
 		}
 		if (this.sqaure.getLoc().getY()+1 < 25){
-			neighbours.add(new pathNode(squares[this.sqaure.getLoc().getX()][this.sqaure.getLoc().getY()+1],this.game));
+			neighbours.add(new pathNode(squares[this.sqaure.getLoc().getX()][this.sqaure.getLoc().getY()+15],this.game));
 		}
 		return neighbours;
 	}

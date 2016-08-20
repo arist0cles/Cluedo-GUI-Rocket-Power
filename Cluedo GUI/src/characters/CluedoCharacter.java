@@ -4,20 +4,27 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
+import core.Location;
 import squares.Square;
 
-public abstract class Character {
+public abstract class CluedoCharacter {
 	
 	private Square current;
 	private String name;
 	private Color c;
 	private BufferedImage pic;
+	private Location loc;
 	
-	public Character(Square starting, String name, Color c, String picLocation){
+	public CluedoCharacter(Square starting, String name, Color c, String picLocation, Location location){
 		setImage(picLocation);
 		this.current = starting;
 		this.name = name;
 		this.c = c;
+		this.loc = location;
+	}
+	
+	public Location getLocation(){
+		return this.loc;
 	}
 
 	private void setImage(String picLocation) {

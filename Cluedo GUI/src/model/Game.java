@@ -9,7 +9,7 @@ import java.util.Random;
 import astarpathfind.AStarPath;
 import astarpathfind.pathNode;
 import cards.Card;
-import cards.Weapon;
+import cards.WeaponCard;
 import colorschemes.ColorScheme;
 import colorschemes.Emo;
 import controller.Controller;
@@ -20,8 +20,8 @@ import squares.DoorSquare;
 import squares.RoomSquare;
 import squares.Square;
 import view.View;
-import cards.Character;
-import cards.Room;
+import cards.CharacterCard;
+import cards.RoomCard;
 
 /**
  * Represents a game of cluedo. This contains a back-end representation of the
