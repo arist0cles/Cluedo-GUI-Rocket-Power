@@ -5,3 +5,9 @@
 1471409796218	Delete element
 1471656435811	Rename field 'menuItem'
 1471656525749	Rename local variable 'listenForStart'
+1471673739594	Encapsulate field 'symbol'
+1471673747266	Encapsulate field 'symbol'
+1471673753121	Encapsulate field 'symbol'
+1471673759256	Encapsulate field 'symbol'
+1471673765316	Encapsulate field 'symbol'
+1471673770039	Encapsulate field 'symbol'

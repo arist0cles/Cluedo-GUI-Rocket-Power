@@ -8,32 +8,36 @@ import core.Location;
 import squares.Square;
 
 public abstract class CluedoCharacter {
-	
-	
+
 	private String name;
 	private Color c;
 	private BufferedImage pic;
 	private Location loc;
-	
-	public CluedoCharacter(String name, Color c, Location location){
+	private String symbol;
+
+	public CluedoCharacter(String name, Color c, Location location) {
 		this.name = name;
 		this.c = c;
 		this.loc = location;
 	}
-	
-	public Location getLocation(){
+
+	public Location getLocation() {
 		return this.loc;
 	}
-	
-	public String getName(){
+
+	public String getName() {
 		return this.name;
 	}
-	
-	public Color getColor(){
+
+	public Color getColor() {
 		return this.c;
 	}
 
 	private void setImage() {
 		//set to pic to be a buffered image based on file f
+	}
+
+	public String getSymbol(){
+		return symbol;
 	}
 }

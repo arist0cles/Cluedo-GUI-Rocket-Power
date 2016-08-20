@@ -9,10 +9,14 @@ public class ColonelMustard extends CluedoCharacter{
 	//initial start position character always starts on
 	private static Location start = new Location(17,0);
 	private static Color color = Color.yellow;
+	protected String symbol = "CM";
 
 	public ColonelMustard(String name) {
 		super(name, color, start);
 	}
 
+	public String getSymbol() {
+		return symbol;
+	}
 
 }

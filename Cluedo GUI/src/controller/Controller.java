@@ -4,11 +4,15 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import colorschemes.BW;
 import colorschemes.Emo;
 import colorschemes.Kirita;
 import colorschemes.Pastel;
+import core.Location;
 import core.Player;
 import model.Model;
 import view.SetupPopup;
@@ -29,7 +33,7 @@ public class Controller {
 	private View view;
 	private SetupPopup pop = new SetupPopup();
 	private int numOfPlayers;
-	private int count=0;
+	private int count = 0;
 
 	public Controller(Model m, View v) {
 		this.model = m;
@@ -38,6 +42,7 @@ public class Controller {
 		addStartListener();
 		addQuitMenuListener();
 		addShowHandMenuListener();
+		addGridMouseListener();
 	}
 
 	public void addStartListener() {
@@ -45,16 +50,27 @@ public class Controller {
 			setup();
 		});
 	}
-	
+
 	public void addQuitMenuListener() {
 		view.addQuitMenuListener(e -> {
 			view.quit();
 		});
 	}
-	
+
 	public void addShowHandMenuListener() {
 		view.addShowHandMenuListener(e -> {
 			view.showHand();
+		});
+	}
+
+	public void addGridMouseListener() {
+		view.addGridMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent me) {
+				System.out.println((me.getX()-60)/15);
+				System.out.println((me.getY()-50)/15);
+				Location l = new Location((me.getX()-60)/15, (me.getY()-50)/15);
+				//currentPlayer.tryUpdateLocation(l);
+			}
 		});
 	}
 
@@ -70,7 +86,7 @@ public class Controller {
 
 	public void addPlayerInfoListener() {
 		pop.addPlayerInfoListener(e -> {
-			if (count >= numOfPlayers){
+			if (count >= numOfPlayers) {
 				String playerName = pop.getPlayerName();
 				String charName = pop.getSelectedButtonText();
 				this.model.createPlayer(playerName, charName, count);
@@ -86,15 +102,15 @@ public class Controller {
 			addPlayerInfoListener();
 		});
 	}
-	
+
 	/**
 	 * Pops up the setup windows which get the info on all the players
 	 */
-	public void setup(){
+	public void setup() {
 		pop.run();
 	}
-	
-	//CALL THIS TO START GAME ONCE SETUP IS WORKING!!!!
+
+	// CALL THIS TO START GAME ONCE SETUP IS WORKING!!!!
 	/**
 	 * Starts the game. Gets the selected colorscheme, creates the board
 	 */
@@ -123,11 +139,11 @@ public class Controller {
 
 	private void play() {
 		// begin play
-		//got all the players, make the solution and deal the cards
+		// got all the players, make the solution and deal the cards
 		model.dealCards();
-			for (Player p : model.getPlayers()){
-				p.showHand();
-			}
-				
+		for (Player p : model.getPlayers()) {
+			p.showHand();
+		}
+
 	}
 }

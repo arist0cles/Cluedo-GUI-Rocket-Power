@@ -131,6 +131,9 @@ public class GridPanel extends JPanel {
 			g.setColor(charColor);
 			//set graphics to be char color
 			g.fillRect(XOFFSET+SQUARE_SIZE*l.getX(), YOFFSET+SQUARE_SIZE*l.getY(), SQUARE_SIZE, SQUARE_SIZE);
+			g.setColor(Color.BLACK);
+			g.setFont(new Font("TimesRoman", Font.PLAIN, 10));
+			g.drawString(c.getSymbol(), XOFFSET+SQUARE_SIZE*l.getX()+1, YOFFSET+SQUARE_SIZE*l.getY()+14);
 			//draw rect
 		}
 	}

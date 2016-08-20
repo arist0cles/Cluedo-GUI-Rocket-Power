@@ -9,10 +9,14 @@ public class MissScarlett extends CluedoCharacter{
 	//initial start position character always starts on
 	private static Location start = new Location(24,19);
 	private static Color color = Color.red;
+	protected String symbol = "MS";
 
 	public MissScarlett(String name) {
 		super(name, color, start);
 	}
 
-
+	public String getSymbol() {
+		return symbol;
+	}
+	
 }

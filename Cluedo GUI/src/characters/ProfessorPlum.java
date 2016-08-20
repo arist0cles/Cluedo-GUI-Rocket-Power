@@ -8,8 +8,13 @@ public class ProfessorPlum extends CluedoCharacter{
 	//initial start position character always starts on
 		private static Location start = new Location(0,17);
 		private static Color color = Color.magenta;
+		protected String symbol = "PP";
 
 	public ProfessorPlum(String name) {
 		super(name, color, start);
+	}
+
+	public String getSymbol() {
+		return symbol;
 	}
 }
