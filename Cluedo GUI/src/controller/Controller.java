@@ -28,12 +28,11 @@ public class Controller {
 	private View view;
 	private SetupPopup pop = new SetupPopup();
 	private int numOfPlayers;
-	private int count;
+	private int count=0;
 
 	public Controller(Model m, View v) {
 		this.model = m;
 		this.view = v;
-		
 		addNumberOfPlayersListener();
 		addStartListener();
 		addQuitMenuListener();
@@ -73,8 +72,6 @@ public class Controller {
 			if (count >= numOfPlayers){
 				String playerName = pop.getPlayerName();
 				String charName = pop.getSelectedButtonText();
-				System.out.println(playerName);
-				System.out.println(charName);
 				this.model.createPlayer(playerName, charName, count);
 				pop.closeWindow();
 				start();
@@ -82,8 +79,6 @@ public class Controller {
 			}
 			String playerName = pop.getPlayerName();
 			String charName = pop.getSelectedButtonText();
-			System.out.println(playerName);
-			System.out.println(charName);
 			this.model.createPlayer(playerName, charName, count);
 			count++;
 			pop.setupEachPlayer();

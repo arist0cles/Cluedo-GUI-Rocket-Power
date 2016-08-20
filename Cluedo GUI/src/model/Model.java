@@ -34,7 +34,13 @@ public class Model {
 	private ArrayList<Card> allCards; // all cards in the game
 	private ArrayList<Card> solution; // three solution cards
 	private ArrayList<Card> ruledOut; // cards ruled out during the game
-	private boolean finished;
+	
+	//arrays used to make and deal out all the cards
+	String [] rooms = {"Kitchen", "Ballroom", "Conservatory", "Dining", "Garage", "Library", "Lounge", "Billiard", "Study"};
+	String [] weapons = {"Candlestick", "Dagger", "Leadpipe", "Revolver", "Rope", "Spanner"};
+	String [] characters = {"Miss Scarlett", "Colonel Mustard", "Mrs White", "Reverend Green", "Mrs Peacok", "Professor Plum"};
+	
+	private boolean finished = false;
 	
 	public Model(){
 		this.players = new ArrayList<Player>();
