@@ -147,9 +147,6 @@ public class View extends JFrame {
 		this.setJMenuBar(menuBar);
 	}
 
-	/**
-	 * Gets rid of any gaps between panels
-	 */
 	public void setupLayout() {
 		layout.setHgap(0);
 		layout.setVgap(0);
@@ -167,9 +164,6 @@ public class View extends JFrame {
 		setupImagePanels();
 	}
 
-	/**
-	 * Loads the image files as ImageIcons. These may eventually end up in the character objects
-	 */
 	private void setupIcons() {
 		icons.add(new ImageIcon(
 				new ImageIcon("card_colonel_mustard.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
@@ -222,9 +216,6 @@ public class View extends JFrame {
 		panel.setBackground(model.getColorScheme().BACKGROUND);
 	}
 
-	/**
-	 * Populates the side panels with images
-	 */
 	public void setupImagePanels() {
 		JLabel thumb;
 		JPanel image;
@@ -250,9 +241,12 @@ public class View extends JFrame {
 		}
 	}
 
-	/**
-	 * Sets up the start button and color spinner for picking different color schemes
-	 */
+	public void setupTextFields() {
+		JTextField numberOfPlayers = new JTextField("ENTER no of players");
+		middleBottomPanel.add(numberOfPlayers, BorderLayout.CENTER);
+		String players = numberOfPlayers.getText();
+	}
+
 	public void setupStartButton() {
 		start = new JButton("START");
 		color = setupColorSpinner();
@@ -261,11 +255,6 @@ public class View extends JFrame {
 		middleBottomPanel.add(color, BorderLayout.NORTH);
 	}
 
-	/**
-	 * Sets up the colorspinner with an arraylist of different colorschemes
-	 * 
-	 * @return the initialised colorspinner
-	 */
 	public JSpinner setupColorSpinner() {
 		List<String> colorScheme = new ArrayList<>();
 		colorScheme.add("Kirita");
@@ -293,15 +282,13 @@ public class View extends JFrame {
 		showHand.addActionListener(l);
 	}
 
-	/**
-	 * Redraws the view with an updated background once the user has selected their colorscheme
-	 */
 	public void redraw() {
 		for (Component comp : components) {
 			comp.setBackground(model.getColorScheme().BACKGROUND);
 		}
 		this.getContentPane().validate();
 		this.getContentPane().repaint();
+
 	}
 
 	public String getScheme() {
@@ -326,4 +313,6 @@ public class View extends JFrame {
 	public void quit() {
 		this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 	}
+	
+	
 }

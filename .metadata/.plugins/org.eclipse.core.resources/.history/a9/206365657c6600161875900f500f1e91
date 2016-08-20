@@ -88,18 +88,11 @@ public class Controller {
 		});
 	}
 	
-	/**
-	 * Pops up the setup windows which get the info on all the players
-	 */
 	public void setup(){
 		pop.run();
 		start();
 	}
-	
 	//CALL THIS TO START GAME ONCE SETUP IS WORKING!!!!
-	/**
-	 * Starts the game. Gets the selected colorscheme, creates the board
-	 */
 	public void start() {
 		String scheme = view.getScheme();
 		switch (scheme) {

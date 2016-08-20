@@ -13,7 +13,6 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Vector;
 
-import javax.activity.InvalidActivityException;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -24,14 +23,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-/**
- * The popup that gets the info from the players, such as the number, individual
- * names and characters they will be represented by. Ties in with the controller
- * as it has a number of ActionListeners
- * 
- * @author Patrick and Kirita
- *
- */
 public class SetupPopup extends JOptionPane {
 	private static final long serialVersionUID = 1L;
 	private JFrame parent = new JFrame();
@@ -49,9 +40,6 @@ public class SetupPopup extends JOptionPane {
 		setupRadioButtons();
 	}
 
-	/**
-	 * Pops up the first window to ask how many players will be playing the game
-	 */
 	public void run() {
 		parent.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -67,11 +55,7 @@ public class SetupPopup extends JOptionPane {
 		parent.setVisible(true);
 	}
 
-	/**
-	 * Opens a new window for each player to enter their name and select a char to be represented by
-	 */
 	public void setupEachPlayer() {
-		//Closes the previous players window, or initially the number of players window
 		closeWindow();
 		playerName = new JTextField(10);
 		parent = new JFrame();
@@ -89,8 +73,8 @@ public class SetupPopup extends JOptionPane {
 		parent.pack();
 		parent.setVisible(true);
 	}
-
-	public void closeWindow() {
+	
+	public void closeWindow(){
 		parent.dispatchEvent(new WindowEvent(parent, WindowEvent.WINDOW_CLOSING));
 	}
 
@@ -98,22 +82,12 @@ public class SetupPopup extends JOptionPane {
 		return playerName.getText();
 	}
 
-	/**
-	 * Gets the string attached to the currently selected radiobutton
-	 * 
-	 * @return the name of the character that is currently selected
-	 */
 	public String getSelectedButtonText() {
-		try {
-			for (Enumeration<AbstractButton> buttons = bg.getElements(); buttons.hasMoreElements();) {
-				AbstractButton button = buttons.nextElement();
-				if (button.isSelected()) {
-					return button.getText();
-				}
+		for (Enumeration<AbstractButton> buttons = bg.getElements(); buttons.hasMoreElements();) {
+			AbstractButton button = buttons.nextElement();
+			if (button.isSelected()) {
+				return button.getText();
 			}
-			throw new InvalidActivityException();
-		} catch (InvalidActivityException e) {
-			e.printStackTrace();
 		}
 		return null;
 	}
@@ -129,7 +103,7 @@ public class SetupPopup extends JOptionPane {
 	public String getNumOfPlayers() {
 		return numOfPlayers.getText();
 	}
-
+	
 	public String getCharacter() {
 		return getSelectedButtonText();
 	}

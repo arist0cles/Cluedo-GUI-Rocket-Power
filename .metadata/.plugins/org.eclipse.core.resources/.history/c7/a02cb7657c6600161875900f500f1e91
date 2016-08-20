@@ -22,8 +22,7 @@ import model.Model;
 import squares.Square;
 
 /**
- * A custom implementation of a JPanel. Used to draw the Cluedo grid. Represented in view
- * as the middleTopPanel
+ * A custom implementation of a JPanel. Used to draw the Cluedo grid.
  * 
  * @author Patrick and Kirita
  *
@@ -43,10 +42,6 @@ public class GridPanel extends JPanel {
 		this.model = m;
 	}
 
-	/**
-	 *Overridden method from JPanel. Where the painting of this panel happens. Either draws the grid if the game 
-	 *has been started or draws a big white question mark
-	 */
 	@Override
 	public void paintComponent(Graphics g) {
 		if (started) {
