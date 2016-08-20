@@ -48,6 +48,10 @@ public class SetupPopup extends JOptionPane {
 		buttons = new ArrayList<>();
 		setupRadioButtons();
 	}
+	
+	public List<JRadioButton> getButtons(){
+		return this.buttons;
+	}
 
 	/**
 	 * Pops up the first window to ask how many players will be playing the game
@@ -104,13 +108,15 @@ public class SetupPopup extends JOptionPane {
 	 * @return the name of the character that is currently selected
 	 */
 	public String getSelectedButtonText() {
-		try {
-			for (Enumeration<AbstractButton> buttons = bg.getElements(); buttons.hasMoreElements();) {
-				AbstractButton button = buttons.nextElement();
-				if (button.isSelected()) {
-					return button.getText();
-				}
+
+	try{
+		for (Enumeration<AbstractButton> buttons = bg.getElements(); buttons.hasMoreElements();) {
+			AbstractButton button = buttons.nextElement();
+			if (button.isSelected()) {
+				this.buttons.remove(button);
+				return button.getText();
 			}
+		}
 			throw new InvalidActivityException();
 		} catch (InvalidActivityException e) {
 			e.printStackTrace();

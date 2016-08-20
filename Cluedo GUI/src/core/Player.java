@@ -33,7 +33,6 @@ public class Player {
 		System.out.println("Created player: "+this.name+" with character: "+this.c.getName());
 	}
 	
-
 	/**
 	 * 
 	 * @param suggestion
@@ -41,7 +40,7 @@ public class Player {
 	 */
 	public List<Card> checkHand(List<Card>suggestion){
 		List<Card> result = new ArrayList<Card>();
-		for (Card c : this.hand){
+		for (Card c : this.hand){ 
 			if (suggestion.contains(c)){
 				result.add(c);
 			}
