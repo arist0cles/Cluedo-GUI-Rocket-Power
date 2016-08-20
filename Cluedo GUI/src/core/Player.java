@@ -139,7 +139,7 @@ public class Player {
 	 * @return
 	 */
 	public boolean getEliminated(){
-		return eliminated;
+		return this.eliminated;
 	}
 	
 	/**

@@ -265,10 +265,7 @@ public class Game {
 		 //* loops through each player while the game is not finished.
 		 /*/
 	/*
-	 * public void playGame(){ while(!finished){ if (players.size()<2){break;}
-	 * for(int i = 0; i != players.size(); i++){ if (players.size()<2){break;}
-	 * currentPlayer = players.get(i); if(!currentPlayer.getEliminated()){
-	 * currentPlayerTurn(); } if(finished == true){ break; } } } endGame(); }
+	 * public void playGame(){
 	 * 
 	 * public void endGame(){ System.out.println("Game Over"); }
 	 * 

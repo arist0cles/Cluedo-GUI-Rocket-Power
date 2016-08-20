@@ -30,6 +30,8 @@ public class Controller {
 	private SetupPopup pop = new SetupPopup();
 	private int numOfPlayers;
 	private int count=0;
+	private boolean finished = false; //is the game finished? 
+	private Player currentPlayer;	//current player
 
 	public Controller(Model m, View v) {
 		this.model = m;
@@ -106,7 +108,6 @@ public class Controller {
 			break;
 		case "Emo":
 			model.setScheme(new Emo());
-			view.redraw();
 			break;
 		case "Pastel":
 			model.setScheme(new Pastel());
@@ -118,16 +119,17 @@ public class Controller {
 		model.makeBoard();
 		view.setGridPaneStarted();
 		view.redraw();
-		play();
 	}
 
 	private void play() {
 		// begin play
 		//got all the players, make the solution and deal the cards
 		model.dealCards();
-			for (Player p : model.getPlayers()){
-				p.showHand();
-			}
-				
+		currentPlayer = model.getPlayers().get(0); //first playaaa
+	}
+	
+	public void currentPlayerTurn(){
+		//player whoevers turn 
+		
 	}
 }
