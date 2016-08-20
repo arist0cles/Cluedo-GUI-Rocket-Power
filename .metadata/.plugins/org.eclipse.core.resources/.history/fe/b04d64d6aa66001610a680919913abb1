@@ -1,0 +1,41 @@
+package view;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import cards.Card;
+import cards.CharacterCard;
+import core.Player;
+import model.Model;
+
+public class HandPopup extends JFrame {
+
+	private Model model;
+	private JPanel hand;
+
+	public HandPopup(Model m) {
+		this.model = m;
+		this.setPreferredSize(new Dimension(500, 500));
+		this.getContentPane().setLayout(new BorderLayout());
+		this.setTitle("Hand");
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setVisible(true);
+		displayHand(m.getPlayers().get(0));
+		System.out.println("Kirita is not the bomb");
+	}
+
+	public void displayHand(Player p) {
+		System.out.println("1111");
+		p.showHand();
+		for (Card c : p.getHand()) {
+			System.out.println(c.getName());
+			if (c instanceof CharacterCard)
+				System.out.println("Kirita is the bomb");
+
+		}
+	}
+
+}

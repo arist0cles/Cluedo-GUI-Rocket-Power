@@ -15,7 +15,6 @@ import colorschemes.Pastel;
 import core.Location;
 import core.Player;
 import model.Model;
-import view.HandPopup;
 import view.SetupPopup;
 import view.View;
 
@@ -72,7 +71,6 @@ public class Controller {
 
 	public void addShowHandMenuListener() {
 		view.addShowHandMenuListener(e -> {
-			HandPopup h = new HandPopup(model);
 			view.showHand();
 		});
 	}
@@ -149,7 +147,6 @@ public class Controller {
 		addEndTurnButtonListener();
 		view.setGridPaneStarted();
 		view.redraw();
-		play();
 	}
 
 	private void play() {

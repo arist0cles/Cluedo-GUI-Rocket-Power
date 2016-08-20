@@ -149,7 +149,6 @@ public class Controller {
 		addEndTurnButtonListener();
 		view.setGridPaneStarted();
 		view.redraw();
-		play();
 	}
 
 	private void play() {

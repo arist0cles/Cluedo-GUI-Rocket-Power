@@ -1,0 +1,31 @@
+package view;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+
+import javax.swing.JFrame;
+
+import core.Player;
+import model.Model;
+
+public class HandPopup extends JFrame{
+	
+	private Model model;
+
+	public HandPopup(Model m) {
+		this.model = m;
+		this.setPreferredSize(new Dimension(500, 500));
+		this.getContentPane().setLayout(new BorderLayout());
+		this.setTitle("Hand");
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setVisible(true);
+		displayHand(m.getCurrentPlayer());
+	}
+	
+	public void displayHand(Player p) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+}

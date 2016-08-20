@@ -167,12 +167,4 @@ public class Model {
 	public ArrayList<Player> getPlayers() {
 		return players;
 	}
-
-	public Player getCurrentPlayer() {
-		return currentPlayer;
-	}
-
-	public void setCurrentPlayer(Player currentPlayer) {
-		this.currentPlayer = currentPlayer;
-	}
 }

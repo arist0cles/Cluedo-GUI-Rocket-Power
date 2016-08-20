@@ -12,3 +12,5 @@
 1471673765316	Encapsulate field 'symbol'
 1471673770039	Encapsulate field 'symbol'
 1471676268268	Rename method 'endTurnButton'
+1471677759682	Encapsulate field 'currentPlayer'
+1471677840386	Rename type 'Hand'
