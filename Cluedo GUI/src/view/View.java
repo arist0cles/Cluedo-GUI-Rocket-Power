@@ -122,7 +122,12 @@ public class View extends JFrame {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(true);
 	}
-
+	
+	public int moveDiagonal(){
+		return JOptionPane.showConfirmDialog(null, "You are in a corner room would you\n"
+		    + "like to move to opposite room?");
+	
+	}
 	/**
 	 * Sets up the Menu, the top menu of the program
 	 * 
@@ -174,17 +179,17 @@ public class View extends JFrame {
 	 */
 	private void setupIcons() {
 		icons.add(new ImageIcon(
-				new ImageIcon("card_colonel_mustard.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
+				new ImageIcon(System.getProperty("user.dir")+"/Chars/Black/card_colonel_mustard.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
 		icons.add(new ImageIcon(
-				new ImageIcon("card_miss_scarlett.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
+				new ImageIcon(System.getProperty("user.dir")+"/Chars/White/card_miss_scarlett.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
 		icons.add(new ImageIcon(
-				new ImageIcon("card_mrs_peacock.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
+				new ImageIcon(System.getProperty("user.dir")+"/Chars/Black/card_mrs_peacock.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
 		icons.add(new ImageIcon(
-				new ImageIcon("card_mrs_white.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
+				new ImageIcon(System.getProperty("user.dir")+"/Chars/White/card_mrs_white.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
 		icons.add(new ImageIcon(
-				new ImageIcon("card_professor_plum.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
+				new ImageIcon(System.getProperty("user.dir")+"/Chars/Black/card_professor_plum.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
 		icons.add(new ImageIcon(
-				new ImageIcon("card_rev_green.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
+				new ImageIcon(System.getProperty("user.dir")+"/Chars/White/card_rev_green.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
 
 	}
 
@@ -336,7 +341,6 @@ public class View extends JFrame {
 		components.add(rightPanel);
 		components.add(middleBottomPanel);
 		components.add(middleTopPanel);
-
 	}
 
 	public void quit() {

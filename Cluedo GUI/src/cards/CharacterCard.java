@@ -4,5 +4,11 @@ public class CharacterCard extends Card {
 
 	public CharacterCard(String name) {
 		super(name);
+	}
+
+	@Override
+	public String getFile() {
+		// TODO Auto-generated method stub
+		return null;
 	}	
 }

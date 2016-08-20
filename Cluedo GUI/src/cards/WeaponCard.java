@@ -5,5 +5,11 @@ public class WeaponCard extends Card {
 	public WeaponCard(String name) {
 		super(name);
 	}
+
+	@Override
+	public String getFile() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
