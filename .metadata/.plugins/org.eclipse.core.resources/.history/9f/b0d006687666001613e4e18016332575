@@ -37,7 +37,6 @@ public class Controller {
 		addNumberOfPlayersListener();
 		addStartListener();
 		addQuitMenuListener();
-		addShowHandMenuListener();
 	}
 
 	public void addStartListener() {
@@ -49,12 +48,6 @@ public class Controller {
 	public void addQuitMenuListener() {
 		view.addQuitMenuListener(e -> {
 			view.quit();
-		});
-	}
-	
-	public void addShowHandMenuListener() {
-		view.addShowHandMenuListener(e -> {
-			view.showHand();
 		});
 	}
 

@@ -37,7 +37,6 @@ public class Controller {
 		addNumberOfPlayersListener();
 		addStartListener();
 		addQuitMenuListener();
-		addShowHandMenuListener();
 	}
 
 	public void addStartListener() {

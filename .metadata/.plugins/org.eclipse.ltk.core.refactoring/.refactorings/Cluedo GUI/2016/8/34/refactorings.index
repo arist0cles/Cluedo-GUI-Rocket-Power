@@ -3,3 +3,5 @@
 1471401440131	Encapsulate field 'colorScheme'
 1471402579445	Encapsulate field 'startingColor'
 1471409796218	Delete element
+1471656435811	Rename field 'menuItem'
+1471656525749	Rename local variable 'listenForStart'

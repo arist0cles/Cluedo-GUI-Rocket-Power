@@ -33,28 +33,13 @@ public class Controller {
 	public Controller(Model m, View v) {
 		this.model = m;
 		this.view = v;
-		
 		addNumberOfPlayersListener();
 		addStartListener();
-		addQuitMenuListener();
-		addShowHandMenuListener();
 	}
 
 	public void addStartListener() {
 		view.addStartButtonListener(e -> {
 			setup();
-		});
-	}
-	
-	public void addQuitMenuListener() {
-		view.addQuitMenuListener(e -> {
-			view.quit();
-		});
-	}
-	
-	public void addShowHandMenuListener() {
-		view.addShowHandMenuListener(e -> {
-			view.showHand();
 		});
 	}
 

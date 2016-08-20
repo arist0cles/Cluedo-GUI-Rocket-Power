@@ -12,7 +12,6 @@ import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -75,28 +74,22 @@ import squares.WallSquare;
  */
 public class View extends JFrame {
 	private static final long serialVersionUID = 1L;
-
+	
 	public final Dimension SIDE_PANEL_SIZE = new Dimension(150, 200);
 	public final Dimension FRAME_SIZE = new Dimension(800, 800);
 	public final Dimension MIDDLE_BOTTOM_PANEL_SIZE = new Dimension(500, 200);
 	public final Dimension MIDDLE_TOP_PANEL_SIZE = new Dimension(500, 500);
-	
 	private GridPanel middleTopPanel;
 	private JPanel middleBottomPanel = new JPanel();
 	private JPanel middlePanel = new JPanel();
 	private JPanel rightPanel = new JPanel();
 	private JPanel leftPanel = new JPanel();
-	
-	private BorderLayout layout = new BorderLayout(10, 10);
+	private BorderLayout layout = new BorderLayout(10, 10);	
 	private List<ImageIcon> icons = new ArrayList<>();
 	private Model model;
 	private JButton start;
 	private JSpinner color;
 	private List<Component> components = new ArrayList<>();
-	private JMenuBar menuBar;
-	private JMenu menu;
-	private JMenuItem quit;
-	private JMenuItem showHand;
 
 	public View(Model m) {
 		this.model = m;
@@ -120,30 +113,74 @@ public class View extends JFrame {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(true);
 	}
-
+	
 	/**
 	 * Sets up the Menu, the top menu of the program
 	 * 
 	 */
 	public void setupMenu() {
-		// Create the menu bar.
+		// TODO This is the gross java tutorial demonstration of Menus. Update to reflect our program
+		JMenuBar menuBar;
+		JMenu menu, submenu;
+		JMenuItem menuItem;
+		JRadioButtonMenuItem rbMenuItem;
+		JCheckBoxMenuItem cbMenuItem;
+
+		//Create the menu bar.
 		menuBar = new JMenuBar();
 
-		// Build the first menu.
+		//Build the first menu.
 		menu = new JMenu("Cluedo Menu");
 		menuBar.add(menu);
 
-		// a group of JMenuItems
-		quit = new JMenuItem("Quit");
-		menu.add(quit);
+		//a group of JMenuItems
+		menuItem = new JMenuItem("Quit");
+		menu.add(menuItem);
 
+		/*//a group of radio button menu items
 		menu.addSeparator();
-		
-		// a group of JMenuItems
-		showHand = new JMenuItem("Show Hand");
-		menu.add(showHand);
-		
-		menuBar.add(menu);
+		ButtonGroup group = new ButtonGroup();
+		rbMenuItem = new JRadioButtonMenuItem("A radio button menu item");
+		rbMenuItem.setSelected(true);
+		rbMenuItem.setMnemonic(KeyEvent.VK_R);
+		group.add(rbMenuItem);
+		menu.add(rbMenuItem);
+
+		rbMenuItem = new JRadioButtonMenuItem("Another one");
+		rbMenuItem.setMnemonic(KeyEvent.VK_O);
+		group.add(rbMenuItem);
+		menu.add(rbMenuItem);
+
+		//a group of check box menu items
+		menu.addSeparator();
+		cbMenuItem = new JCheckBoxMenuItem("A check box menu item");
+		cbMenuItem.setMnemonic(KeyEvent.VK_C);
+		menu.add(cbMenuItem);
+
+		cbMenuItem = new JCheckBoxMenuItem("Another one");
+		cbMenuItem.setMnemonic(KeyEvent.VK_H);
+		menu.add(cbMenuItem);
+
+		//a submenu
+		menu.addSeparator();
+		submenu = new JMenu("A submenu");
+		submenu.setMnemonic(KeyEvent.VK_S);
+
+		menuItem = new JMenuItem("An item in the submenu");
+		menuItem.setAccelerator(KeyStroke.getKeyStroke(
+		        KeyEvent.VK_2, ActionEvent.ALT_MASK));
+		submenu.add(menuItem);
+
+		menuItem = new JMenuItem("Another item");
+		submenu.add(menuItem);
+		menu.add(submenu);
+
+		//Build second menu in the menu bar.
+		menu = new JMenu("Another Menu");
+		menu.setMnemonic(KeyEvent.VK_N);
+		menu.getAccessibleContext().setAccessibleDescription(
+		        "This menu does nothing");
+		menuBar.add(menu);*/
 		this.setJMenuBar(menuBar);
 	}
 
@@ -165,20 +202,15 @@ public class View extends JFrame {
 	}
 
 	private void setupIcons() {
-		icons.add(new ImageIcon(
-				new ImageIcon("card_colonel_mustard.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
-		icons.add(new ImageIcon(
-				new ImageIcon("card_miss_scarlett.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
-		icons.add(new ImageIcon(
-				new ImageIcon("card_mrs_peacock.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
-		icons.add(new ImageIcon(
-				new ImageIcon("card_mrs_white.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
-		icons.add(new ImageIcon(
-				new ImageIcon("card_professor_plum.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
-		icons.add(new ImageIcon(
-				new ImageIcon("card_rev_green.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
-
+		icons.add(new ImageIcon(new ImageIcon("card_colonel_mustard.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
+		icons.add(new ImageIcon(new ImageIcon("card_miss_scarlett.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
+		icons.add(new ImageIcon(new ImageIcon("card_mrs_peacock.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
+		icons.add(new ImageIcon(new ImageIcon("card_mrs_white.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
+		icons.add(new ImageIcon(new ImageIcon("card_professor_plum.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
+		icons.add(new ImageIcon(new ImageIcon("card_rev_green.jpg").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
+		
 	}
+
 
 	/**
 	 * Sets up all the middle panels
@@ -193,7 +225,7 @@ public class View extends JFrame {
 
 		this.add(middlePanel, BorderLayout.CENTER);
 		middlePanel.setBackground(model.getColorScheme().BACKGROUND);
-
+		
 		middlePanel.add(middleTopPanel, BorderLayout.NORTH);
 		middlePanel.add(middleBottomPanel, BorderLayout.SOUTH);
 	}
@@ -215,25 +247,26 @@ public class View extends JFrame {
 		this.add(panel, layoutPosition);
 		panel.setBackground(model.getColorScheme().BACKGROUND);
 	}
-
-	public void setupImagePanels() {
+	
+	public void setupImagePanels(){
 		JLabel thumb;
 		JPanel image;
 		leftPanel.setLayout(new GridLayout(3, 1));
-		rightPanel.setLayout(new GridLayout(3, 1));
-		for (int i = 0; i < icons.size(); i++) {
+		rightPanel.setLayout(new GridLayout(3,1));
+		for (int i=0; i < icons.size(); i++){
 			thumb = new JLabel();
 			image = new JPanel();
 			thumb.setIcon(icons.get(i));
 			image.add(thumb);
-			image.setPreferredSize(new Dimension(50, 50));
-			if (i < 3) {
-				// leftside
+			image.setPreferredSize(new Dimension(50,50));
+			if (i < 3){
+				//leftside
 				image.setBackground(model.getColorScheme().BACKGROUND);
 				components.add(image);
 				leftPanel.add(image);
-			} else {
-				// rightside
+			}
+			else {
+				//rightside
 				image.setBackground(model.getColorScheme().BACKGROUND);
 				components.add(image);
 				rightPanel.add(image);
@@ -250,12 +283,12 @@ public class View extends JFrame {
 	public void setupStartButton() {
 		start = new JButton("START");
 		color = setupColorSpinner();
-
+		
 		middleBottomPanel.add(start, BorderLayout.SOUTH);
 		middleBottomPanel.add(color, BorderLayout.NORTH);
 	}
-
-	public JSpinner setupColorSpinner() {
+	
+	public JSpinner setupColorSpinner(){
 		List<String> colorScheme = new ArrayList<>();
 		colorScheme.add("Kirita");
 		colorScheme.add("Pastel");
@@ -265,54 +298,36 @@ public class View extends JFrame {
 		return new JSpinner(l);
 	}
 
-	public void addStartButtonListener(ActionListener l) {
-		start.addActionListener(l);
+	public void addStartButtonListener(ActionListener listenForStart) {
+		start.addActionListener(listenForStart);
 	}
 	
-	public void showHand() {
-		//TODO fill this in once hands are drawing
-		System.out.println("Write this method!!!");
-	}
-	
-	public void addQuitMenuListener(ActionListener l) {
-		quit.addActionListener(l);
-	}
-	
-	public void addShowHandMenuListener(ActionListener l) {
-		showHand.addActionListener(l);
-	}
-
-	public void redraw() {
-		for (Component comp : components) {
+	public void redraw(){
+		for(Component comp: components){
 			comp.setBackground(model.getColorScheme().BACKGROUND);
 		}
+		
 		this.getContentPane().validate();
 		this.getContentPane().repaint();
-
+		
 	}
 
 	public String getScheme() {
-		return (String) color.getValue();
+		return (String)color.getValue();
 	}
-
-	public void setGridPaneStarted() {
+	
+	public void setGridPaneStarted(){
 		middleTopPanel.setStarted(true);
 	}
-
+	
 	/**
 	 * Helper method to help batch process actions to all components
 	 */
-	public void addComponents() {
+	public void addComponents(){
 		components.add(leftPanel);
 		components.add(rightPanel);
 		components.add(middleBottomPanel);
 		components.add(middleTopPanel);
 
 	}
-
-	public void quit() {
-		this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-	}
-	
-	
 }
