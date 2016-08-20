@@ -69,13 +69,13 @@ public class Controller {
 	
 	public void addAccuseButtonListener() {
 		view.addAccuseButtonListener(e -> {
-			new AccusePopup(model);
+			new AccusePopup();
 		});
 	}
 	
 	public void addSuggestButtonListener() {
 		view.addSuggestButtonListener(e -> {
-			new SuggestPopup(model);
+			new SuggestPopup();
 		});
 	}
 	

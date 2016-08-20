@@ -48,8 +48,8 @@ public class SetupPopup extends JOptionPane {
 		buttons = new ArrayList<>();
 		setupRadioButtons();
 	}
-
-	public List<JRadioButton> getButtons() {
+	
+	public List<JRadioButton> getButtons(){
 		return this.buttons;
 	}
 
@@ -72,12 +72,10 @@ public class SetupPopup extends JOptionPane {
 	}
 
 	/**
-	 * Opens a new window for each player to enter their name and select a char
-	 * to be represented by
+	 * Opens a new window for each player to enter their name and select a char to be represented by
 	 */
 	public void setupEachPlayer() {
-		// Closes the previous players window, or initially the number of
-		// players window
+		//Closes the previous players window, or initially the number of players window
 		closeWindow();
 		playerName = new JTextField(10);
 		parent = new JFrame();
@@ -111,20 +109,18 @@ public class SetupPopup extends JOptionPane {
 	 */
 	public String getSelectedButtonText() {
 
-		try {
-			for (Enumeration<AbstractButton> buttons = bg.getElements(); buttons.hasMoreElements();) {
-				AbstractButton button = buttons.nextElement();
-				if (button.isSelected()) {
-					this.buttons.remove(button);
-					return button.getText();
-				}
+	try{
+		for (Enumeration<AbstractButton> buttons = bg.getElements(); buttons.hasMoreElements();) {
+			AbstractButton button = buttons.nextElement();
+			if (button.isSelected()) {
+				this.buttons.remove(button);
+				return button.getText();
 			}
+		}
 			throw new InvalidActivityException();
 		} catch (InvalidActivityException e) {
-			JOptionPane.showMessageDialog(this, "Please select a player using the radiobuttons.");
-			//setupEachPlayer();
+			e.printStackTrace();
 		}
-		// should never get here
 		return null;
 	}
 

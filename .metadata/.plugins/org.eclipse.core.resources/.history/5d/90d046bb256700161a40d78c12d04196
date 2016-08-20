@@ -22,7 +22,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 public class HandPopup extends JFrame {
-	
+
 	private Model model;
 	private JPanel hand;
 	private List<ImageIcon> images;

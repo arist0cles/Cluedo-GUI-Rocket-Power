@@ -122,7 +122,7 @@ public class SetupPopup extends JOptionPane {
 			throw new InvalidActivityException();
 		} catch (InvalidActivityException e) {
 			JOptionPane.showMessageDialog(this, "Please select a player using the radiobuttons.");
-			//setupEachPlayer();
+			setupEachPlayer();
 		}
 		// should never get here
 		return null;

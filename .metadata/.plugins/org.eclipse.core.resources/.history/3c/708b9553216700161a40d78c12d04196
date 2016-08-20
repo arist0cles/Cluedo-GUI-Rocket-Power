@@ -22,12 +22,10 @@ import core.Die;
 import core.Location;
 import core.Player;
 import model.Model;
-import view.AccusePopup;
 import view.HandPopup;
 import squares.RoomSquare;
 import squares.Square;
 import view.SetupPopup;
-import view.SuggestPopup;
 import view.View;
 
 /**
@@ -64,18 +62,6 @@ public class Controller {
 	public void addStartListener() {
 		view.addStartButtonListener(e -> {
 			setup();
-		});
-	}
-	
-	public void addAccuseButtonListener() {
-		view.addAccuseButtonListener(e -> {
-			new AccusePopup(model);
-		});
-	}
-	
-	public void addSuggestButtonListener() {
-		view.addSuggestButtonListener(e -> {
-			new SuggestPopup(model);
 		});
 	}
 	
@@ -193,10 +179,8 @@ public class Controller {
 			break;
 		}
 		model.makeBoard();
-		view.addPlayButtons();
+		view.addEndTurnButton();
 		addEndTurnButtonListener();
-		addAccuseButtonListener();
-		addSuggestButtonListener();
 		view.setGridPaneStarted();
 		view.redraw();
 		play();

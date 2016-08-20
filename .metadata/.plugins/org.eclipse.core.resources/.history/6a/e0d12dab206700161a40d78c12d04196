@@ -1,7 +1,6 @@
 package controller;
 
 import java.awt.Color;
-import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -22,12 +21,10 @@ import core.Die;
 import core.Location;
 import core.Player;
 import model.Model;
-import view.AccusePopup;
 import view.HandPopup;
 import squares.RoomSquare;
 import squares.Square;
 import view.SetupPopup;
-import view.SuggestPopup;
 import view.View;
 
 /**
@@ -67,18 +64,6 @@ public class Controller {
 		});
 	}
 	
-	public void addAccuseButtonListener() {
-		view.addAccuseButtonListener(e -> {
-			new AccusePopup(model);
-		});
-	}
-	
-	public void addSuggestButtonListener() {
-		view.addSuggestButtonListener(e -> {
-			new SuggestPopup(model);
-		});
-	}
-	
 	public void addEndTurnButtonListener() {
 		view.addEndTurnButtonListener(e -> {
 			endTurn();
@@ -112,7 +97,6 @@ public class Controller {
 	public void addGridMouseListener() {
 		view.addGridMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent me) {
-				Toolkit.getDefaultToolkit().beep();
 				Location l = new Location((me.getX()-60)/15, (me.getY()-50)/15);
 				if (tryMove(l)){
 					//can move! so do it
@@ -193,10 +177,8 @@ public class Controller {
 			break;
 		}
 		model.makeBoard();
-		view.addPlayButtons();
+		view.addEndTurnButton();
 		addEndTurnButtonListener();
-		addAccuseButtonListener();
-		addSuggestButtonListener();
 		view.setGridPaneStarted();
 		view.redraw();
 		play();

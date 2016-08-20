@@ -22,7 +22,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 public class HandPopup extends JFrame {
-	
+
 	private Model model;
 	private JPanel hand;
 	private List<ImageIcon> images;
@@ -38,7 +38,7 @@ public class HandPopup extends JFrame {
 		this.pack();
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(true);
-		displayHand(m.getCurrentPlayer());
+		displayHand(m.getPlayers().get(0));
 	}
 
 	public void displayHand(Player p) {
@@ -71,7 +71,7 @@ public class HandPopup extends JFrame {
 							.getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
 					break;
 				default:
-					//throw new IllegalArgumentException("Illegal Character Card");
+					throw new IllegalArgumentException("Illegal Character Card");
 				}
 			} else if (c instanceof WeaponCard) {
 				switch (c.getName()) {
@@ -100,7 +100,7 @@ public class HandPopup extends JFrame {
 							.getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
 					break;
 				default:
-					//throw new IllegalArgumentException("Illegal Weapon Card");
+					throw new IllegalArgumentException("Illegal Weapon Card");
 				}
 			} else if (c instanceof RoomCard) {
 				switch (c.getName()) {
@@ -141,7 +141,7 @@ public class HandPopup extends JFrame {
 							Image.SCALE_DEFAULT)));
 					break;
 				default:
-					//throw new IllegalArgumentException("Illegal Room Card");
+					throw new IllegalArgumentException("Illegal Room Card");
 				}
 			}
 		}

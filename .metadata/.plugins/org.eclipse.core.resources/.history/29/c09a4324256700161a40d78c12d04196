@@ -22,10 +22,12 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 public class HandPopup extends JFrame {
-	
+
 	private Model model;
 	private JPanel hand;
 	private List<ImageIcon> images;
+	//public final int IMAGE_SIZE_X = model.getPlayers().size()*50;
+	//public final int IMAGE_SIZE_Y = IMAGE_SIZE_X+70;
 
 	public HandPopup(Model m) {
 		images = new ArrayList<>();
@@ -38,7 +40,7 @@ public class HandPopup extends JFrame {
 		this.pack();
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(true);
-		displayHand(m.getCurrentPlayer());
+		displayHand(m.getPlayers().get(0));
 	}
 
 	public void displayHand(Player p) {

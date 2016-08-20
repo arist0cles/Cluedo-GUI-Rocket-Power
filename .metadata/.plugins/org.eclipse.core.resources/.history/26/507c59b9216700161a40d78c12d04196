@@ -93,8 +93,6 @@ public class View extends JFrame {
 	private Model model;
 	private JButton start;
 	private JButton endTurnButton;
-	private JButton suggestButton;
-	private JButton accuseButton;
 	private JSpinner color;
 	private List<Component> components = new ArrayList<>();
 	private JMenuBar menuBar;
@@ -270,27 +268,14 @@ public class View extends JFrame {
 		middleBottomPanel.add(color, BorderLayout.NORTH);
 	}
 	
-	public void addPlayButtons() {
+	public void addEndTurnButton() {
 		endTurnButton = new JButton("Pass");
-		suggestButton = new JButton("Suggest");
-		accuseButton = new JButton("Accuse");
 		middleBottomPanel.add(endTurnButton, BorderLayout.SOUTH);
-		middleBottomPanel.add(suggestButton, BorderLayout.EAST);
-		middleBottomPanel.add(accuseButton, BorderLayout.WEST);
 	}
 	
 	public void addEndTurnButtonListener(ActionListener l) {
 		middleBottomPanel.remove(start);
-		middleBottomPanel.remove(color);
 		endTurnButton.addActionListener(l);
-	}
-	
-	public void addSuggestButtonListener(ActionListener l) {
-		suggestButton.addActionListener(l);
-	}
-	
-	public void addAccuseButtonListener(ActionListener l) {
-		accuseButton.addActionListener(l);
 	}
 
 	/**

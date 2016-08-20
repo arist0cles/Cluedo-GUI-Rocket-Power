@@ -21,13 +21,13 @@ import javax.swing.ButtonGroup;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-public class HandPopup extends JFrame {
+public class AccusePopup extends JFrame {
 	
 	private Model model;
 	private JPanel hand;
 	private List<ImageIcon> images;
 
-	public HandPopup(Model m) {
+	public AccusePopup(Model m) {
 		images = new ArrayList<>();
 		hand = new JPanel();
 		this.model = m;

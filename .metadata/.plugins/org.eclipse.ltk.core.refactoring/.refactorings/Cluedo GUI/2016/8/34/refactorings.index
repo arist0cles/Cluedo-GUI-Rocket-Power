@@ -14,3 +14,4 @@
 1471676268268	Rename method 'endTurnButton'
 1471677759682	Encapsulate field 'currentPlayer'
 1471677840386	Rename type 'Hand'
+1471730351608	Rename method 'addEndTurnButton'

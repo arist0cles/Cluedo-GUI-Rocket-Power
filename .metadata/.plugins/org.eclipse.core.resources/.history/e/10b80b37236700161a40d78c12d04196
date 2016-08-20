@@ -59,6 +59,8 @@ public class Controller {
 		addQuitMenuListener();
 		addShowHandMenuListener();
 		addGridMouseListener();
+		addAccuseButtonListener();
+		addSuggestButtonListener();
 	}
 
 	public void addStartListener() {
@@ -69,13 +71,13 @@ public class Controller {
 	
 	public void addAccuseButtonListener() {
 		view.addAccuseButtonListener(e -> {
-			new AccusePopup(model);
+			new AccusePopup();
 		});
 	}
 	
 	public void addSuggestButtonListener() {
 		view.addSuggestButtonListener(e -> {
-			new SuggestPopup(model);
+			new SuggestPopup();
 		});
 	}
 	
@@ -195,8 +197,6 @@ public class Controller {
 		model.makeBoard();
 		view.addPlayButtons();
 		addEndTurnButtonListener();
-		addAccuseButtonListener();
-		addSuggestButtonListener();
 		view.setGridPaneStarted();
 		view.redraw();
 		play();
