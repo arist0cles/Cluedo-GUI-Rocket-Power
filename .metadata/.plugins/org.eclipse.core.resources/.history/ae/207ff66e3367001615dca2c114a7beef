@@ -8,7 +8,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -140,23 +139,19 @@ public class View extends JFrame {
 	public void setupMenu() {
 		// Create the menu bar.
 		menuBar = new JMenuBar();
-		
 
 		// Build the first menu.
 		menu = new JMenu("Cluedo Menu");
-		menu.setToolTipText("Can be used to show the players hand or quit the game");
 		menuBar.add(menu);
 
 		// a group of JMenuItems
 		quit = new JMenuItem("Quit");
-		quit.setToolTipText("If you leave me now, you take away the biggest part of me");
 		menu.add(quit);
 
 		menu.addSeparator();
 
 		// a group of JMenuItems
 		showHand = new JMenuItem("Show Hand");
-		showHand.setToolTipText("Players hand");
 		menu.add(showHand);
 
 		menuBar.add(menu);
@@ -250,7 +245,6 @@ public class View extends JFrame {
 		for (int i = 0; i < icons.size(); i++) {
 			thumb = new JLabel();
 			image = new JPanel();
-			image.setToolTipText("Did I do it?");
 			thumb.setIcon(icons.get(i));
 			image.add(thumb);
 			image.setPreferredSize(new Dimension(50, 50));
@@ -276,9 +270,7 @@ public class View extends JFrame {
 	 */
 	public void setupStartButton() {
 		start = new JButton("START");
-		start.setToolTipText("A+ please?");
 		color = setupColorSpinner();
-		color.setToolTipText("Choose your color scheme before starting the game");
 
 		middleBottomPanel.add(start, BorderLayout.SOUTH);
 		middleBottomPanel.add(color, BorderLayout.NORTH);
@@ -286,11 +278,8 @@ public class View extends JFrame {
 
 	public void addPlayButtons() {
 		endTurnButton = new JButton("Pass");
-		endTurnButton.setToolTipText("Ends this players turn");
 		suggestButton = new JButton("Suggest");
-		suggestButton.setToolTipText("Make a suggestion");
 		accuseButton = new JButton("Accuse");
-		accuseButton.setToolTipText("Accuse IF YOU DARE!");
 		middleBottomPanel.add(endTurnButton, BorderLayout.SOUTH);
 		middleBottomPanel.add(suggestButton, BorderLayout.EAST);
 		middleBottomPanel.add(accuseButton, BorderLayout.WEST);
@@ -327,6 +316,11 @@ public class View extends JFrame {
 
 	public void addStartButtonListener(ActionListener l) {
 		start.addActionListener(l);
+	}
+
+	public void showHand() {
+		// TODO fill this in once hands are drawing
+		System.out.println("Write this method!!!");
 	}
 
 	public void addQuitMenuListener(ActionListener l) {

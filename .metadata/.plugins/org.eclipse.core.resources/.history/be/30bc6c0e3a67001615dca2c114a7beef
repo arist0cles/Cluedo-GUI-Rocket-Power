@@ -43,7 +43,7 @@ public class Model {
 	//arrays used to make and deal out all the cards
 	private String [] rooms = {"Kitchen", "Ballroom", "Conservatory", "Dining", "Garage", "Library", "Lounge", "Billiard", "Study"};
 	String [] weapons = {"Candlestick", "Dagger", "Leadpipe", "Revolver", "Rope", "Spanner"};
-	String [] characters = {"Miss Scarlett", "Colonel Mustard", "Mrs White", "Reverend Green", "Mrs Peacock", "Professor Plum"};
+	String [] characters = {"Miss Scarlett", "Colonel Mustard", "Mrs White", "Reverend Green", "Mrs Peacok", "Professor Plum"};
 	
 	private boolean finished = false;
 	

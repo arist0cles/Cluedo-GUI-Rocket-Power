@@ -21,17 +21,17 @@ import javax.swing.ButtonGroup;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-public class HandPopup extends JFrame {
+public class SuggestPopup extends JFrame {
 	
 	private Model model;
 	private JPanel hand;
 	private List<ImageIcon> images;
 
-	public HandPopup(Model m) {
+	public SuggestPopup(Model m) {
 		images = new ArrayList<>();
 		hand = new JPanel();
 		this.model = m;
-		this.setPreferredSize(new Dimension(700, 700));
+		this.setPreferredSize(new Dimension(500, 500));
 		this.getContentPane().setLayout(new BorderLayout());
 		this.setTitle("Hand");
 		this.add(hand);
@@ -71,7 +71,7 @@ public class HandPopup extends JFrame {
 							.getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
 					break;
 				default:
-					throw new IllegalArgumentException("Illegal Character Card");
+					//throw new IllegalArgumentException("Illegal Character Card");
 				}
 			} else if (c instanceof WeaponCard) {
 				switch (c.getName()) {
@@ -100,7 +100,7 @@ public class HandPopup extends JFrame {
 							.getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
 					break;
 				default:
-					throw new IllegalArgumentException("Illegal Weapon Card");
+					//throw new IllegalArgumentException("Illegal Weapon Card");
 				}
 			} else if (c instanceof RoomCard) {
 				switch (c.getName()) {
@@ -137,11 +137,11 @@ public class HandPopup extends JFrame {
 							220, Image.SCALE_DEFAULT)));
 					break;
 				case ("Garage"):
-					images.add(new ImageIcon(new ImageIcon("Rooms\\card_hall.png").getImage().getScaledInstance(150, 220,
+					images.add(new ImageIcon(new ImageIcon("Rooms\\hall.png").getImage().getScaledInstance(150, 220,
 							Image.SCALE_DEFAULT)));
 					break;
 				default:
-					throw new IllegalArgumentException("Illegal Room Card");
+					//throw new IllegalArgumentException("Illegal Room Card");
 				}
 			}
 		}

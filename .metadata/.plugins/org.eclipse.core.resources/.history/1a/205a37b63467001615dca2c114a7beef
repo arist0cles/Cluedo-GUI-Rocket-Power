@@ -44,7 +44,6 @@ public class SetupPopup extends JOptionPane {
 
 	public SetupPopup() {
 		button = new JButton("Enter");
-		button.setToolTipText("Enter the number of players");
 		numOfPlayers = new JTextField(5);
 		buttons = new ArrayList<>();
 		setupRadioButtons();

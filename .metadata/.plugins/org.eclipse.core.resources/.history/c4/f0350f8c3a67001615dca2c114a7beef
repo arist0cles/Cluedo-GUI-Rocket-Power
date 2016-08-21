@@ -31,7 +31,7 @@ public class HandPopup extends JFrame {
 		images = new ArrayList<>();
 		hand = new JPanel();
 		this.model = m;
-		this.setPreferredSize(new Dimension(700, 700));
+		this.setPreferredSize(new Dimension(500, 500));
 		this.getContentPane().setLayout(new BorderLayout());
 		this.setTitle("Hand");
 		this.add(hand);

@@ -57,6 +57,7 @@ public class Controller {
 		addStartListener();
 		addQuitMenuListener();
 		addShowHandMenuListener();
+		addGridMouseListener();
 	}
 
 	public void addStartListener() {
@@ -194,7 +195,6 @@ public class Controller {
 		addEndTurnButtonListener();
 		addAccuseButtonListener();
 		addSuggestButtonListener();
-		addGridMouseListener();
 		view.setGridPaneStarted();
 		//view.redraw();
 		play();
