@@ -44,7 +44,6 @@ public class Controller {
 	private Model model;
 	private View view;
 	private SetupPopup pop = new SetupPopup();
-	private SuggestPopup suggest;
 	private int numOfPlayers;
 	private int count=0;
 	private boolean firstTurn = false;
@@ -75,8 +74,7 @@ public class Controller {
 	
 	public void addSuggestButtonListener() {
 		view.addSuggestButtonListener(e -> {
-			suggest = new SuggestPopup(model);
-			addDoneButtonListener();
+			new SuggestPopup(model);
 		});
 	}
 	
@@ -106,14 +104,6 @@ public class Controller {
 	public void addShowHandMenuListener() {
 		view.addShowHandMenuListener(e -> {
 			HandPopup h = new HandPopup(model);
-		});
-	}
-	
-	public void addDoneButtonListener(){
-		suggest.addDoneButtonListener(e -> {
-			System.out.println(suggest.getWeapon());
-			System.out.println(suggest.getRoom());
-			System.out.println(suggest.getChar());
 		});
 	}
 

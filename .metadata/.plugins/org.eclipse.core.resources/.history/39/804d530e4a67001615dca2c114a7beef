@@ -3,14 +3,11 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Image;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
@@ -20,10 +17,7 @@ import cards.RoomCard;
 import cards.WeaponCard;
 import core.Player;
 import model.Model;
-
-import javax.activity.InvalidActivityException;
 import javax.imageio.ImageIO;
-import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -33,12 +27,6 @@ public class SuggestPopup extends JFrame {
 
 	private Model model;
 	private JPanel hand;
-	private JPanel weaponButtons;
-	private JPanel charButtons;
-	private JPanel roomButtons;
-	private JPanel weapons;
-	private JPanel chars;
-	private JPanel rooms;
 	private JPanel donePanel;
 	private JButton done;
 	private List<ImageIcon> images;
@@ -53,20 +41,14 @@ public class SuggestPopup extends JFrame {
 		hand = new JPanel();
 		done = new JButton("Done");
 		donePanel = new JPanel();
-		charButtons = new JPanel();
-		roomButtons = new JPanel();
-		weaponButtons = new JPanel();
-		hand.add(charButtons);
-		hand.add(weaponButtons);
-		hand.add(roomButtons);
 		this.model = m;
-		this.setPreferredSize(new Dimension(700, 800));
+		this.setPreferredSize(new Dimension(700, 700));
 		hand.setPreferredSize(new Dimension(700, 600));
 		donePanel.setPreferredSize(new Dimension(700, 100));
 		this.getContentPane().setLayout(new BorderLayout());
 		this.setTitle("Hand");
 		this.add(hand, BorderLayout.NORTH);
-		done.setPreferredSize(new Dimension(50, 20));
+		done.setPreferredSize(new Dimension(50, 50));
 		donePanel.add(done);
 		this.add(donePanel, BorderLayout.SOUTH);
 		this.pack();
@@ -79,7 +61,7 @@ public class SuggestPopup extends JFrame {
 	public void displayCards(Player p) {
 		for (String c : model.getCharacters()) {
 			JRadioButton b = new JRadioButton(c);
-			charButtons.add(b);
+			hand.add(b);
 			charBG.add(b);
 			switch (c) {
 			case ("Colonel Mustard"):
@@ -112,7 +94,7 @@ public class SuggestPopup extends JFrame {
 		}
 		for (String c : model.getWeapons()) {
 			JRadioButton b = new JRadioButton(c);
-			weaponButtons.add(b);
+			hand.add(b);
 			weaponBG.add(b);
 			switch (c) {
 			case ("Candlestick"):
@@ -145,7 +127,7 @@ public class SuggestPopup extends JFrame {
 		}
 		for (String c : model.getRooms()) {
 			JRadioButton b = new JRadioButton(c);
-			roomButtons.add(b);
+			hand.add(b);
 			roomBG.add(b);
 			switch (c) {
 			case ("Kitchen"):
@@ -191,10 +173,6 @@ public class SuggestPopup extends JFrame {
 
 		showImages();
 	}
-	
-	public void addDoneButtonListener(ActionListener l) {
-		done.addActionListener(l);
-	}
 
 	private void showImages() {
 		for (ImageIcon i : images) {
@@ -203,62 +181,5 @@ public class SuggestPopup extends JFrame {
 			hand.add(j);
 		}
 	}
-
-	public String getWeapon() {
-		try {
-			for (Enumeration<AbstractButton> buttons = weaponBG.getElements(); buttons.hasMoreElements();) {
-				AbstractButton button = buttons.nextElement();
-				if (button.isSelected()) {
-					return button.getText();
-				}
-			}
-			throw new InvalidActivityException();
-		} catch (InvalidActivityException e) {
-			JOptionPane.showMessageDialog(this, "Please select a player using the radiobuttons.");
-			//setupEachPlayer();
-		}
-		// should never get here
-		return null;
-		
-	}
-	
-	public String getRoom() {
-		try {
-			for (Enumeration<AbstractButton> buttons = roomBG.getElements(); buttons.hasMoreElements();) {
-				AbstractButton button = buttons.nextElement();
-				if (button.isSelected()) {
-					return button.getText();
-				}
-			}
-			throw new InvalidActivityException();
-		} catch (InvalidActivityException e) {
-			JOptionPane.showMessageDialog(this, "Please select a player using the radiobuttons.");
-			//setupEachPlayer();
-		}
-		// should never get here
-		return null;
-		
-		
-	}
-	
-	public String getChar() {
-		try {
-			for (Enumeration<AbstractButton> buttons = charBG.getElements(); buttons.hasMoreElements();) {
-				AbstractButton button = buttons.nextElement();
-				if (button.isSelected()) {
-					return button.getText();
-				}
-			}
-			throw new InvalidActivityException();
-		} catch (InvalidActivityException e) {
-			JOptionPane.showMessageDialog(this, "Please select a player using the radiobuttons.");
-			//setupEachPlayer();
-		}
-		// should never get here
-		return null;
-		
-	}
-	
-
 
 }

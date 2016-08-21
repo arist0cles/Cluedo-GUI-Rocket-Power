@@ -2,3 +2,6 @@
 1471737642297	Move package
 1471737692292	Delete element
 1471739355999	Encapsulate field 'rooms'
+1471748406059	Rename field 'weapons'
+1471748412489	Rename field 'chars'
+1471748419159	Rename field 'rooms'
