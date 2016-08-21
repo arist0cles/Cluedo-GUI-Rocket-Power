@@ -137,7 +137,6 @@ public class View extends JFrame {
 	public int moveDiagonal() {
 		return JOptionPane.showConfirmDialog(null,
 				"You are in a corner room would you\n" + "like to move to opposite room?", null, 0);
-
 	}
 
 	/**

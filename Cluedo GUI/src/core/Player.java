@@ -30,7 +30,6 @@ public class Player {
 		this.location = c.getLocation();
 		this.name = name;
 		this.hand = new ArrayList<Card>();
-		System.out.println("Created player: "+this.name+" with character: "+this.c.getName());
 	}
 	
 	/**
