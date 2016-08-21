@@ -22,6 +22,10 @@ import colorschemes.Kirita;
 import core.Board;
 import core.Player;
 import squares.Square;
+<<<<<<< HEAD
+=======
+
+>>>>>>> d08d010400815647ca37e4b895d03bcccc202b9d
 
 /**
  * The model represents data and the rules that govern access to and updates of

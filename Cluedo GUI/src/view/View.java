@@ -216,7 +216,7 @@ public class View extends JFrame {
 	public void setupMiddlePanels() {
 		middleTopPanel = new GridPanel(model);
 		middleTopPanel.setPreferredSize(MIDDLE_TOP_PANEL_SIZE);
-		middleTopPanel.setBackground(model.getColorScheme().BACKGROUND);
+		//middleTopPanel.setBackground(model.getColorScheme().BACKGROUND);
 
 		middleBottomPanel.setPreferredSize(MIDDLE_BOTTOM_PANEL_SIZE);
 		middleBottomPanel.setBackground(model.getColorScheme().BACKGROUND);
@@ -319,13 +319,16 @@ public class View extends JFrame {
 	public void addPlayButtons() {
 		endTurnButton = new JButton("Pass");
 		endTurnButton.setToolTipText("Ends this players turn");
-		suggestButton = new JButton("Suggest");
-		suggestButton.setToolTipText("Make a suggestion");
 		accuseButton = new JButton("Accuse");
 		accuseButton.setToolTipText("Accuse IF YOU DARE!");
 		middleBottomPanel.add(endTurnButton, BorderLayout.SOUTH);
-		middleBottomPanel.add(suggestButton, BorderLayout.EAST);
 		middleBottomPanel.add(accuseButton, BorderLayout.WEST);
+	}
+	
+	public void addSuggestButton(){
+		suggestButton = new JButton("Suggest");
+		suggestButton.setToolTipText("Make a suggestion");
+		middleBottomPanel.add(suggestButton, BorderLayout.EAST);
 	}
 
 	public void addEndTurnButtonListener(ActionListener l) {
@@ -387,7 +390,6 @@ public class View extends JFrame {
 		}
 		highlight();
 		this.getContentPane().validate();
-
 		this.getContentPane().repaint();
 		
 	}
