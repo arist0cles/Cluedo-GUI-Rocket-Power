@@ -1,0 +1,147 @@
+package view;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.MouseInfo;
+import java.awt.Point;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import characters.CluedoCharacter;
+import colorschemes.ColorScheme;
+import core.Board;
+import core.Location;
+import core.Player;
+import model.Model;
+import squares.Square;
+
+/**
+ * A custom implementation of a JPanel. Used to draw the Cluedo grid. Represented in view
+ * as the middleTopPanel
+ * 
+ * @author Patrick and Kirita
+ *
+ */
+public class GridPanel extends JPanel {
+	private static final long serialVersionUID = 1L;
+	public final int XOFFSET = 60;
+	public final int YOFFSET = 50;
+	private final int SQUARE_SIZE = 15;
+	public final int GAP = SQUARE_SIZE;
+	public final int WIDTH = XOFFSET+GAP*25;
+	public final int HEIGHT = YOFFSET+GAP*25;
+	private boolean started;
+	private Model model;
+	
+	public GridPanel(Model m){
+		this.model = m;
+	}
+
+	/**
+	 *Overridden method from JPanel. Where the painting of this panel happens. Either draws the grid if the game 
+	 *has been started or draws a big white question mark
+	 */
+	@Override
+	public void paintComponent(Graphics g) {
+		if (started) {
+			this.setBackground(model.getColorScheme().BACKGROUND);
+			drawGrid(g);
+		} else {
+			this.setBackground(model.getColorScheme().BACKGROUND);
+			g.setColor(Color.WHITE);
+			g.setFont(new Font("TimesRoman", Font.PLAIN, 100));
+			g.drawString("?", 230, 150);
+			g.setColor(new Color(0, 0, 0));
+		}
+	}
+
+	/**
+	 * Calls draw squares and then draws the grid as an overlay over them.
+	 * 
+	 * @param g
+	 */
+	public void drawGrid(Graphics g) {
+		this.setBackground(model.getColorScheme().BACKGROUND);
+		drawSquares(g);
+		g.setColor(model.getColorScheme().GRID);
+		drawGridlines(g, XOFFSET, YOFFSET, true);
+		drawGridlines(g, XOFFSET, YOFFSET, false);
+	}
+
+	/**
+	 * Takes care of the nitty gritty of drawing the grid lines
+	 * 
+	 * @param g
+	 *            the graphics object
+	 * @param x1
+	 *            starting x
+	 * @param y1
+	 *            staring y
+	 * @param x2
+	 *            finishing x
+	 * @param y2
+	 *            finishing y
+	 * @param drawAcross
+	 *            True when drawing across the X axis, false when drawing down
+	 *            the Y axis
+	 */
+	public void drawGridlines(Graphics g, int x1, int y1, boolean drawAcross) {
+		for (int i = 0; i <= 25; i++) {
+			if (drawAcross) {
+				g.drawLine(x1, y1, x1, HEIGHT);
+				x1 += GAP;
+			} else {
+				g.drawLine(x1, y1, WIDTH, y1);
+				y1 += GAP;
+			}
+		}
+	}
+
+	/**
+	 * Takes care of the nitty gritty of drawing the squares. Calls the draw on
+	 * the Square objects which take care of drawing themselves
+	 * 
+	 * @param g
+	 *            Graphics object
+	 */
+	public void drawSquares(Graphics g) {
+		for (int i = 0; i < 25; i++) {
+			for (int j = 0; j < 25; j++) {
+				Square current = model.getSquares()[j][i];
+				int xLocation = XOFFSET + j * GAP;
+				int yLocation = YOFFSET + i * GAP;
+				g.setColor(current.getColor());
+				g.fillRect(xLocation, yLocation, SQUARE_SIZE, SQUARE_SIZE);
+			}
+		}
+		for(Player p: model.getPlayers()){
+			Location l = p.getLocation();
+			//get p location
+			//convert location to x, y
+			CluedoCharacter c = p.getCharacter();
+			//get players char 
+			Color charColor = c.getColor();
+			//get char color
+			g.setColor(charColor);
+			//set graphics to be char color
+			g.fillRect(XOFFSET+SQUARE_SIZE*l.getX(), YOFFSET+SQUARE_SIZE*l.getY(), SQUARE_SIZE, SQUARE_SIZE);
+			g.setColor(Color.BLACK);
+			g.setFont(new Font("TimesRoman", Font.PLAIN, 10));
+			g.drawString(c.getSymbol(), XOFFSET+SQUARE_SIZE*l.getX()+1, YOFFSET+SQUARE_SIZE*l.getY()+14);
+			//draw rect
+		}
+	}
+
+	public void setStarted(boolean b) {
+		started = b;
+	}
+}

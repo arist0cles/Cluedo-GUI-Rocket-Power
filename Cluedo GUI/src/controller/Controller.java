@@ -23,6 +23,7 @@ import core.Location;
 import core.Player;
 import model.Model;
 import view.AccusePopup;
+import view.DiscardPopup;
 import view.HandPopup;
 import squares.RoomSquare;
 import squares.Square;
@@ -45,6 +46,7 @@ public class Controller {
 	private View view;
 	private SetupPopup pop = new SetupPopup();
 	private SuggestPopup suggest;
+	private AccusePopup accuse;
 	private int numOfPlayers;
 	private int count=0;
 	private boolean firstTurn = false;
@@ -59,6 +61,7 @@ public class Controller {
 		addStartListener();
 		addQuitMenuListener();
 		addShowHandMenuListener();
+		addShowDicardMenuListener();
 	}
 
 	public void addStartListener() {
@@ -69,7 +72,8 @@ public class Controller {
 	
 	public void addAccuseButtonListener() {
 		view.addAccuseButtonListener(e -> {
-			new AccusePopup(model);
+			accuse = new AccusePopup(model);
+			addAccuseDoneButtonListener();
 		});
 	}
 	
@@ -86,6 +90,10 @@ public class Controller {
 		});
 	}
 
+	/**
+	 * Ends the turn of the the current player. If that player is the last in the arraylist
+	 * start again from players[0]
+	 */
 	private void endTurn() {
 		int idx = model.getPlayers().indexOf(model.getCurrentPlayer());
 		if ((idx+1)>=model.getPlayers().size()){
@@ -109,11 +117,25 @@ public class Controller {
 		});
 	}
 	
+	public void addShowDicardMenuListener() {
+		view.addShowDiscardMenuListener(e -> {
+			DiscardPopup d = new DiscardPopup(model);
+		});
+	}
+	
 	public void addDoneButtonListener(){
 		suggest.addDoneButtonListener(e -> {
 			System.out.println(suggest.getWeapon());
 			System.out.println(suggest.getRoom());
 			System.out.println(suggest.getChar());
+		});
+	}
+	
+	public void addAccuseDoneButtonListener(){
+		accuse.addAccuseDoneButtonListener(e -> {
+			System.out.println(accuse.getWeapon());
+			System.out.println(accuse.getRoom());
+			System.out.println(accuse.getChar());
 		});
 	}
 
@@ -138,6 +160,12 @@ public class Controller {
 		});
 	}
 	
+	/**
+	 * Returns whether the given move is valid
+	 * 
+	 * @param l the location they are trying to move to
+	 * @return whether or not the move is valid
+	 */
 	public boolean tryMove(Location l){
 		Square local = model.getSquares()[model.getCurrentPlayer().getLocation().getX()][model.getCurrentPlayer().getLocation().getY()];
 		Square target = model.getSquares()[l.getX()][l.getY()];
@@ -163,6 +191,7 @@ public class Controller {
 	public void addPlayerInfoListener() {
 		pop.addPlayerInfoListener(e -> {
 			if (count >= numOfPlayers) {
+				//when the last player is done setting up, start the game
 				String playerName = pop.getPlayerName();
 				String charName = pop.getSelectedButtonText();
 				this.model.createPlayer(playerName, charName, count);
@@ -170,6 +199,7 @@ public class Controller {
 				start();
 				return;
 			}
+			
 			String playerName = pop.getPlayerName();
 			String charName = pop.getSelectedButtonText();
 			this.model.createPlayer(playerName, charName, count);
@@ -206,7 +236,6 @@ public class Controller {
 			model.setScheme(new BW());
 			break;
 		}
-		
 		model.makeBoard();
 		view.addPlayButtons();
 		addEndTurnButtonListener();

@@ -109,6 +109,7 @@ public class View extends JFrame {
 	private JMenu menu;
 	private JMenuItem quit;
 	private JMenuItem showHand;
+	private JMenuItem showDiscard;
 
 	public View(Model m) {
 		this.model = m;
@@ -146,7 +147,6 @@ public class View extends JFrame {
 	public void setupMenu() {
 		// Create the menu bar.
 		menuBar = new JMenuBar();
-		
 
 		// Build the first menu.
 		menu = new JMenu("Cluedo Menu");
@@ -164,6 +164,10 @@ public class View extends JFrame {
 		showHand = new JMenuItem("Show Hand");
 		showHand.setToolTipText("Players hand");
 		menu.add(showHand);
+		
+		showDiscard = new JMenuItem("Show Discarded");
+		showDiscard.setToolTipText("Cards that have been ruled out");
+		menu.add(showDiscard);
 
 		menuBar.add(menu);
 		this.setJMenuBar(menuBar);
@@ -375,6 +379,9 @@ public class View extends JFrame {
 		showHand.addActionListener(l);
 	}
 
+	public void addShowDiscardMenuListener(ActionListener l) {
+		showDiscard.addActionListener(l);
+	}
 	/**
 	 * Redraws the view with an updated background once the user has selected
 	 * their colorscheme
@@ -394,7 +401,7 @@ public class View extends JFrame {
 	}
 
 	public String getScheme() {
-		return (String) color.getValue();
+		return (String)color.getValue();
 	}
 
 	public void setGridPaneStarted() {
@@ -409,6 +416,7 @@ public class View extends JFrame {
 		components.add(rightPanel);
 		components.add(middleBottomPanel);
 		components.add(middleTopPanel);
+		components.add(middlePanel);
 	}
 
 	public void quit() {

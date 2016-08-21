@@ -64,7 +64,7 @@ public class SuggestPopup extends JFrame {
 		hand.setPreferredSize(new Dimension(700, 600));
 		donePanel.setPreferredSize(new Dimension(700, 100));
 		this.getContentPane().setLayout(new BorderLayout());
-		this.setTitle("Hand");
+		this.setTitle("Suggest");
 		this.add(hand, BorderLayout.NORTH);
 		done.setPreferredSize(new Dimension(50, 20));
 		donePanel.add(done);

@@ -53,10 +53,8 @@ public class GridPanel extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		if (started) {
-			this.setBackground(model.getColorScheme().BACKGROUND);
 			drawGrid(g);
 		} else {
-			this.setBackground(model.getColorScheme().BACKGROUND);
 			g.setColor(Color.WHITE);
 			g.setFont(new Font("TimesRoman", Font.PLAIN, 100));
 			g.drawString("?", 230, 150);
@@ -70,7 +68,6 @@ public class GridPanel extends JPanel {
 	 * @param g
 	 */
 	public void drawGrid(Graphics g) {
-		this.setBackground(model.getColorScheme().BACKGROUND);
 		drawSquares(g);
 		g.setColor(model.getColorScheme().GRID);
 		drawGridlines(g, XOFFSET, YOFFSET, true);

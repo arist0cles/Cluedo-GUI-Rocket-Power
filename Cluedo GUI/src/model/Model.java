@@ -53,7 +53,6 @@ public class Model {
 		this.allCards = intialiseCards();
 		this.solution = new ArrayList<Card>();
 		this.ruledOut = new ArrayList<Card>();
-		
 	}
 
 	public void createPlayer(String name, String character, int ID) {
@@ -117,24 +116,20 @@ public class Model {
 		  
 		  // makes a copy of the cards. 
 		  // deals out the cards randomly until they are all gone. 
-		  ruledOut = new ArrayList<Card>(); 
-		  for(Card c : allCards){
-			  ruledOut.add(c); 
-		  } 
-		  
+		  this.ruledOut = intialiseCards();
 		  // number of players/21 
-		  int numCards = allCards.size()%players.size(); 
+		  int numCards = this.ruledOut.size()%players.size();
 		  int bound; 
-		  if (numCards>0){ bound = numCards * players.size();}
-		   else {bound = ruledOut.size();}
-		  
-		  for(int i = 0; i < bound-1 ; i++){ 
+		  if (numCards>0){ bound = ruledOut.size()/players.size();}
+		   else {bound = this.ruledOut.size();}
+		  System.out.println("Bound "+bound);
+		  for(int i = 0; i < bound ; i++){ 
 			 for(Player p : this.players){
-				 if(ruledOut.size() > numCards){ 
-					 int cardIdx = new Random().nextInt(ruledOut.size()); 
-					 Card c = ruledOut.get(cardIdx);
+				 if(this.ruledOut.size() > numCards){ 
+					 int cardIdx = new Random().nextInt(this.ruledOut.size()); 
+					 Card c = this.ruledOut.get(cardIdx);
 					 p.addCard(c);
-					 ruledOut.remove(cardIdx); 
+					 this.ruledOut.remove(cardIdx); 
 				 } 
 			} 
 		} 
@@ -192,5 +187,10 @@ public class Model {
 	public String [] getWeapons() {
 		// TODO Auto-generated method stub
 		return weapons;
+	}
+	
+	public ArrayList<Card> getDiscarded() {
+		// TODO Auto-generated method stub
+		return ruledOut;
 	}
 }
