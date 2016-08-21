@@ -122,12 +122,16 @@ public class Controller {
 			public void mousePressed(MouseEvent me) {
 				if (me.getX()>60+15*25 || me.getY()>50+15*25) return;
 				if (me.getX()<60 || me.getY()<50) return;
-				Location l = new Location((me.getX()-60)/15, (me.getY()-50)/15);
+				int x = (me.getX()-60)/15;
+				int y = (me.getY()-50)/15;
+				Location l = new Location(x, y);
 				
 				if (tryMove(l)){
-					//can move! so do it
+					//can move so do so!! 
+					
 					model.getCurrentPlayer().updateLocation(l);
 					currentRoll=0;
+					
 					view.redraw();
 				}
 			}
@@ -200,7 +204,6 @@ public class Controller {
 			break;
 		case "BW":
 			model.setScheme(new BW());
-			
 			break;
 		}
 		
@@ -210,7 +213,6 @@ public class Controller {
 		addAccuseButtonListener();
 		addGridMouseListener();
 		view.setGridPaneStarted();
-		//view.redraw();
 		play();
 	}
 
@@ -226,10 +228,7 @@ public class Controller {
 	private void rollDice(){
 		Die d1 = new Die();
 		Die d2 = new Die();
-		System.out.println("D1 file "+d1.getRoll());
-		//System.out.println("D2 file "+d2.getDieFile());
 		currentRoll = d1.getRoll()+d2.getRoll();
-		System.out.println("ROLL :"+currentRoll);
 		view.addDiceToPane(d1, d2);
 		view.redraw();
 	}
