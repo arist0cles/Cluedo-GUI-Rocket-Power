@@ -20,33 +20,23 @@ import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 
 public class SuggestPopup extends JFrame {
 
 	private Model model;
 	private JPanel hand;
-	private JPanel donePanel;
-	private JButton done;
 	private List<ImageIcon> images;
-	private int IMAGE_X = 80;
-	private int IMAGE_Y = IMAGE_X + 70;
+	private int IMAGE_X = 50;
+	private int IMAGE_Y = IMAGE_X+70;
 
 	public SuggestPopup(Model m) {
 		images = new ArrayList<>();
 		hand = new JPanel();
-		done = new JButton("Done");
-		donePanel = new JPanel();
 		this.model = m;
 		this.setPreferredSize(new Dimension(700, 700));
-		hand.setPreferredSize(new Dimension(700, 600));
-		donePanel.setPreferredSize(new Dimension(700, 100));
 		this.getContentPane().setLayout(new BorderLayout());
 		this.setTitle("Hand");
-		this.add(hand, BorderLayout.NORTH);
-		done.setPreferredSize(new Dimension(50, 50));
-		donePanel.add(done);
-		this.add(donePanel, BorderLayout.SOUTH);
+		this.add(hand);
 		this.pack();
 		hand.setToolTipText("Pick a weapon, char and room");
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -85,81 +75,77 @@ public class SuggestPopup extends JFrame {
 			default:
 				// throw new IllegalArgumentException("Illegal Character Card");
 			}
-		}
-		for (String c : model.getWeapons()) {
 			switch (c) {
 			case ("Candlestick"):
 				images.add(new ImageIcon(new ImageIcon("Weapons\\card_candlestick.png").getImage()
-						.getScaledInstance(IMAGE_X, IMAGE_Y, Image.SCALE_DEFAULT)));
+						.getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
 				break;
 			case ("Dagger"):
-				images.add(new ImageIcon(new ImageIcon("Weapons\\card_dagger.png").getImage().getScaledInstance(IMAGE_X,
-						IMAGE_Y, Image.SCALE_DEFAULT)));
+				images.add(new ImageIcon(new ImageIcon("Weapons\\card_dagger.png").getImage().getScaledInstance(150,
+						220, Image.SCALE_DEFAULT)));
 				break;
 			case ("Leadpipe"):
 				images.add(new ImageIcon(new ImageIcon("Weapons\\card_lead_piping.png").getImage()
-						.getScaledInstance(IMAGE_X, IMAGE_Y, Image.SCALE_DEFAULT)));
+						.getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
 				break;
 			case ("Revolver"):
-				images.add(new ImageIcon(new ImageIcon("Weapons\\card_revolver.png").getImage().getScaledInstance(IMAGE_X,
-						IMAGE_Y, Image.SCALE_DEFAULT)));
+				images.add(new ImageIcon(new ImageIcon("Weapons\\card_revolver.png").getImage().getScaledInstance(150,
+						220, Image.SCALE_DEFAULT)));
 				break;
 			case ("Rope"):
-				images.add(new ImageIcon(new ImageIcon("Weapons\\card_rope.png").getImage().getScaledInstance(IMAGE_X, IMAGE_Y,
+				images.add(new ImageIcon(new ImageIcon("Weapons\\card_rope.png").getImage().getScaledInstance(150, 220,
 						Image.SCALE_DEFAULT)));
 				break;
 			case ("Spanner"):
-				images.add(new ImageIcon(new ImageIcon("Weapons\\card_spanner.png").getImage().getScaledInstance(IMAGE_X,
-						IMAGE_Y, Image.SCALE_DEFAULT)));
+				images.add(new ImageIcon(new ImageIcon("Weapons\\card_spanner.png").getImage().getScaledInstance(150,
+						220, Image.SCALE_DEFAULT)));
 				break;
 			default:
 				// throw new IllegalArgumentException("Illegal Weapon Card");
 			}
-		}
-		for (String c : model.getRooms()) {
 
 			switch (c) {
 			case ("Kitchen"):
-				images.add(new ImageIcon(new ImageIcon("Rooms\\card_kitchen.png").getImage().getScaledInstance(IMAGE_X, IMAGE_Y,
+				images.add(new ImageIcon(new ImageIcon("Rooms\\card_kitchen.png").getImage().getScaledInstance(150, 220,
 						Image.SCALE_DEFAULT)));
 				break;
 			case ("Ballroom"):
-				images.add(new ImageIcon(new ImageIcon("Rooms\\card_ballroom.png").getImage().getScaledInstance(IMAGE_X,
-						IMAGE_Y, Image.SCALE_DEFAULT)));
+				images.add(new ImageIcon(new ImageIcon("Rooms\\card_ballroom.png").getImage().getScaledInstance(150,
+						220, Image.SCALE_DEFAULT)));
 				break;
 			case ("Dining"):
-				images.add(new ImageIcon(new ImageIcon("Rooms\\card_dining_room.png").getImage().getScaledInstance(IMAGE_X,
-						IMAGE_Y, Image.SCALE_DEFAULT)));
+				images.add(new ImageIcon(new ImageIcon("Rooms\\card_dining_room.png").getImage().getScaledInstance(150,
+						220, Image.SCALE_DEFAULT)));
 				break;
 			case ("Conservatory"):
-				images.add(new ImageIcon(new ImageIcon("Rooms\\card_conservatory.png").getImage().getScaledInstance(IMAGE_X,
-						IMAGE_Y, Image.SCALE_DEFAULT)));
+				images.add(new ImageIcon(new ImageIcon("Rooms\\card_conservatory.png").getImage().getScaledInstance(150,
+						220, Image.SCALE_DEFAULT)));
 				break;
 			case ("Billiard"):
 				images.add(new ImageIcon(new ImageIcon("Rooms\\card_billiard_room.png").getImage()
-						.getScaledInstance(IMAGE_X, IMAGE_Y, Image.SCALE_DEFAULT)));
+						.getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
 				break;
 			case ("Library"):
-				images.add(new ImageIcon(new ImageIcon("Rooms\\card_library.png").getImage().getScaledInstance(IMAGE_X, IMAGE_Y,
+				images.add(new ImageIcon(new ImageIcon("Rooms\\card_library.png").getImage().getScaledInstance(150, 220,
 						Image.SCALE_DEFAULT)));
 				break;
 			case ("Study"):
-				images.add(new ImageIcon(new ImageIcon("Rooms\\card_study.png").getImage().getScaledInstance(IMAGE_X, IMAGE_Y,
+				images.add(new ImageIcon(new ImageIcon("Rooms\\card_study.png").getImage().getScaledInstance(150, 220,
 						Image.SCALE_DEFAULT)));
 				break;
 			case ("Lounge"):
-				images.add(new ImageIcon(new ImageIcon("Rooms\\card_lounge.png").getImage().getScaledInstance(IMAGE_X, IMAGE_Y,
+				images.add(new ImageIcon(new ImageIcon("Rooms\\card_lounge.png").getImage().getScaledInstance(150, 220,
 						Image.SCALE_DEFAULT)));
 				break;
 			case ("Garage"):
 				images.add(new ImageIcon(
-						new ImageIcon("Rooms\\card_hall.png").getImage().getScaledInstance(IMAGE_X, IMAGE_Y, Image.SCALE_DEFAULT)));
+						new ImageIcon("Rooms\\hall.png").getImage().getScaledInstance(150, 220, Image.SCALE_DEFAULT)));
 				break;
 			default:
 				// throw new IllegalArgumentException("Illegal Room Card");
 			}
-		}
 
+		}
 		showImages();
 	}
 

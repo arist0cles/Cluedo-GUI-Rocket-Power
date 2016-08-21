@@ -29,7 +29,7 @@ public class SuggestPopup extends JFrame {
 	private JPanel donePanel;
 	private JButton done;
 	private List<ImageIcon> images;
-	private int IMAGE_X = 80;
+	private int IMAGE_X = 100;
 	private int IMAGE_Y = IMAGE_X + 70;
 
 	public SuggestPopup(Model m) {
@@ -39,12 +39,10 @@ public class SuggestPopup extends JFrame {
 		donePanel = new JPanel();
 		this.model = m;
 		this.setPreferredSize(new Dimension(700, 700));
-		hand.setPreferredSize(new Dimension(700, 600));
-		donePanel.setPreferredSize(new Dimension(700, 100));
 		this.getContentPane().setLayout(new BorderLayout());
 		this.setTitle("Hand");
 		this.add(hand, BorderLayout.NORTH);
-		done.setPreferredSize(new Dimension(50, 50));
+		done.setPreferredSize(new Dimension(20, 20));
 		donePanel.add(done);
 		this.add(donePanel, BorderLayout.SOUTH);
 		this.pack();
@@ -153,7 +151,7 @@ public class SuggestPopup extends JFrame {
 				break;
 			case ("Garage"):
 				images.add(new ImageIcon(
-						new ImageIcon("Rooms\\card_hall.png").getImage().getScaledInstance(IMAGE_X, IMAGE_Y, Image.SCALE_DEFAULT)));
+						new ImageIcon("Rooms\\hall.png").getImage().getScaledInstance(IMAGE_X, IMAGE_Y, Image.SCALE_DEFAULT)));
 				break;
 			default:
 				// throw new IllegalArgumentException("Illegal Room Card");

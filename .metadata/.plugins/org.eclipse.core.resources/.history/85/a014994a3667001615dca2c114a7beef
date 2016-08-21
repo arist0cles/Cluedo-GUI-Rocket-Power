@@ -21,10 +21,6 @@ import colorschemes.Emo;
 import core.Board;
 import core.Player;
 import squares.Square;
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/master
 
 /**
  * The model represents data and the rules that govern access to and updates of
@@ -45,9 +41,9 @@ public class Model {
 	private ArrayList<Card> ruledOut; // cards ruled out during the game
 	
 	//arrays used to make and deal out all the cards
-	private String [] rooms = {"Kitchen", "Ballroom", "Conservatory", "Dining", "Garage", "Library", "Lounge", "Billiard", "Study"};
+	String [] rooms = {"Kitchen", "Ballroom", "Conservatory", "Dining", "Garage", "Library", "Lounge", "Billiard", "Study"};
 	String [] weapons = {"Candlestick", "Dagger", "Leadpipe", "Revolver", "Rope", "Spanner"};
-	String [] characters = {"Miss Scarlett", "Colonel Mustard", "Mrs White", "Reverend Green", "Mrs Peacock", "Professor Plum"};
+	String [] characters = {"Miss Scarlett", "Colonel Mustard", "Mrs White", "Reverend Green", "Mrs Peacok", "Professor Plum"};
 	
 	private boolean finished = false;
 	
@@ -93,7 +89,7 @@ public class Model {
 			 all.add(new WeaponCard(weapons[i])); 
 			 all.add(new CharacterCard(characters[i])); } 
 		 for (int j = 0; j < 9; j++) {
-			 all.add(new RoomCard(getRooms()[j])); 
+			 all.add(new RoomCard(rooms[j])); 
 		 } 
 		 return all;
 	}
@@ -106,8 +102,8 @@ public class Model {
 		int charIdx = new Random().nextInt(characters.length); 
 		String solCharacter =  (characters[charIdx]);
 		this.solution.add(new CharacterCard(solCharacter));
-		int romIdx = new Random().nextInt(getRooms().length); 
-		String solRoom =(getRooms()[romIdx]); 
+		int romIdx = new Random().nextInt(rooms.length); 
+		String solRoom =(rooms[romIdx]); 
 		this.solution.add(new RoomCard(solRoom));
 		  
 		  // removes solution cards from allCards
@@ -177,23 +173,5 @@ public class Model {
 
 	public void setCurrentPlayer(Player currentPlayer) {
 		this.currentPlayer = currentPlayer;
-	}
-
-	public String [] getRooms() {
-		return rooms;
-	}
-
-	public void setRooms(String [] rooms) {
-		this.rooms = rooms;
-	}
-
-	public String [] getCharacters() {
-		// TODO Auto-generated method stub
-		return characters;
-	}
-
-	public String [] getWeapons() {
-		// TODO Auto-generated method stub
-		return weapons;
 	}
 }

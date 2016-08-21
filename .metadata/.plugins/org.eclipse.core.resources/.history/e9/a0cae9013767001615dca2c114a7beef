@@ -21,10 +21,6 @@ import colorschemes.Emo;
 import core.Board;
 import core.Player;
 import squares.Square;
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/master
 
 /**
  * The model represents data and the rules that govern access to and updates of
@@ -47,7 +43,7 @@ public class Model {
 	//arrays used to make and deal out all the cards
 	private String [] rooms = {"Kitchen", "Ballroom", "Conservatory", "Dining", "Garage", "Library", "Lounge", "Billiard", "Study"};
 	String [] weapons = {"Candlestick", "Dagger", "Leadpipe", "Revolver", "Rope", "Spanner"};
-	String [] characters = {"Miss Scarlett", "Colonel Mustard", "Mrs White", "Reverend Green", "Mrs Peacock", "Professor Plum"};
+	String [] characters = {"Miss Scarlett", "Colonel Mustard", "Mrs White", "Reverend Green", "Mrs Peacok", "Professor Plum"};
 	
 	private boolean finished = false;
 	
@@ -185,15 +181,5 @@ public class Model {
 
 	public void setRooms(String [] rooms) {
 		this.rooms = rooms;
-	}
-
-	public String [] getCharacters() {
-		// TODO Auto-generated method stub
-		return characters;
-	}
-
-	public String [] getWeapons() {
-		// TODO Auto-generated method stub
-		return weapons;
 	}
 }
