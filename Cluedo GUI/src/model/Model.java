@@ -21,7 +21,7 @@ import colorschemes.Emo;
 import core.Board;
 import core.Player;
 import squares.Square;
-import weapons.Weapon;
+
 
 /**
  * The model represents data and the rules that govern access to and updates of

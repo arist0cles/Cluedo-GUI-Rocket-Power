@@ -1,14 +1,21 @@
 package core;
 
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Random;
 
 public class Die {
+	private int roll;
+	
 
-	public int roll(){
-		Random r = new Random();
-		return r.nextInt(6)+1;
+	public Die(){
+		roll = new Random().nextInt(6)+1;
+	}
+	
+	public int getRoll(){
+		return roll;
+	}
+	
+	public String getDieFile(){
+		return System.getProperty("user.dir")+"/Die Faces/"+roll+".jpg";
 	}
 }

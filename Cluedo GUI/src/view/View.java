@@ -58,6 +58,7 @@ import colorschemes.Emo;
 import colorschemes.Pastel;
 import controller.Controller;
 import core.Board;
+import core.Die;
 import model.Model;
 import squares.DoorSquare;
 import squares.HallwaySquare;
@@ -87,6 +88,12 @@ public class View extends JFrame {
 	private JPanel middlePanel = new JPanel();
 	private JPanel rightPanel = new JPanel();
 	private JPanel leftPanel = new JPanel();
+	
+	//for the dice
+	JLabel thmbd1;
+	JLabel thmbd2;
+	JPanel imgd1;	
+	JPanel imgd2;
 
 	private BorderLayout layout = new BorderLayout(10, 10);
 	private List<ImageIcon> icons = new ArrayList<>();
@@ -233,6 +240,8 @@ public class View extends JFrame {
 		this.add(panel, layoutPosition);
 		panel.setBackground(model.getColorScheme().BACKGROUND);
 	}
+	
+	
 
 	/**
 	 * Populates the side panels with images
@@ -262,6 +271,29 @@ public class View extends JFrame {
 				rightPanel.add(image);
 			}
 		}
+	}
+	
+	public void addDiceToPane(Die d1, Die d2){
+		thmbd1 = new JLabel();
+		thmbd2 = new JLabel();
+		imgd1 = new JPanel();	
+		imgd2 = new JPanel();
+		
+		thmbd1.setIcon(new ImageIcon(new ImageIcon(d1.getDieFile())
+				.getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+		thmbd2.setIcon(new ImageIcon(new ImageIcon(d2.getDieFile())
+				.getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+		imgd1.add(thmbd1);
+		imgd2.add(thmbd2);
+		components.add(imgd1);
+		components.add(imgd2);
+		middleBottomPanel.add(imgd1);
+		middleBottomPanel.add(imgd2);
+	}
+	
+	public void removeDice(){
+		middleBottomPanel.remove(imgd1);
+		middleBottomPanel.remove(imgd2);
 	}
 
 	/**
@@ -378,8 +410,6 @@ public class View extends JFrame {
 
 	public void highlight() {
 		for (Component c : components) {
-			System.out.println("Current player" + model.getCurrentPlayer().getCharacter().getID());
-			System.out.println(model.getCurrentPlayer().getName());
 			if (c.getName() != null && model.getCurrentPlayer().getCharacter() != null) {
 				if (c.getName().equals(model.getCurrentPlayer().getCharacter().getID())) {
 					c.setBackground(model.getCurrentPlayer().getCharacter().getColor());

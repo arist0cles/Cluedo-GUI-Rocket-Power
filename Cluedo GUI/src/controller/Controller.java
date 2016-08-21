@@ -46,6 +46,7 @@ public class Controller {
 	private SetupPopup pop = new SetupPopup();
 	private int numOfPlayers;
 	private int count=0;
+	private boolean firstTurn = false;
 	private boolean finished = false; //is the game finished? 
 	private int currentRoll;
 
@@ -111,8 +112,10 @@ public class Controller {
 	public void addGridMouseListener() {
 		view.addGridMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent me) {
-				Toolkit.getDefaultToolkit().beep();
+				if (me.getX()>60+15*25 || me.getY()>50+15*25) return;
+				if (me.getX()<60 || me.getY()<50) return;
 				Location l = new Location((me.getX()-60)/15, (me.getY()-50)/15);
+				
 				if (tryMove(l)){
 					//can move! so do it
 					model.getCurrentPlayer().updateLocation(l);
@@ -206,15 +209,26 @@ public class Controller {
 		// got all the players, make the solution and deal the cards
 		model.dealCards();
 		model.setCurrentPlayer(model.getPlayers().get(0));
+		firstTurn = true;
 		currentPlayerTurn();
 	}
 	
-	public void currentPlayerTurn(){
-		//view.highlight();
-		view.redraw();
-		Square local = model.getSquares()[model.getCurrentPlayer().getLocation().getX()][model.getCurrentPlayer().getLocation().getY()];
-		currentRoll = new Die().roll();
+	private void rollDice(){
+		Die d1 = new Die();
+		Die d2 = new Die();
+		System.out.println("D1 file "+d1.getRoll());
+		//System.out.println("D2 file "+d2.getDieFile());
+		currentRoll = d1.getRoll()+d2.getRoll();
 		System.out.println("ROLL :"+currentRoll);
+		view.addDiceToPane(d1, d2);
+		view.redraw();
+	}
+	
+	public void currentPlayerTurn(){
+		if (!firstTurn) view.removeDice();
+		view.redraw();
+		firstTurn = false;
+		Square local = model.getSquares()[model.getCurrentPlayer().getLocation().getX()][model.getCurrentPlayer().getLocation().getY()];
 		if (local instanceof RoomSquare){
 			//check if corner square for stairways
 			if (((RoomSquare)local).getStairs()){
@@ -224,10 +238,12 @@ public class Controller {
 					view.redraw();
 					currentRoll=0;
 				}
-			}
-			
+				else {rollDice();}
+				} else {rollDice();}
 		} 
+		else {rollDice();}
 		
-	}
+	} 
 	
 }
+
