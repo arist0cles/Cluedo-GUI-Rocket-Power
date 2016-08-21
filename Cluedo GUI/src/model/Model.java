@@ -18,13 +18,11 @@ import characters.ProfessorPlum;
 import characters.ReverendGreen;
 import colorschemes.ColorScheme;
 import colorschemes.Emo;
+import colorschemes.Kirita;
 import core.Board;
 import core.Player;
 import squares.Square;
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/master
 
 /**
  * The model represents data and the rules that govern access to and updates of
@@ -35,7 +33,7 @@ import squares.Square;
  *
  */
 public class Model {
-	private ColorScheme colorScheme = new Emo();
+	private ColorScheme colorScheme = new Kirita();
 	private Color startingColor;
 	private Board board;
 	private Player currentPlayer;

@@ -190,13 +190,14 @@ public class Controller {
 			break;
 		case "BW":
 			model.setScheme(new BW());
+			
 			break;
 		}
+		
 		model.makeBoard();
 		view.addPlayButtons();
 		addEndTurnButtonListener();
 		addAccuseButtonListener();
-		addSuggestButtonListener();
 		addGridMouseListener();
 		view.setGridPaneStarted();
 		//view.redraw();
@@ -232,6 +233,9 @@ public class Controller {
 			//check if corner square for stairways
 			if (((RoomSquare)local).getStairs()){
 				//am able to move via stairs
+				view.addSuggestButton();
+				addSuggestButtonListener();
+				view.redraw();
 				if(view.moveDiagonal()==0){
 					model.getCurrentPlayer().updateLocation(((RoomSquare)local).getOppLoc());
 					view.redraw();
