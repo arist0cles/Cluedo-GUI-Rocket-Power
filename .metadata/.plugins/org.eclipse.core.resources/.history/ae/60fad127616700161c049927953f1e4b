@@ -65,7 +65,11 @@ public class SuggestPopup extends JFrame {
 		hand.setPreferredSize(new Dimension(700, 600));
 		donePanel.setPreferredSize(new Dimension(700, 100));
 		this.getContentPane().setLayout(new BorderLayout());
+<<<<<<< HEAD
+		this.setTitle("Suggest");
+=======
 		this.setTitle("Make a suggestion from room: "+((RoomSquare)(model.getSquares()[model.getCurrentPlayer().getLocation().getX()][model.getCurrentPlayer().getLocation().getY()])).getName());
+>>>>>>> b75d7d8ef9dea680bb6c848c83f3939f404e93d1
 		this.add(hand, BorderLayout.NORTH);
 		done.setPreferredSize(new Dimension(50, 20));
 		donePanel.add(done);

@@ -292,8 +292,10 @@ public class View extends JFrame {
 				.getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		thmbd2.setIcon(new ImageIcon(new ImageIcon(d2.getDieFile())
 				.getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+		
 		imgd1.add(thmbd1);
 		imgd2.add(thmbd2);
+		
 		components.add(imgd1);
 		components.add(imgd2);
 		middleBottomPanel.add(imgd1);
