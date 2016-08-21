@@ -139,6 +139,26 @@ public class View extends JFrame {
 		return JOptionPane.showConfirmDialog(null,
 				"You are in a corner room would you\n" + "like to move to opposite room?", null, 0);
 	}
+	
+	public void wonGame(){
+		JOptionPane.showMessageDialog(null, model.getCurrentPlayer().getName()+" has won!");
+	}
+	
+	public void lostGame() {
+		JOptionPane.showMessageDialog(null,model.getCurrentPlayer().getName()+" has lost and will be eliminated!");
+	}
+	
+	public void invalidMove() {
+		JOptionPane.showMessageDialog(null,"That destination is too far away! Try again!");
+	}
+	
+	public void startTurnMessage() {
+		JOptionPane.showMessageDialog(null,"It's "+model.getCurrentPlayer().getName()+"'s turn.");
+	}
+	
+	public void discardMessage() {
+		JOptionPane.showMessageDialog(null,"Check the discarded cards in the menu then end turn!");
+	}
 
 	/**
 	 * Sets up the Menu, the top menu of the program
@@ -322,7 +342,7 @@ public class View extends JFrame {
 	}
 
 	public void addPlayButtons() {
-		endTurnButton = new JButton("Pass");
+		endTurnButton = new JButton("End Turn");
 		endTurnButton.setToolTipText("Ends this players turn");
 		accuseButton = new JButton("Accuse");
 		accuseButton.setToolTipText("Accuse IF YOU DARE!");
@@ -434,4 +454,10 @@ public class View extends JFrame {
 			}
 		}
 	}
+
+	
+
+	
+
+	
 }

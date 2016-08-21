@@ -3,6 +3,7 @@ package model;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 import cards.Card;
@@ -130,12 +131,11 @@ public class Model {
 		// number of players/21
 		int numCards = this.ruledOut.size() % players.size();
 		int bound;
+		
 		if (numCards > 0) {
 			bound = ruledOut.size() / players.size();
-		} else {
-			bound = this.ruledOut.size();
-		}
-		System.out.println("Bound " + bound);
+		} else {bound = this.ruledOut.size();}
+		
 		for (int i = 0; i < bound; i++) {
 			for (Player p : this.players) {
 				if (this.ruledOut.size() > numCards) {
@@ -208,8 +208,8 @@ public class Model {
 	}
 
 	public void checkSuggestion(String cha, String wep) {
-		ArrayList<Card> suggest = new ArrayList();
-		for (Card c : this.allCards) {
+		ArrayList<Card> suggest = new ArrayList<Card>();
+		for (Card c : intialiseCards()) {
 			if (c instanceof CharacterCard) {
 				if (c.getName().equals(cha))
 					suggest.add(c);
@@ -225,9 +225,54 @@ public class Model {
 
 		}
 
-		for (Card c : suggest) {
-			System.out.println("FROM SUGGEST ARRAY: " + c.getName());
+		//go through players cards 
+		//if they have one or more of the suggested cards
+		//add the first one to the discarded list
+		//and remove from their hand
+		for (int i = 0; i < players.size(); i++){
+			Player play = players.get(i);
+			if (!play.equals(currentPlayer)){
+			List <Card> playHas = play.checkHand(suggest);
+				if (!playHas.isEmpty()){
+					this.ruledOut.add(playHas.get(0));
+					//play.removeFromHand(playHas.get(0));
+				}
+			}
 		}
+		
+	}
+
+	public boolean checkAccusaction(String charac, String weap, String room) {
+		// check accusation against solution
+		ArrayList<Card> accuse = new ArrayList<Card>();
+		for (Card c : intialiseCards()) {
+			if (c instanceof CharacterCard) {
+				if (c.getName().equals(charac))
+					accuse.add(c);
+			} else if (c instanceof WeaponCard) {
+				if (c.getName().equals(weap))
+					accuse.add(c);
+			} else if (c instanceof RoomCard) {
+				if (c.getName().equals(room)){
+					accuse.add(c);
+				}
+			}
+
+		}
+		int count = 0;
+		for (int i=0; i<accuse.size(); i++){
+			if(accuse.get(i).equals(solution.get(i))) count++;
+		}
+		if (count==accuse.size()) return true;
+	return false;
+	}
+
+	public void removePlayerFromGame() {
+		List<Card>fromEliminated = currentPlayer.setEliminated(true);
+		for (Card ca : fromEliminated){
+			this.ruledOut.add(ca);
+		}
+		this.players.remove(currentPlayer);
 	}
 
 }

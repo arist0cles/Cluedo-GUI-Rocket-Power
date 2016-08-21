@@ -95,6 +95,7 @@ public class Controller {
 	 * start again from players[0]
 	 */
 	private void endTurn() {
+		
 		int idx = model.getPlayers().indexOf(model.getCurrentPlayer());
 		if ((idx+1)>=model.getPlayers().size()){
 			model.setCurrentPlayer(model.getPlayers().get(0));
@@ -126,15 +127,30 @@ public class Controller {
 	public void addDoneButtonListener(){
 		suggest.addDoneButtonListener(e -> {
 			model.checkSuggestion(suggest.getChar(), suggest.getWeapon());
-			
+			suggest.closeWindow();
+			view.discardMessage();
 		});
 	}
 	
 	public void addAccuseDoneButtonListener(){
 		accuse.addAccuseDoneButtonListener(e -> {
-			System.out.println(accuse.getWeapon());
-			System.out.println(accuse.getRoom());
-			System.out.println(accuse.getChar());
+			
+			boolean hasWon = model.checkAccusaction(accuse.getChar(), accuse.getWeapon(), accuse.getRoom());
+			
+			//player has won, let them know!
+			if (hasWon == true) {
+				finished = true;
+				view.wonGame();
+				accuse.closeWindow();
+				view.quit();
+			}
+			//player has lost, delete them from the game
+			else {
+				view.lostGame();
+				accuse.closeWindow();
+				model.removePlayerFromGame();
+				endTurn();
+			}
 		});
 	}
 
@@ -146,15 +162,13 @@ public class Controller {
 				int x = (me.getX()-60)/15;
 				int y = (me.getY()-50)/15;
 				Location l = new Location(x, y);
-				
 				if (tryMove(l)){
 					//can move so do so!! 
-					
+					//animation logic? 
 					model.getCurrentPlayer().updateLocation(l);
 					currentRoll=0;
-					
 					view.redraw();
-				}
+				} else {view.invalidMove(); addGridMouseListener();} 
 			}
 		});
 	}
@@ -265,6 +279,8 @@ public class Controller {
 		if (!firstTurn) view.removeDice();
 		view.redraw();
 		firstTurn = false;
+		if (model.getCurrentPlayer().getEliminated()) endTurn();
+		view.startTurnMessage();
 		Square local = model.getSquares()[model.getCurrentPlayer().getLocation().getX()][model.getCurrentPlayer().getLocation().getY()];
 		if (local instanceof RoomSquare){
 			//check if corner square for stairways

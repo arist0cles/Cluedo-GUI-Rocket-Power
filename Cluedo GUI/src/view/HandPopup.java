@@ -33,7 +33,7 @@ public class HandPopup extends JFrame {
 		this.model = m;
 		this.setPreferredSize(new Dimension(700, 700));
 		this.getContentPane().setLayout(new BorderLayout());
-		this.setTitle("Hand");
+		this.setTitle(model.getCurrentPlayer().getName()+"'s Hand");
 		this.add(hand);
 		this.pack();
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -42,7 +42,6 @@ public class HandPopup extends JFrame {
 	}
 
 	public void displayHand(Player p) {
-		p.showHand();
 		for (Card c : p.getHand()) {
 			if (c instanceof CharacterCard) {
 				switch (c.getName()) {

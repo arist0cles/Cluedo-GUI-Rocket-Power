@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -65,7 +66,9 @@ public class SuggestPopup extends JFrame {
 		hand.setPreferredSize(new Dimension(700, 600));
 		donePanel.setPreferredSize(new Dimension(700, 100));
 		this.getContentPane().setLayout(new BorderLayout());
-		this.setTitle("Make a suggestion from room: "+((RoomSquare)(model.getSquares()[model.getCurrentPlayer().getLocation().getX()][model.getCurrentPlayer().getLocation().getY()])).getName());
+		this.setTitle("Make a suggestion from room: "+((RoomSquare)
+				(model.getSquares()[model.getCurrentPlayer().getLocation().getX()]
+				[model.getCurrentPlayer().getLocation().getY()])).getName());
 		this.add(hand, BorderLayout.NORTH);
 		done.setPreferredSize(new Dimension(50, 20));
 		donePanel.add(done);
@@ -77,6 +80,10 @@ public class SuggestPopup extends JFrame {
 		displayCards(m.getCurrentPlayer());
 	}
 
+	public void closeWindow() {
+		this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+	}
+	
 	public void displayCards(Player p) {
 		for (String c : model.getCharacters()) {
 			JRadioButton b = new JRadioButton(c);

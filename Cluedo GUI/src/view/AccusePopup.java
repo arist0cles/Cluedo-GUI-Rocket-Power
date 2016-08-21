@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -190,6 +191,10 @@ public class AccusePopup extends JFrame {
 		}
 
 		showImages();
+	}
+	
+	public void closeWindow() {
+		this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 	}
 	
 	public void addAccuseDoneButtonListener(ActionListener l) {

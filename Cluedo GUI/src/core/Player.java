@@ -111,20 +111,6 @@ public class Player {
 		hand.add(c);
 	}
 	
-	/**
-	 * shows players hand.
-	 * change to show the images 
-	 * 
-	 */
-	public void showHand(){
-		System.out.println();
-		System.out.print(this.hand.size()+" Hand:\n");
-		for(Card c : hand){
-			System.out.print("card is: " + c.getName() + "\n");
-		}
-		System.out.println("");
-
-	}
 	
 	/**
 	 * Get current location of player.

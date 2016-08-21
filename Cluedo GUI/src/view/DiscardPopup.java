@@ -33,7 +33,7 @@ public class DiscardPopup extends JFrame {
 		this.model = m;
 		this.setPreferredSize(new Dimension(700, 700));
 		this.getContentPane().setLayout(new BorderLayout());
-		this.setTitle("Discarded");
+		this.setTitle("Cards That Have Been Discarded From The Game");
 		this.add(hand);
 		this.pack();
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -42,7 +42,6 @@ public class DiscardPopup extends JFrame {
 	}
 
 	public void displayHand() {
-		System.out.println("adflk = "+model.getDiscarded().size());
 		for (Card c:model.getDiscarded()) {
 			if (c instanceof CharacterCard) {
 				switch (c.getName()) {

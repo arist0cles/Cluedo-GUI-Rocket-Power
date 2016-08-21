@@ -1,16 +1,9 @@
 package cards;
 
-public abstract class Card {
-	protected String name;
+public interface Card {
 	
-	public Card(String name){
-		this.name = name;
-	}
-
-	public String getName(){
-		return name;
-	}
+	String name = "";
 	
-	public abstract String getFile();
+	public String getName();
 
 }
