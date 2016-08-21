@@ -20,6 +20,7 @@ import cards.RoomCard;
 import cards.WeaponCard;
 import core.Player;
 import model.Model;
+import squares.RoomSquare;
 
 import javax.activity.InvalidActivityException;
 import javax.imageio.ImageIO;
@@ -64,13 +65,13 @@ public class SuggestPopup extends JFrame {
 		hand.setPreferredSize(new Dimension(700, 600));
 		donePanel.setPreferredSize(new Dimension(700, 100));
 		this.getContentPane().setLayout(new BorderLayout());
-		this.setTitle("Hand");
+		this.setTitle("Make a suggestion from room: "+((RoomSquare)(model.getSquares()[model.getCurrentPlayer().getLocation().getX()][model.getCurrentPlayer().getLocation().getY()])).getName());
 		this.add(hand, BorderLayout.NORTH);
 		done.setPreferredSize(new Dimension(50, 20));
 		donePanel.add(done);
 		this.add(donePanel, BorderLayout.SOUTH);
 		this.pack();
-		hand.setToolTipText("Pick a weapon, char and room");
+		hand.setToolTipText("Pick a weapon and a char");
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(true);
 		displayCards(m.getCurrentPlayer());
@@ -143,51 +144,6 @@ public class SuggestPopup extends JFrame {
 				throw new IllegalArgumentException("Illegal Weapon Card");
 			}
 		}
-		for (String c : model.getRooms()) {
-			JRadioButton b = new JRadioButton(c);
-			roomButtons.add(b);
-			roomBG.add(b);
-			switch (c) {
-			case ("Kitchen"):
-				images.add(new ImageIcon(new ImageIcon(System.getProperty("user.dir")+"/Rooms/card_kitchen.png").getImage().getScaledInstance(IMAGE_X, IMAGE_Y,
-						Image.SCALE_DEFAULT)));
-				break;
-			case ("Ballroom"):
-				images.add(new ImageIcon(new ImageIcon(System.getProperty("user.dir")+"/Rooms/card_ballroom.png").getImage().getScaledInstance(IMAGE_X,
-						IMAGE_Y, Image.SCALE_DEFAULT)));
-				break;
-			case ("Dining"):
-				images.add(new ImageIcon(new ImageIcon(System.getProperty("user.dir")+"/Rooms/card_dining_room.png").getImage().getScaledInstance(IMAGE_X,
-						IMAGE_Y, Image.SCALE_DEFAULT)));
-				break;
-			case ("Conservatory"):
-				images.add(new ImageIcon(new ImageIcon(System.getProperty("user.dir")+"/Rooms/card_conservatory.png").getImage().getScaledInstance(IMAGE_X,
-						IMAGE_Y, Image.SCALE_DEFAULT)));
-				break;
-			case ("Billiard"):
-				images.add(new ImageIcon(new ImageIcon(System.getProperty("user.dir")+"/Rooms/card_billiard_room.png").getImage()
-						.getScaledInstance(IMAGE_X, IMAGE_Y, Image.SCALE_DEFAULT)));
-				break;
-			case ("Library"):
-				images.add(new ImageIcon(new ImageIcon(System.getProperty("user.dir")+"/Rooms/card_library.png").getImage().getScaledInstance(IMAGE_X, IMAGE_Y,
-						Image.SCALE_DEFAULT)));
-				break;
-			case ("Study"):
-				images.add(new ImageIcon(new ImageIcon(System.getProperty("user.dir")+"/Rooms/card_study.png").getImage().getScaledInstance(IMAGE_X, IMAGE_Y,
-						Image.SCALE_DEFAULT)));
-				break;
-			case ("Lounge"):
-				images.add(new ImageIcon(new ImageIcon(System.getProperty("user.dir")+"/Rooms/card_lounge.png").getImage().getScaledInstance(IMAGE_X, IMAGE_Y,
-						Image.SCALE_DEFAULT)));
-				break;
-			case ("Garage"):
-				images.add(new ImageIcon(
-						new ImageIcon(System.getProperty("user.dir")+"/Rooms/card_hall.png").getImage().getScaledInstance(IMAGE_X, IMAGE_Y, Image.SCALE_DEFAULT)));
-				break;
-			default:
-			 throw new IllegalArgumentException("Illegal Room Card");
-			}
-		}
 
 		showImages();
 	}
@@ -215,31 +171,12 @@ public class SuggestPopup extends JFrame {
 			throw new InvalidActivityException();
 		} catch (InvalidActivityException e) {
 			JOptionPane.showMessageDialog(this, "Please select a player using the radiobuttons.");
-			//setupEachPlayer();
 		}
 		// should never get here
 		return null;
 		
 	}
-	
-	public String getRoom() {
-		try {
-			for (Enumeration<AbstractButton> buttons = roomBG.getElements(); buttons.hasMoreElements();) {
-				AbstractButton button = buttons.nextElement();
-				if (button.isSelected()) {
-					return button.getText();
-				}
-			}
-			throw new InvalidActivityException();
-		} catch (InvalidActivityException e) {
-			JOptionPane.showMessageDialog(this, "Please select a player using the radiobuttons.");
-			//setupEachPlayer();
-		}
-		// should never get here
-		return null;
-		
-		
-	}
+
 	
 	public String getChar() {
 		try {
@@ -252,13 +189,10 @@ public class SuggestPopup extends JFrame {
 			throw new InvalidActivityException();
 		} catch (InvalidActivityException e) {
 			JOptionPane.showMessageDialog(this, "Please select a player using the radiobuttons.");
-			//setupEachPlayer();
 		}
 		// should never get here
 		return null;
 		
 	}
-	
-
 
 }

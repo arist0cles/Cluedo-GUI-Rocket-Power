@@ -111,9 +111,8 @@ public class Controller {
 	
 	public void addDoneButtonListener(){
 		suggest.addDoneButtonListener(e -> {
-			System.out.println(suggest.getWeapon());
-			System.out.println(suggest.getRoom());
-			System.out.println(suggest.getChar());
+			model.checkSuggestion(suggest.getChar(), suggest.getWeapon());
+			
 		});
 	}
 

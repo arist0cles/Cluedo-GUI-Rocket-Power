@@ -21,6 +21,7 @@ import colorschemes.Emo;
 import colorschemes.Kirita;
 import core.Board;
 import core.Player;
+import squares.RoomSquare;
 import squares.Square;
 
 /**
@@ -123,7 +124,8 @@ public class Model {
 		  } 
 		  
 		  // number of players/21 
-		  int numCards = allCards.size()%players.size(); 
+		  int numCards = allCards.size()/players.size(); 
+		  System.out.println(numCards);
 		  int bound; 
 		  if (numCards>0){ bound = numCards * players.size();}
 		   else {bound = ruledOut.size();}
@@ -193,4 +195,26 @@ public class Model {
 		// TODO Auto-generated method stub
 		return weapons;
 	}
+
+	public void checkSuggestion(String cha, String wep) {
+		ArrayList <Card> suggest = new ArrayList();
+		for (Card c : this.allCards){
+				if (c instanceof CharacterCard){
+					if (c.getName().equals(cha)) suggest.add(c);
+				} else if (c instanceof WeaponCard){
+					if (c.getName().equals(wep)) suggest.add(c);
+				} else if (c instanceof RoomCard){
+					if (c.getName().equals(((RoomSquare)(getSquares()[getCurrentPlayer().getLocation().getX()]
+							[getCurrentPlayer().getLocation().getY()])).getName())) suggest.add(c);
+				}
+
+			}
+		
+		
+		for (Card c : suggest){
+			System.out.println("FROM SUGGEST ARRAY: "+c.getName());
+		}
+	}
+		
 }
+
