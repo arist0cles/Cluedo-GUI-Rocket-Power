@@ -49,7 +49,7 @@ public class Model {
 	String[] weapons = { "Candlestick", "Dagger", "Leadpipe", "Revolver", "Rope", "Spanner" };
 	String[] characters = { "Miss Scarlett", "Colonel Mustard", "Mrs White", "Reverend Green", "Mrs Peacock",
 			"Professor Plum" };
-
+	//is the game finished? 
 	private boolean finished = false;
 
 	public Model() {
@@ -58,15 +58,23 @@ public class Model {
 		this.solution = new ArrayList<Card>();
 		this.ruledOut = new ArrayList<Card>();
 	}
-
+	/**
+	 * create player + character
+	 * add to list of players
+	 * @param name, character, ID
+	 * */
 	public void createPlayer(String name, String character, int ID) {
-		// create player + character
-		// add to list of players
 		CluedoCharacter charac = characterSelection(character);
 		players.add(new Player(ID, name, charac));
 
 	}
-
+	
+	/**
+	 * selects and returns a specific cluedocharacter object 
+	 * dependent upon the string value passed in as the players chosen 
+	 * character name
+	 * @param character
+	 * */
 	private CluedoCharacter characterSelection(String character) {
 		switch (character) {
 		case "Colonel Mustard":
@@ -84,21 +92,27 @@ public class Model {
 		}
 		throw new IllegalArgumentException("Invalid Character");
 	}
-
+	/**
+	 * make the character + room + weapon cards
+	 * add them in to collection of Card objects
+	 * @return all
+	 * */
 	public ArrayList<Card> intialiseCards() {
-		// make the character + room + weapon cards
-		// add them in to collection of Card objects
-		ArrayList<Card> all = new ArrayList();
+		ArrayList<Card> all = new ArrayList<Card>();
 		for (int i = 0; i < 6; i++) {
 			all.add(new WeaponCard(weapons[i]));
 			all.add(new CharacterCard(characters[i]));
 		}
 		for (int j = 0; j < 9; j++) {
-			all.add(new RoomCard(getRooms()[j]));
+			all.add(new RoomCard(rooms[j]));
 		}
 		return all;
 	}
-
+	/**
+	 * makes the solution which is an arraylist of 3 cards
+	 * then deals the remaining cards out evenly to the players
+	 * any left over cards are added to the ruledOut
+	 * */
 	public void dealCards() {
 		int wepIdx = new Random().nextInt(weapons.length);
 		String solWeapon = (weapons[wepIdx]);
@@ -106,8 +120,8 @@ public class Model {
 		int charIdx = new Random().nextInt(characters.length);
 		String solCharacter = (characters[charIdx]);
 		this.solution.add(new CharacterCard(solCharacter));
-		int romIdx = new Random().nextInt(getRooms().length);
-		String solRoom = (getRooms()[romIdx]);
+		int romIdx = new Random().nextInt(rooms.length);
+		String solRoom = (rooms[romIdx]);
 		this.solution.add(new RoomCard(solRoom));
 
 		// removes solution cards from allCards
@@ -127,13 +141,16 @@ public class Model {
 
 		// makes a copy of the cards.
 		// deals out the cards randomly until they are all gone.
-		this.ruledOut = intialiseCards();
+		for (Card c : this.allCards){
+			this.ruledOut.add(c);
+		}
+		
 		// number of players/21
 		int numCards = this.ruledOut.size() % players.size();
 		int bound;
 		
 		if (numCards > 0) {
-			bound = ruledOut.size() / players.size();
+			bound = numCards * players.size();
 		} else {bound = this.ruledOut.size();}
 		
 		for (int i = 0; i < bound; i++) {
@@ -147,67 +164,110 @@ public class Model {
 			}
 		}
 	}
-
+	/**
+	 * makes the board and gives it the colorscheme
+	 * */
 	public void makeBoard() {
 		this.board = new Board(colorScheme);
 	}
-
+	/**
+	 * sets the colorscheme of the model
+	 * @param c
+	 * */
 	public void setScheme(ColorScheme c) {
 		this.colorScheme = c;
 	}
-
+	/**
+	 * returns the current colorscheme of the model
+	 * @return colorScheme
+	 * */
 	public ColorScheme getColorScheme() {
 		return colorScheme;
 	}
-
+	/**
+	 * returns the starting color
+	 * @return startingColor
+	 * */
 	public Color getStartingColor() {
 		return startingColor;
 	}
-
+	/**
+	 * sets the starting color
+	 * @param startingColor
+	 * */
 	public void setStartingColor(Color startingColor) {
 		this.startingColor = startingColor;
 	}
-
+	/**
+	 * returns the array of squares stored in the board
+	 * */
 	public Square[][] getSquares() {
 		return this.board.getSquares();
 	}
-
+	
+	/**
+	 * returns the string array of character names
+	 * @return characters
+	 * */
+	public String [] getCharacters(){
+		return this.characters;
+	}
+	
+	/**
+	 * returns the string array of weapon names
+	 * @return weapons
+	 * */
+	public String [] getWeapons(){
+		return this.weapons;
+	}
+	
+	/**
+	 * returns the string array of character names
+	 * @return rooms
+	 * */
+	public String [] getRooms(){
+		return this.rooms;
+	}
+	
+	/**
+	 * returns the list of players
+	 * @return players
+	 * */
 	public ArrayList<Player> getPlayers() {
 		return players;
 	}
-
+	/**
+	 * returns the current player
+	 * @return currentPlayer
+	 * */
 	public Player getCurrentPlayer() {
 		return currentPlayer;
 	}
-
+	/**
+	 * sets the current player
+	 * @param currentPlayer
+	 * */
 	public void setCurrentPlayer(Player currentPlayer) {
 		this.currentPlayer = currentPlayer;
 	}
-
-	public String[] getRooms() {
-		return rooms;
-	}
-
-	public void setRooms(String[] rooms) {
-		this.rooms = rooms;
-	}
-
-	public String[] getCharacters() {
-		// TODO Auto-generated method stub
-		return characters;
-	}
-
-	public String[] getWeapons() {
-		// TODO Auto-generated method stub
-		return weapons;
-	}
-
+	/**
+	 * returns the list of discarded cards 
+	 * @return ruledOut
+	 * */
 	public ArrayList<Card> getDiscarded() {
-		// TODO Auto-generated method stub
 		return ruledOut;
 	}
-
+	
+	/**
+	 * checks the passed in suggestion against the players hands 
+	 * if their hand contains one or more of the cards in the suggestion, they must
+	 * discard at least one to the discard list ruledOut, this method just takes 
+	 * the first found card in their hand
+	 * throws an exception if the suggestion contains a null value
+	 * @param cha, wep
+	 * */
 	public void checkSuggestion(String cha, String wep) {
+		if (cha == null || wep == null) throw new NullPointerException();
 		ArrayList<Card> suggest = new ArrayList<Card>();
 		for (Card c : intialiseCards()) {
 			if (c instanceof CharacterCard) {
@@ -235,14 +295,19 @@ public class Model {
 			List <Card> playHas = play.checkHand(suggest);
 				if (!playHas.isEmpty()){
 					this.ruledOut.add(playHas.get(0));
-					//play.removeFromHand(playHas.get(0));
+					play.removeFromHand(playHas.get(0));
 				}
 			}
 		}
 		
 	}
-
+	/**
+	 * checks the accusation against the solution
+	 * returns true if correct else returns false
+	 * throws exception if accusation contains a null value
+	 * */
 	public boolean checkAccusaction(String charac, String weap, String room) {
+		if (charac == null || weap == null || room == null){throw new NullPointerException();}
 		// check accusation against solution
 		ArrayList<Card> accuse = new ArrayList<Card>();
 		for (Card c : intialiseCards()) {
@@ -266,7 +331,11 @@ public class Model {
 		if (count==accuse.size()) return true;
 	return false;
 	}
-
+	/**
+	 * removes currentPlayer from game if accusation returns false
+	 * adds their hand to the discard list ruledOut and removes
+	 * them from players
+	 * */
 	public void removePlayerFromGame() {
 		List<Card>fromEliminated = currentPlayer.setEliminated(true);
 		for (Card ca : fromEliminated){

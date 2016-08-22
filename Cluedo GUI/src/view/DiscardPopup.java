@@ -21,6 +21,15 @@ import javax.swing.ButtonGroup;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
+/**
+ * popup for displaying the discarded pile of cards 'ruledOut' from the model
+ *  Ties in with the controller
+ * as it as it responds to the menulistener
+ * 
+ * @author Patrick and Kirita
+ *
+ */
+
 public class DiscardPopup extends JFrame {
 	
 	private Model model;
@@ -40,7 +49,10 @@ public class DiscardPopup extends JFrame {
 		setVisible(true);
 		displayHand();
 	}
-
+	/**
+	 * displays the images of the cards currently in the ruledOut 
+	 * gets the path to the image location from the name of the character/room/weapon
+	 * */
 	public void displayHand() {
 		for (Card c:model.getDiscarded()) {
 			if (c instanceof CharacterCard) {
@@ -146,7 +158,9 @@ public class DiscardPopup extends JFrame {
 		}
 		showImages();
 	}
-
+	/**
+	 * iterates over the imageicon array and displays them all in the popup
+	 * */
 	private void showImages() {
 		for (ImageIcon i : images) {
 			JLabel j = new JLabel();

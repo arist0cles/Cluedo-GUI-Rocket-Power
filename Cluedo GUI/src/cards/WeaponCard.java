@@ -12,8 +12,9 @@ public class WeaponCard implements Card {
 		return this.name;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
+	/* *
+	 * generate hashcode method, necessary for comparison of card objects
+	 * @return result
 	 */
 	@Override
 	public int hashCode() {
@@ -23,8 +24,9 @@ public class WeaponCard implements Card {
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
+	/** 
+	 * generated equals method, necessary for comparison of card objects
+	 * @param obj
 	 */
 	@Override
 	public boolean equals(Object obj) {

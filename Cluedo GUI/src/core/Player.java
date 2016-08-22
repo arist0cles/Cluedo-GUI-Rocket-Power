@@ -13,7 +13,7 @@ import core.Location;
  * their hand, their location and gives an indication whether or not they
  * are eliminated.
  * 
- * @author 
+ * @author kirita escott and patrick ryan
  */
 public class Player {
 	
@@ -33,9 +33,10 @@ public class Player {
 	}
 	
 	/**
-	 * 
+	 * List of cards in the suggestion passed to player to 
+	 * compare against players hand
 	 * @param suggestion
-	 * @return
+	 * @return result
 	 */
 	public List<Card> checkHand(List<Card>suggestion){
 		List<Card> result = new ArrayList<Card>();
@@ -47,28 +48,32 @@ public class Player {
 		return result;
 	}
 	
+	/**
+	 * player is passed a card object to remove from their hand
+	 * @param c
+	 * */
 	public void removeFromHand(Card c){
 		this.hand.remove(c);
 	}
 	
 	/**
 	 * get players location on the board
-	 * @return
+	 * @return location
 	 */
 	public Location getPlayerLocation(){
 		return location;
 	}
 	
-	/** Updates the players location.
-	 * 
-	 * @param new location
+	/** 
+	 * Updates the players location.
+	 * @param l
 	 */
 	public void updateLocation(Location l){
 		this.location = l;
 	}
 	
-	/** Gets the players character
-	 * 
+	/** 
+	 * Gets the players character
 	 * @return c
 	 */
 	public CluedoCharacter getCharacter(){
@@ -78,7 +83,7 @@ public class Player {
 	/**
 	 *  gets the players name.
 	 *  
-	 * @return
+	 * @return name
 	 */
 	public String getName(){
 		return name;
@@ -87,7 +92,7 @@ public class Player {
 	/**
 	 *  gets the players id.
 	 *  
-	 * @return
+	 * @return id
 	 */
 	public Integer getId(){
 		return id;
@@ -96,15 +101,14 @@ public class Player {
 	/**
 	 * gets the players hand.
 	 * 
-	 * @return
+	 * @return hand
 	 */
 	public ArrayList<Card> getHand(){
 		return hand;
 	}
 	
 	/** 
-	 * adds card to players hand.
-	 * 
+	 * adds card to players hand
 	 * @param c
 	 */
 	public void addCard(Card c){
@@ -114,6 +118,7 @@ public class Player {
 	
 	/**
 	 * Get current location of player.
+	 * @return location
 	 */
 	public Location getLocation(){
 		return location;
@@ -121,15 +126,17 @@ public class Player {
 	
 	/**
 	 * returns eliminated t/f
-	 * @return
+	 * @return eliminated
 	 */
 	public boolean getEliminated(){
 		return this.eliminated;
 	}
 	
 	/**
-	 * sets eliminated.
-	 * 
+	 * sets eliminated to be true then returns
+	 * hand
+	 * @param b
+	 * @return hand
 	 */
 	public List<Card> setEliminated(boolean b){
 		this.eliminated = b;

@@ -9,10 +9,20 @@ import squares.DoorSquare;
 import squares.HallwaySquare;
 import squares.RoomSquare;
 
+/**
+ * This class represents an AStar object which 
+ * determines the cost of the path between two pathNode objects
+ * in terms of location coordinates stored within those pathNodes
+ * 
+ * @author kirita escott and patrick ryan
+ * */
+
 public class AStarPath {
 	private PriorityQueue<pathNode> fringe;
 	private Set<pathNode>visited;
 	private pathNode start, end;
+	
+	
 	
 	public AStarPath(pathNode start, pathNode end){
 		this.start=start; 
@@ -33,6 +43,11 @@ public class AStarPath {
 		start.setCostToGoal(estimate(start, end));
 	}
 	
+	/**
+	 * determines the path (if any) and returns the integer cost
+	 * of that path, if no path exists -1 is returned
+	 * @return totalcost
+	 * */
 	public int findPath(){
 		//add start node to the fringe
 		fringe.add(this.start);
@@ -45,7 +60,8 @@ public class AStarPath {
 			}
 			//found the end node
 			if (current.equals(this.end)){
-				return (int) current.getTotalCost();
+				int totalcost = (int) current.getTotalCost();
+				return totalcost;
 			}
 			//go through the current nodes neighbours
 			for (pathNode neigh : current.findNeighbours()){
@@ -61,7 +77,9 @@ public class AStarPath {
 		}
 		return -1; //fail case
 	}
-	
+	/**
+	 * returns the estimated cost between start and end node
+	 * */
 	private double estimate(pathNode start, pathNode end) {
 		return Math.abs(start.getSqaure().getLoc().getX() - end.getSqaure().getLoc().getX()) +
 				Math.abs(start.getSqaure().getLoc().getX() - end.getSqaure().getLoc().getX());

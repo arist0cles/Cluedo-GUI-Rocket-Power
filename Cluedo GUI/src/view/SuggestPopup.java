@@ -33,6 +33,16 @@ import javax.swing.JButton;
 
 public class SuggestPopup extends JFrame {
 
+	/**
+	 * The popup that gets the suggestion info from the player, such as 
+	 * weapon and character they wish to suggest. Players must suggest from the room they are
+	 * currently standing in Ties in with the controller
+	 * as it has a number of ActionListeners
+	 * 
+	 * @author Patrick and Kirita
+	 *
+	 */
+	
 	private Model model;
 	private JPanel hand;
 	private JPanel weaponButtons;
@@ -83,7 +93,11 @@ public class SuggestPopup extends JFrame {
 	public void closeWindow() {
 		this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 	}
-	
+	/**
+	 * displays the image options of characters and weapons along with radio buttons for the 
+	 * user to choose their suggestion
+	 * gets the path to the image location from the name of the character/weapon
+	 * */
 	public void displayCards(Player p) {
 		for (String c : model.getCharacters()) {
 			JRadioButton b = new JRadioButton(c);
@@ -158,7 +172,9 @@ public class SuggestPopup extends JFrame {
 	public void addDoneButtonListener(ActionListener l) {
 		done.addActionListener(l);
 	}
-
+	/**
+	 * iterates over the imageicon array and displays them all in the popup
+	 * */
 	private void showImages() {
 		for (ImageIcon i : images) {
 			JLabel j = new JLabel();
@@ -166,7 +182,9 @@ public class SuggestPopup extends JFrame {
 			hand.add(j);
 		}
 	}
-
+	/**
+	 * gets the string value of the weapon from the user
+	 * */
 	public String getWeapon() {
 		try {
 			for (Enumeration<AbstractButton> buttons = weaponBG.getElements(); buttons.hasMoreElements();) {
@@ -184,7 +202,9 @@ public class SuggestPopup extends JFrame {
 		
 	}
 
-	
+	/**
+	 * gets the string value of the character from the user
+	 * */
 	public String getChar() {
 		try {
 			for (Enumeration<AbstractButton> buttons = charBG.getElements(); buttons.hasMoreElements();) {

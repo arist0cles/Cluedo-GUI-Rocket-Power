@@ -31,6 +31,15 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class AccusePopup extends JFrame {
+	
+	/**
+	 * The popup that gets the accusation info from the players, such as the room, 
+	 * weapon and character they wish to accuse. Ties in with the controller
+	 * as it has a number of ActionListeners
+	 * 
+	 * @author Patrick and Kirita
+	 *
+	 */
 
 	private Model model;
 	private JPanel hand;
@@ -76,7 +85,11 @@ public class AccusePopup extends JFrame {
 		setVisible(true);
 		displayCards(m.getCurrentPlayer());
 	}
-
+	/**
+	 * displays the image options of characters, weapons and rooms along with radio buttons for the 
+	 * user to choose their accusation
+	 * gets the path to the image location from the name of the character/room/weapon
+	 * */
 	public void displayCards(Player p) {
 		for (String c : model.getCharacters()) {
 			JRadioButton b = new JRadioButton(c);
@@ -200,7 +213,9 @@ public class AccusePopup extends JFrame {
 	public void addAccuseDoneButtonListener(ActionListener l) {
 		done.addActionListener(l);
 	}
-
+	/**
+	 * iterates over the imageicon array and displays them all in the popup
+	 * */
 	private void showImages() {
 		for (ImageIcon i : images) {
 			JLabel j = new JLabel();
@@ -208,7 +223,9 @@ public class AccusePopup extends JFrame {
 			hand.add(j);
 		}
 	}
-
+	/**
+	 * gets the string value of the weapon from the user
+	 * */
 	public String getWeapon() {
 		try {
 			for (Enumeration<AbstractButton> buttons = weaponBG.getElements(); buttons.hasMoreElements();) {
@@ -226,7 +243,9 @@ public class AccusePopup extends JFrame {
 		return null;
 		
 	}
-	
+	/**
+	 * gets the string value of the room from the user
+	 * */
 	public String getRoom() {
 		try {
 			for (Enumeration<AbstractButton> buttons = roomBG.getElements(); buttons.hasMoreElements();) {
@@ -245,7 +264,9 @@ public class AccusePopup extends JFrame {
 		
 		
 	}
-	
+	/**
+	 * gets the string value of the character from the user
+	 * */
 	public String getChar() {
 		try {
 			for (Enumeration<AbstractButton> buttons = charBG.getElements(); buttons.hasMoreElements();) {
@@ -264,6 +285,4 @@ public class AccusePopup extends JFrame {
 		
 	}
 	
-
-
 }

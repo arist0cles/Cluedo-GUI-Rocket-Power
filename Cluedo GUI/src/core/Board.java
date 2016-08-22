@@ -18,7 +18,7 @@ import squares.WallSquare;
  * board simply provides access functions to determine the location object at a
  * given position on the board.
  *
- * @author Kirita Escott
+ * @author Kirita Escott and patrick ryan
  */
 public class Board {
 	// need a 2D array of Square objects 25 x 25
@@ -68,19 +68,31 @@ public class Board {
 		}
 
 	}
-
+	/**
+	 * returns the board as a 2D array of square objects
+	 * @return squares
+	 * */
 	public Square[][] getSquares() {
 		return this.squares;
 	}
-
+	/**
+	 * returns the current colorscheme of the board
+	 * @return scheme
+	 * */
 	public ColorScheme getScheme() {
 		return scheme;
 	}
-
+	/**
+	 * sets the color scheme of the board
+	 * @param scheme
+	 * */
 	public void setScheme(ColorScheme scheme) {
 		this.scheme = scheme;
 	}
-
+	/**
+	 * updates the colorscheme of the board, must go through the square objects and 
+	 * update their color accordingly
+	 * */
 	public void updateScheme() {
 		File file = new File("board.txt");
 		Scanner scan;

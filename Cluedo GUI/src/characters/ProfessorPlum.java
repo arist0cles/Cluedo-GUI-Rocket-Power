@@ -14,14 +14,19 @@ public class ProfessorPlum extends CluedoCharacter{
 	public ProfessorPlum(String name) {
 		super(name, color, start);
 	}
-
+	/**
+	 * returns the symbol of character
+	 * @return symbol
+	 * */
 	public String getSymbol() {
 		return symbol;
 	}
-
+	/**
+	 * returns the ID NO of character
+	 * @return ID
+	 * */
 	@Override
 	public String getID() {
-		// TODO Auto-generated method stub
 		return ID;
 	}
 }

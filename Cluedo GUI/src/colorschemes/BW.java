@@ -2,6 +2,7 @@ package colorschemes;
 
 import java.awt.Color;
 
+
 public class BW extends ColorScheme {
 	public BW() {
 		DOOR = new Color(0, 0, 0);

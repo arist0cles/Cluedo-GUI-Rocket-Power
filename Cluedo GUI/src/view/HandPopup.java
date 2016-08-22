@@ -40,7 +40,10 @@ public class HandPopup extends JFrame {
 		setVisible(true);
 		displayHand(m.getCurrentPlayer());
 	}
-
+	/**
+	 * displays the images of the cards currently in the current players hand 
+	 * gets the path to the image location from the name of the character/room/weapon
+	 * */
 	public void displayHand(Player p) {
 		for (Card c : p.getHand()) {
 			if (c instanceof CharacterCard) {
@@ -146,7 +149,9 @@ public class HandPopup extends JFrame {
 		}
 		showImages();
 	}
-
+	/**
+	 * iterates over the imageicon array and displays them all in the popup
+	 * */
 	private void showImages() {
 		for (ImageIcon i : images) {
 			JLabel j = new JLabel();

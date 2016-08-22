@@ -13,6 +13,7 @@ import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
@@ -78,12 +79,13 @@ import squares.WallSquare;
  */
 public class View extends JFrame {
 	private static final long serialVersionUID = 1L;
-
+	//dimensions
 	public final Dimension SIDE_PANEL_SIZE = new Dimension(150, 200);
 	public final Dimension FRAME_SIZE = new Dimension(800, 800);
 	public final Dimension MIDDLE_BOTTOM_PANEL_SIZE = new Dimension(500, 200);
 	public final Dimension MIDDLE_TOP_PANEL_SIZE = new Dimension(500, 500);
-
+	
+	//panels
 	private JPanel middleTopPanel;
 	private JPanel middleBottomPanel = new JPanel();
 	private JPanel middlePanel = new JPanel();
@@ -95,7 +97,7 @@ public class View extends JFrame {
 	JLabel thmbd2;
 	JPanel imgd1;	
 	JPanel imgd2;
-
+	//layouts, icons, buttons and menu
 	private BorderLayout layout = new BorderLayout(10, 10);
 	private List<ImageIcon> icons = new ArrayList<>();
 	private Model model;
@@ -139,26 +141,31 @@ public class View extends JFrame {
 		return JOptionPane.showConfirmDialog(null,
 				"You are in a corner room would you\n" + "like to move to opposite room?", null, 0);
 	}
-	
 	public void wonGame(){
 		JOptionPane.showMessageDialog(null, model.getCurrentPlayer().getName()+" has won!");
 	}
-	
 	public void lostGame() {
 		JOptionPane.showMessageDialog(null,model.getCurrentPlayer().getName()+" has lost and will be eliminated!");
 	}
-	
 	public void invalidMove() {
 		JOptionPane.showMessageDialog(null,"That destination is too far away! Try again!");
 	}
-	
-	public void startTurnMessage() {
-		JOptionPane.showMessageDialog(null,"It's "+model.getCurrentPlayer().getName()+"'s turn.");
-	}
-	
 	public void discardMessage() {
 		JOptionPane.showMessageDialog(null,"Check the discarded cards in the menu then end turn!");
 	}
+	public void endGameMessage() {
+		JOptionPane.showMessageDialog(null,"Only one player left! Game is over!");
+	}
+	public void incorrectPlayersMessage() {
+		JOptionPane.showMessageDialog(null,"Must have between 3 and 6 players to start the game!");
+	}
+	public void mustEnterNumberMessage() {
+		JOptionPane.showMessageDialog(null,"Must enter a number value!");
+	}
+	public void invalidPlayerMessage() {
+		JOptionPane.showMessageDialog(null,"Must select a valid selection!");
+	}
+
 
 	/**
 	 * Sets up the Menu, the top menu of the program
@@ -301,7 +308,10 @@ public class View extends JFrame {
 			}
 		}
 	}
-	
+	/**
+	 * adds the die images to the middle bottom panel 
+	 * @param d1, d2
+	 * */
 	public void addDiceToPane(Die d1, Die d2){
 		thmbd1 = new JLabel();
 		thmbd2 = new JLabel();
@@ -321,10 +331,26 @@ public class View extends JFrame {
 		middleBottomPanel.add(imgd1);
 		middleBottomPanel.add(imgd2);
 	}
-	
+	/**
+	 * removes the dice from the panel
+	 * */
 	public void removeDice(){
 		middleBottomPanel.remove(imgd1);
 		middleBottomPanel.remove(imgd2);
+	}
+	/**
+	 * returns the jpanel suggest button
+	 * @return suggestButton
+	 * */
+	public JButton getSuggest(){
+		return this.suggestButton;
+	}
+	/**
+	 * removes the suggest button
+	 * */
+	public void removeSuggest(){
+		if (suggestButton != null) 
+		middleBottomPanel.remove(suggestButton);
 	}
 
 	/**
@@ -340,7 +366,11 @@ public class View extends JFrame {
 		middleBottomPanel.add(start, BorderLayout.SOUTH);
 		middleBottomPanel.add(color, BorderLayout.NORTH);
 	}
-
+	/**
+	 * adds the buttons to the middle bottom panel
+	 * that are always present
+	 * eg end turn button and accuse button
+	 * */
 	public void addPlayButtons() {
 		endTurnButton = new JButton("End Turn");
 		endTurnButton.setToolTipText("Ends this players turn");
@@ -349,23 +379,31 @@ public class View extends JFrame {
 		middleBottomPanel.add(endTurnButton, BorderLayout.SOUTH);
 		middleBottomPanel.add(accuseButton, BorderLayout.WEST);
 	}
-	
+	/**
+	 * add suggest to the middle bottom panel
+	 * */
 	public void addSuggestButton(){
 		suggestButton = new JButton("Suggest");
 		suggestButton.setToolTipText("Make a suggestion");
 		middleBottomPanel.add(suggestButton, BorderLayout.EAST);
 	}
-
+	/**
+	 * adds the end button listener 
+	 * */
 	public void addEndTurnButtonListener(ActionListener l) {
 		middleBottomPanel.remove(start);
 		middleBottomPanel.remove(color);
 		endTurnButton.addActionListener(l);
 	}
-
+	/**
+	 * adds the suggest button listener 
+	 * */
 	public void addSuggestButtonListener(ActionListener l) {
 		suggestButton.addActionListener(l);
 	}
-
+	/**
+	 * adds the accuse button listener 
+	 * */
 	public void addAccuseButtonListener(ActionListener l) {
 		accuseButton.addActionListener(l);
 	}
@@ -377,33 +415,45 @@ public class View extends JFrame {
 	 */
 	public JSpinner setupColorSpinner() {
 		List<String> colorScheme = new ArrayList<>();
-		colorScheme.add("Kirita");
 		colorScheme.add("Pastel");
+		colorScheme.add("Kirita");
 		colorScheme.add("Emo");
 		colorScheme.add("BW");
 		SpinnerListModel l = new SpinnerListModel(colorScheme);
 		return new JSpinner(l);
 	}
-
+	/**
+	 * adds the start button listener 
+	 * */
 	public void addStartButtonListener(ActionListener l) {
 		start.addActionListener(l);
 	}
-
+	/**
+	 * adds the quit menu listener 
+	 * */
 	public void addQuitMenuListener(ActionListener l) {
 		quit.addActionListener(l);
 	}
-
+	/**
+	 * adds the grid mouse listener 
+	 * */
 	public void addGridMouseListener(MouseListener l) {
 		middleTopPanel.addMouseListener(l);
 	}
-
+	
+	/**
+	 * adds the hand menu listener 
+	 * */
 	public void addShowHandMenuListener(ActionListener l) {
 		showHand.addActionListener(l);
 	}
-
+	/**
+	 * adds the discard menu listener 
+	 * */
 	public void addShowDiscardMenuListener(ActionListener l) {
 		showDiscard.addActionListener(l);
 	}
+
 	/**
 	 * Redraws the view with an updated background once the user has selected
 	 * their colorscheme
@@ -421,11 +471,15 @@ public class View extends JFrame {
 		this.getContentPane().repaint();
 		
 	}
-
+	/**
+	 * returns the color scheme as a string
+	 * */
 	public String getScheme() {
 		return (String)color.getValue();
 	}
-
+	/**
+	 * set the started boolean in the gridpanel to true
+	 * */
 	public void setGridPaneStarted() {
 		((GridPanel)middleTopPanel).setStarted(true);
 	}
@@ -440,11 +494,17 @@ public class View extends JFrame {
 		components.add(middleTopPanel);
 		components.add(middlePanel);
 	}
-
+	/**
+	 * quit the game and close all panels
+	 * */
 	public void quit() {
 		this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 	}
-
+	/**
+	 * highlights the current players back ground on the screen
+	 * if player one chooses mrs peacock then when the game starts
+	 * mrs peacocks image background is highlighted her color (blue)
+	 * */
 	public void highlight() {
 		for (Component c : components) {
 			if (c.getName() != null && model.getCurrentPlayer().getCharacter() != null) {
@@ -454,10 +514,5 @@ public class View extends JFrame {
 			}
 		}
 	}
-
-	
-
-	
-
 	
 }

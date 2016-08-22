@@ -6,6 +6,12 @@ import java.util.List;
 import model.Model;
 import squares.Square;
 
+
+/**
+ * This class represents a single pathNode object, these objects are used only by the view in the controller 
+ * when determining whether the user can move to the locaiton they have clicked on or not
+ * 
+ * */
 public class pathNode {
 	private Square sqaure;
 	private pathNode parent;
@@ -15,6 +21,10 @@ public class pathNode {
 	public pathNode(Square square, Model model){
 		this.model=model; this.sqaure=square;
 	}
+	
+	/**
+	 * 
+	 * */
 	
 	public List<pathNode> findNeighbours(){
 		List<pathNode> neighbours = new ArrayList<>();
@@ -37,8 +47,9 @@ public class pathNode {
 	
 	
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
+	/**
+	 * generated hashcode method necessary for AStar
+	 * @return result
 	 */
 	@Override
 	public int hashCode() {
@@ -48,8 +59,9 @@ public class pathNode {
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
+	/** 
+	 * generated equals method
+	 * @param obj
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -67,43 +79,73 @@ public class pathNode {
 			return false;
 		return true;
 	}
-
+	/**
+	 * returns the current square
+	 * @return square
+	 * */
 	public Square getSqaure() {
 		return sqaure;
 	}
-
+	/**
+	 * sets the square
+	 * @param square
+	 * */
 	public void setSqaure(Square sqaure) {
 		this.sqaure = sqaure;
 	}
-
+	/**
+	 * returns the parent pathnode
+	 * @return parent
+	 * */
 	public pathNode getParent() {
 		return parent;
 	}
-
+	/**
+	 * sets the this parent
+	 * @param parent
+	 * */
 	public void setParent(pathNode parent) {
 		this.parent = parent;
 	}
-
+	/**
+	 * return the cost to this node
+	 * @return costToHere
+	 * */
 	public double getCostToHere() {
 		return costToHere;
 	}
-
+	/**
+	 * sets the costToHere
+	 * @param costToHere
+	 * */
 	public void setCostToHere(double costToHere) {
 		this.costToHere = costToHere;
 	}
-
+	/**
+	 * return the cost to this goal
+	 * @return costToGoal
+	 * */
 	public double getCostToGoal() {
 		return costToGoal;
 	}
-
+	/**
+	 * sets the cost to the goal
+	 * @param costToGoal
+	 * */
 	public void setCostToGoal(double costToGoal) {
 		this.costToGoal = costToGoal;
 	}
-
+	/**
+	 * return the total cost to this node
+	 * @return totalCost
+	 * */
 	public double getTotalCost() {
 		return totalCost;
 	}
-
+	/**
+	 * sets the total cost
+	 * @param totalCost
+	 * */
 	public void setTotalCost(double totalCost) {
 		this.totalCost = totalCost;
 	}	
